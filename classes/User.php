@@ -214,7 +214,22 @@
             return $this;
         }
 
-        public function save() {
+        public function allUserData() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("select * from users where id = :id");
+            $id = $this->getId();
+            $statement->bindParam(":id", $id);
+
+            //return result
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $result;
+        }
+
+        public function update() {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -237,7 +252,13 @@
             $statement->bindParam(":hobbies", $hobbies);
             $statement->bindParam(":beverage", $beverage);
             $statement->bindParam(":pet", $pet);
-           // $statement->bindParam(":email", $email);
+            //$statement->bindParam(":email", $email);
+            //
+            //
+            //add avatar into query
+            //
+            //
+
             //return result
             $result = $statement->execute();
     

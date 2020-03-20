@@ -3,16 +3,17 @@
     include_once("functions.php");
     
     $user = new User();
-    $user->setId(1); //session -> $_SESSION['id'];
+    $user->setId(1); //change to session or cookie instead of hard coded -> $_SESSION['id'];
+    $userData = $user->allUserData();
 
-    $email = $user->getEmail();
-    /*$firstname = "testfirstname";
-    $lastname = "testlastname";
-    $class = "2IMD";
-    $interests = "Designing";
-    $hobbies = "Sleeping";
-    $beverage = "Tea";
-    $pet = "All";*/
+    $email = $userData[0]['email'];
+    $firstname = $userData[0]['firstname'];
+    $lastname = $userData[0]['lastname'];
+    $class = $userData[0]['class'];
+    $interests = $userData[0]['interests'];
+    $hobbies = $userData[0]['hobbies'];
+    $beverage = $userData[0]['beverage'];
+    $pet = $userData[0]['pet'];
 
 
     if(!empty($_POST)) {
@@ -59,7 +60,7 @@
             $user->setBeverage($beverage);
             $user->setPet($pet);
 
-            $user->save();
+            $user->update();
         } catch (\Throwable $th) {
             $error = $th->getMessage();
         }
@@ -70,7 +71,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>complete profile</title>
+    <title>vervolledig</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
