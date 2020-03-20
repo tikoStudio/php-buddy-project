@@ -1,13 +1,52 @@
 <?php 
-    $email = "test@gmail.com";
+    include_once("functions.php");
+
+    /*$email = "test@gmail.com";
     $firstname = "testfirstname";
     $lastname = "testlastname";
     $class = "2IMD";
     $interests = "Designing";
     $hobbies = "Sleeping";
     $beverage = "Tea";
-    $pet = "All";
+    $pet = "All";*/
 
+
+    if(!empty($_POST)) {
+        //PROFILE PICTURE
+        if(!empty($_POST['avatar'])) {
+            $image = $_FILES['avatar']['name']; 
+            try {
+                uploadImage(htmlspecialchars($image));
+            }catch(Exception $e) {
+                $error = $e->getMessage();
+            }
+        }
+        
+        //USERNAME
+        if(!empty($_POST['firstname']) && !empty($_POST['lastname'])) {
+            $firstname = htmlspecialchars($_POST['firstname']);
+            $lastname = htmlspecialchars($_POST['lastname']);
+        }else {
+            $error = "voornaam en achternaam zijn verplicht";
+        }
+
+        //KLAS
+        $class = $_POST['class'];
+
+        //INTERESSES
+        $interests = $_POST['interests'];
+
+        //HOBBIES
+        $hobbies = $_POST['hobbies'];
+
+        //FAVORIETE DRANKJE
+        $beverage = $_POST['beverage'];
+
+        //FAVORIETE HUISDIER
+        $pet = $_POST['pet'];
+
+        echo $firstname . $lastname . $class . $interests . $hobbies . $beverage . $pet;
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +58,7 @@
 <body>
 <div class="login">
 		<div class="form form--login">
-			<form action="" method="post">
+			<form action="" method="post" enctype="multipart/form-data">
 				<h2 form__title>Maak je profiel volledig!</h2>
 
 				<?php if(isset($error)) : ?>
@@ -31,15 +70,15 @@
 				<?php endif; ?>
 
 				<div class="form__field">
-					<label for="email">Email</label>
-                    <input type="text" id="email" name="email" 
-                    <?php if(!empty($email)){ ?>
-                        value="<?php echo $email; ?>"
-                    <?php } else { ?>
-                        placeholder="email"
-                    <?php } ?>
-                    >
-				</div>
+                    <label for="avatar">Profiel foto</label>
+                    <input type="file" name="avatar" id="avatar">
+                    <div><img class="max" src="<?php if(isset($image)) {
+                        echo "uploads/" . $image; //change to image connected to user from database
+                    }else {
+                        echo "https://via.placeholder.com/150";
+                    } ?>
+                    " alt="profielfoto"></div>
+                </div>
 
                 <div class="form__field">
 					<label for="firstname">voornaam</label>
@@ -82,7 +121,7 @@
                 </div>
                 
                 <div class="form__field">
-					<label for="interests">hobbies</label>
+					<label for="hobbies">hobbies</label>
                     <select name="hobbies" id="hobbies">
                         <option <?php if(isset($hobbies) && $hobbies === "Party") { echo "selected";}?> value="Party">party like it's 1969 🥳</option>
                         <option <?php if(isset($hobbies) && $hobbies === "Sleeping") { echo "selected";}?> value="Sleeping">slapen 😴</option>
@@ -91,7 +130,7 @@
                 </div>
 
                 <div class="form__field">
-					<label for="interests">favoriete drankje tijdens het developen/designen</label>
+					<label for="beverage">favoriete drankje tijdens het developen/designen</label>
                     <select name="beverage" id="beverage">
                         <option <?php if(isset($beverage) && $beverage === "Beer") { echo "selected";}?> value="Beer">Bier 🍺</option>
                         <option <?php if(isset($beverage) && $beverage === "Coffee") { echo "selected";}?> value="Coffee">Koffie ☕</option>
@@ -101,7 +140,7 @@
                 </div>
 
                 <div class="form__field">
-					<label for="interests">favoriete huisdier</label>
+					<label for="pet">favoriete huisdier</label>
                     <select name="pet" id="pet">
                         <option <?php if(isset($pet) && $pet === "Bunny") { echo "selected";}?> value="Bunny">Konijn 🐇</option>
                         <option <?php if(isset($pet) && $pet === "Cat") { echo "selected";}?> value="Cat">Kat 🐈</option>

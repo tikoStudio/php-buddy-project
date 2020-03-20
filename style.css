@@ -81,3 +81,8 @@ body
 h2 {
   text-align: center;
 }
+
+.max {
+  height: 150px;
+  width: 150px;
+}
