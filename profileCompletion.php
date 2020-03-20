@@ -1,8 +1,12 @@
 <?php 
+    include_once(__DIR__ . "/classes/User.php"); 
     include_once("functions.php");
+    
+    $user = new User();
+    $user->setId(1); //session -> $_SESSION['id'];
 
-    /*$email = "test@gmail.com";
-    $firstname = "testfirstname";
+    $email = $user->getEmail();
+    /*$firstname = "testfirstname";
     $lastname = "testlastname";
     $class = "2IMD";
     $interests = "Designing";
@@ -16,7 +20,7 @@
         if(!empty($_POST['avatar'])) {
             $image = $_FILES['avatar']['name']; 
             try {
-                uploadImage(htmlspecialchars($image));
+                 uploadImage(htmlspecialchars($image));
             }catch(Exception $e) {
                 $error = $e->getMessage();
             }
@@ -45,7 +49,21 @@
         //FAVORIETE HUISDIER
         $pet = $_POST['pet'];
 
-        echo $firstname . $lastname . $class . $interests . $hobbies . $beverage . $pet;
+        try {
+            
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setClass($class);
+            $user->setInterests($interests);
+            $user->setHobbies($hobbies);
+            $user->setBeverage($beverage);
+            $user->setPet($pet);
+
+            $user->save();
+        } catch (\Throwable $th) {
+            $error = $th->getMessage();
+        }
+
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -73,7 +91,7 @@
                     <label for="avatar">Profiel foto</label>
                     <input type="file" name="avatar" id="avatar">
                     <div><img class="max" src="<?php if(isset($image)) {
-                        echo "uploads/" . $image; //change to image connected to user from database
+                        echo "img"; //change to image connected to user from database
                     }else {
                         echo "https://via.placeholder.com/150";
                     } ?>
