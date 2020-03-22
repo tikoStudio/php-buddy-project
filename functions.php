@@ -16,8 +16,7 @@
                 }
             }
             // Check if file already exists
-            if (file_exists($target_file)) {
-                throw new Exception('Dit bestand bestaat al!');
+            if (file_exists($target_file)) { // no exception because we Do want to change users picture but not upload it again
                 $uploadOk = 0;
             }
             // Check file size

@@ -14,14 +14,14 @@
     $hobbies = $userData[0]['hobbies'];
     $beverage = $userData[0]['beverage'];
     $pet = $userData[0]['pet'];
-
+    $image = $userData[0]['avatar'];
 
     if(!empty($_POST)) {
         //PROFILE PICTURE
-        if(!empty($_POST['avatar'])) {
-            $image = $_FILES['avatar']['name']; 
+        if(!empty($_FILES['avatar']['name'])) {         
             try {
-                 uploadImage(htmlspecialchars($image));
+                $image = $_FILES['avatar']['name'];
+                uploadImage(htmlspecialchars($image));
             }catch(Exception $e) {
                 $error = $e->getMessage();
             }
@@ -50,21 +50,23 @@
         //FAVORIETE HUISDIER
         $pet = $_POST['pet'];
 
-        try {
-            
-            $user->setFirstname($firstname);
-            $user->setLastname($lastname);
-            $user->setClass($class);
-            $user->setInterests($interests);
-            $user->setHobbies($hobbies);
-            $user->setBeverage($beverage);
-            $user->setPet($pet);
-
-            $user->update();
-        } catch (\Throwable $th) {
-            $error = $th->getMessage();
-        }
-
+        if(!isset($error)){
+            try {
+                $user->setFirstname($firstname);
+                $user->setLastname($lastname);
+                $user->setClass($class);
+                $user->setInterests($interests);
+                $user->setHobbies($hobbies);
+                $user->setBeverage($beverage);
+                $user->setPet($pet);
+                $user->setAvatar($image);
+                echo $image;
+                $user->update();
+                //redirect to homepage
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+        }     
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -91,11 +93,11 @@
 				<div class="form__field">
                     <label for="avatar">Profiel foto</label>
                     <input type="file" name="avatar" id="avatar">
-                    <div><img class="max" src="<?php if(isset($image)) {
-                        echo "img"; //change to image connected to user from database
-                    }else {
-                        echo "https://via.placeholder.com/150";
-                    } ?>
+                    <div><img class="max" src="<?php if(!empty($image)){ 
+                        echo "uploads/" . $image;
+                    }else { 
+                       echo "https://via.placeholder.com/150";
+                    }  ?>
                     " alt="profielfoto"></div>
                 </div>
 

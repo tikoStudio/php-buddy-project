@@ -233,31 +233,26 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("update users set firstname= :firstname, lastname= :lastname, class= :class, interests= :interests, hobbies= :hobbies, beverage= :beverage, pet= :pet where id= :id");
+            $statement = $conn->prepare("update users set firstname= :firstname, lastname= :lastname, avatar= :avatar, class= :class, interests= :interests, hobbies= :hobbies, beverage= :beverage, pet= :pet where id= :id");
             $id = $this->getId();
             $firstname = $this->getFirstname();
             $lastname = $this->getLastname();
+            $avatar = $this->getAvatar();
             $class = $this->getClass();
             $interests = $this->getInterest();
             $hobbies = $this->getHobbies();
             $beverage = $this->getBeverage();
             $pet = $this->getPet();
-            $email = $this->getEmail();
             
             $statement->bindParam(":id", $id);
             $statement->bindParam(":firstname", $firstname);
             $statement->bindParam(":lastname", $lastname);
+            $statement->bindParam(":avatar", $avatar);
             $statement->bindParam(":class", $class);
             $statement->bindParam(":interests", $interests);
             $statement->bindParam(":hobbies", $hobbies);
             $statement->bindParam(":beverage", $beverage);
             $statement->bindParam(":pet", $pet);
-            //$statement->bindParam(":email", $email);
-            //
-            //
-            //add avatar into query
-            //
-            //
 
             //return result
             $result = $statement->execute();
