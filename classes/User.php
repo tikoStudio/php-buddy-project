@@ -229,7 +229,7 @@
             return $result;
         }
 
-        public function update() {
+        public function completeProfile() {
             //db conn
             $conn = Db::getConnection();
             //insert query

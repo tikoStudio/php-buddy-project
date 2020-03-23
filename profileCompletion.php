@@ -23,6 +23,7 @@
                 $image = $_FILES['avatar']['name'];
                 uploadImage(htmlspecialchars($image));
             }catch(Exception $e) {
+                $image = $userData[0]['avatar'];
                 $error = $e->getMessage();
             }
         }
@@ -60,8 +61,7 @@
                 $user->setBeverage($beverage);
                 $user->setPet($pet);
                 $user->setAvatar($image);
-                echo $image;
-                $user->update();
+                $user->completeProfile();
                 //redirect to homepage
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
@@ -92,13 +92,14 @@
 
 				<div class="form__field">
                     <label for="avatar">Profiel foto</label>
-                    <input type="file" name="avatar" id="avatar">
-                    <div><img class="max" src="<?php if(!empty($image)){ 
+                    <div class="avatar__img"><img class="avatar" src="<?php if(!empty($image)){ 
                         echo "uploads/" . $image;
                     }else { 
                        echo "https://via.placeholder.com/150";
                     }  ?>
                     " alt="profielfoto"></div>
+                    <input type="file" name="avatar" id="avatar" class="fileUpload">
+                    
                 </div>
 
                 <div class="form__field">
