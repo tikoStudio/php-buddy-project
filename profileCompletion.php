@@ -63,6 +63,7 @@
                 $user->setAvatar($image);
                 $user->completeProfile();
                 //redirect to homepage
+				header('location: index.php');
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
             }
@@ -92,7 +93,9 @@
 
 				<div class="form__field">
                     <label for="avatar">Profiel foto</label>
-                    <div class="avatar__img"><img class="avatar" src="<?php if(!empty($image)){ 
+                    <div class="avatar__img">
+                        <p>Huidige profielfoto:</p>
+                        <img class="avatar" src="<?php if(!empty($image)){ 
                         echo "uploads/" . $image;
                     }else { 
                        echo "https://via.placeholder.com/150";
