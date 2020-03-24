@@ -5,11 +5,11 @@ if(!empty($_POST)) {
 
     try {
         $user = new User();
-        $user->setFirstname($_POST['firstname']);
-        $user->setLastname($_POST['lastname']);
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setPasswordconfirmation($_POST['passwordconfirmation']);
+        $user->setFirstname(htmlspecialchars($_POST['firstname']));
+        $user->setLastname(htmlspecialchars($_POST['lastname']));
+        $user->setEmail(htmlspecialchars($_POST['email']));
+        $user->setPassword(htmlspecialchars($_POST['password']));
+        $user->setPasswordconfirmation(htmlspecialchars($_POST['passwordconfirmation']));
 
         if($_POST['password'] != $_POST['passwordconfirmation']) {
             $error = "Wachtwoord klopt niet!";
