@@ -54,48 +54,49 @@ if(!empty($_POST)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css" crossorigin="anonymous">
+    <title>Registeer</title>
 </head>
 <body>
+<div class="login">
+    <div class="form form--login">
+        <h2 form__title>Registreer</h2>
+            <form action="" method="POST">
+            
+                <?php if(isset($error)): ?>
+                    <div class="form__error"><?php echo $error; ?></div>
+                <?php endif; ?>
 
-    <?php if(isset($error)): ?>
-        <div class="alert alert-danger"><?php echo $error; ?></div>
-    <?php endif; ?>
+                <div class="form__field">
+                    <label for="firstname">Voornaam</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="voornaam">
+                </div>
 
-    <?php if(isset($succes)): ?>
-        <div class="succes"><?php echo $succes; ?></div>
-    <?php endif; ?>
+                <div class="form__field">
+                    <label for="lastname">Achternaam</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="achternaam">
+                </div>
 
-    <form action="" method="POST">
-        <div>
-            <label for="firstname">Firstname</label>
-            <input type="text" class="form-control" name="firstname" id="firstname">
-        </div>
+                <div class="form__field">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="email">
+                </div>
 
-        <div>
-            <label for="lastname">Lastname</label>
-            <input type="text" class="form-control" name="lastname" id="lastname">
-        </div>
+                <div class="form__field">
+                    <label for="password">Wachtwoord</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="wachtwoord">
+                </div>
 
-        <div>
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email">
-        </div>
+                <div class="form__field">
+                    <label for="passwordconfirmation">Password confirmatie</label>
+                    <input type="password" class="form-control" name="passwordconfirmation" id="passwordconfirmation" placeholder="wachtwoord confirmatie">
+                </div>
 
-        <div>
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password">
-        </div>
-
-        <div></div>
-            <label for="passwordconfirmation">Password confirmation</label>
-            <input type="password" class="form-control" name="passwordconfirmation" id="passwordconfirmation">
-        </div>
-
-        <div>
-            <input type="submit" class="btn btn-primary" value="Registreren">
-        </div>
-    </form>
+                <div class="form__field">
+					<input type="submit" value="Registreren" class="btn btn--primary">	
+				</div>
+            </form>
+    </div>
+</div>
 </body>
 </html>
