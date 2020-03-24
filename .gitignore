@@ -1,5 +1,3 @@
 # exclude everything
-settings/*
+settings/
 
-# exception to the rule
-!settings/.gitkeep 
