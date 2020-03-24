@@ -1,53 +1,52 @@
 <?php
-include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/User.php");
 
-if(!empty($_POST)) {
+    if(!empty($_POST)) {
 
-    try {
-        $user = new User();
-        $user->setFirstname(htmlspecialchars($_POST['firstname']));
-        $user->setLastname(htmlspecialchars($_POST['lastname']));
-        $user->setEmail(htmlspecialchars($_POST['email']));
-        $user->setPassword($_POST['password']);
+        try {
+            $user = new User();
+            $user->setFirstname(htmlspecialchars($_POST['firstname']));
+            $user->setLastname(htmlspecialchars($_POST['lastname']));
+            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setPassword($_POST['password']);
 
-        if($_POST['password'] != $_POST['passwordconfirmation']) {
-            $error = "Wachtwoord klopt niet!";
-        }
-
-        if ( $user->availableEmail($user->getEmail()) ) {
-            // Email ready to use
-            if ( $user->validEmail($_POST['email']) === true ){
-                // valid email
-            } else {
-                $error = "Ongeldig email!";
+            if($_POST['password'] != $_POST['passwordconfirmation']) {
+                $error = "Wachtwoord klopt niet!";
             }
-        } 
-        else {
-            $error = "Email is al in gebruik!";
+
+            if ( $user->availableEmail($user->getEmail()) ) {
+                // Email ready to use
+                if ( $user->validEmail($_POST['email']) === true ){
+                    // valid email
+                } else {
+                    $error = "Ongeldig email!";
+                }
+            } 
+            else {
+                $error = "Email is al in gebruik!";
+            }
+
+            if($user->endsWith($_POST['email'],"@student.thomasmore.be")) {
+            }
+            else {
+                $error = "Gebruik email van Thomasmore!";
         }
 
-        if($user->endsWith($_POST['email'],"@student.thomasmore.be")) {
+
+        } catch (\Throwable $th) {
+            $error = $th->getMessage();
         }
-        else {
-            $error = "Gebruik email van Thomasmore!";
+
+
+        if(!isset($error)) {
+            // methode
+            $user->save();
+
+            //$succes = "user saved";
+            header('Location: login.php');
+        }
+
     }
-
-
-    } catch (\Throwable $th) {
-        $error = $th->getMessage();
-    }
-
-
-    if(!isset($error)) {
-        // methode
-        $user->save();
-
-        //$succes = "user saved";
-        header('Location: login.php');
-    }
-
-}
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
