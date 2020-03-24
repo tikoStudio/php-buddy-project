@@ -33,11 +33,6 @@
             return $this->firstname;
         }
 
-        public function getLastname() {
-                return $this->lastname;
-        }
-
-
         public function setLastname($lastname) {
 
                 if(empty($lastname)) {
@@ -53,8 +48,8 @@
                 return $this;
         }
 
-        public function getEmail() {
-                return $this->email;
+        public function getLastname() {
+                return $this->lastname;
         }
 
         public function setEmail($email) {
@@ -73,65 +68,8 @@
                 return $this;
         }
 
-        public function getPassword() {
-                return $this->password;
-        }
-
-        public function setPassword($password) {
-
-                if(empty($password)) {
-                        throw new Exception("Wachtwoord mag niet leeg zijn!");
-                }
-
-                $options = ['cost' => 12];
-                $password = password_hash($password, PASSWORD_DEFAULT, $options);
-
-                $this->password = $password;
-
-                return $this;
-        }
-
-        public function getPasswordconfirmation() {
-                return $this->passwordconfirmation;
-        }
-
-        public function setPasswordconfirmation($passwordconfirmation) {
-
-                if(empty($passwordconfirmation)) {
-                        throw new Exception("Wachtwoord mag niet leeg zijn!");
-                }
-
-                $options = ['cost' => 12];
-                $passwordconfirmation = password_hash($this->passwordconfirmation, PASSWORD_DEFAULT, $options);
-
-                $this->passwordconfirmation = $passwordconfirmation;
-
-                return $this;
-        }
-
-        public function save() {
-                // connectie
-                $conn = Db::getConnection();
-
-                // query
-                $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstname, :lastname, :email, :password)");
-                
-                // variabelen klaarzetten om te binden
-                $firstname = $this->getFirstname();
-                $lastname = $this->getLastname();
-                $email = $this->getEmail();
-                $password = $this->getPassword();
-                
-                // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
-                $statement->bindParam(":firstname", $firstname);
-                $statement->bindParam(":lastname", $lastname);
-                $statement->bindParam(":email", $email);
-                $statement->bindParam(":password", $password);
-
-                // als je geen execute doet dan wordt die query niet uitgevoerd
-                $result = $statement->execute();
-
-                return $result;
+        public function getEmail() {
+                return $this->email;
         }
 
         public function validEmail($email) {
@@ -162,85 +100,96 @@
         public function endsWith($email, $target) {
                 $length = strlen($target);
                 if ($length == 0) {
-                return true;
-    }
+                        return true;
+                }
  
                 return (substr($email, -$length) === $target);
         }
 
-        /**
-         * Get the value of id
-         */ 
+        public function setPassword($password) {
+
+                if(empty($password)) {
+                        throw new Exception("Wachtwoord mag niet leeg zijn!");
+                }
+
+                $options = ['cost' => 12];
+                $password = password_hash($password, PASSWORD_DEFAULT, $options);
+
+                $this->password = $password;
+
+                return $this;
+        }
+
+        public function getPassword() {
+                return $this->password;
+        }
+
+        public function save() {
+                // connectie
+                $conn = Db::getConnection();
+
+                // query
+                $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstname, :lastname, :email, :password)");
+                
+                // variabelen klaarzetten om te binden
+                $firstname = $this->getFirstname();
+                $lastname = $this->getLastname();
+                $email = $this->getEmail();
+                $password = $this->getPassword();
+                
+                // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
+                $statement->bindParam(":firstname", $firstname);
+                $statement->bindParam(":lastname", $lastname);
+                $statement->bindParam(":email", $email);
+                $statement->bindParam(":password", $password);
+
+                // als je geen execute doet dan wordt die query niet uitgevoerd
+                $result = $statement->execute();
+
+                return $result;
+        }
+
         public function getId()
         {
                 return $this->id;
         }
 
-        /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
         public function setId($id)
         {
                 $this->id = $id;
 
                 return $this;
         }
-
-        /**
-         * Get the value of avatar
-         */ 
+ 
         public function getAvatar()
         {
             return $this->avatar;
         }
             
-        /**
-         * Set the value of avatar
-         *
-         * @return  self
-         */ 
         public function setAvatar($avatar)
         {  
             $this->avatar = $avatar;
 
             return $this;
         }
-
-        /**
-         * Get the value of Class
-         */ 
+ 
         public function getClass()
         {
             return $this->class;
         }
-            
-        /**
-         * Set the value of class
-         *
-         * @return  self
-         */ 
+             
         public function setClass($class)
         {  
             $this->class = $class;
 
             return $this;
         }
-
-        /**
-         * Get the value of interests
-         */ 
+ 
         public function getInterest()
         {
             return $this->interests;
         }
-            
-        /**
-         * Set the value of interests
-         *
-         * @return  self
-         */ 
+             
         public function setInterests($interests)
         {  
             $this->interests = $interests;
@@ -248,19 +197,11 @@
             return $this;
         }
         
-        /**
-         * Get the value of hobbies
-         */ 
         public function getHobbies()
         {
             return $this->hobbies;
         }
             
-        /**
-         * Set the value of hobbies
-         *
-         * @return  self
-         */ 
         public function setHobbies($hobbies)
         {  
             $this->hobbies = $hobbies;
@@ -268,19 +209,11 @@
             return $this;
         }
 
-        /**
-         * Get the value of beverage
-         */ 
         public function getBeverage()
         {
             return $this->beverage;
         }
             
-        /**
-         * Set the value of beverage
-         *
-         * @return  self
-         */ 
         public function setBeverage($beverage)
         {  
             $this->beverage = $beverage;
@@ -288,19 +221,11 @@
             return $this;
         }
 
-        /**
-         * Get the value of pet
-         */ 
         public function getPet()
         {
             return $this->pet;
         }
             
-        /**
-         * Set the value of pet
-         *
-         * @return  self
-         */ 
         public function setPet($pet)
         {  
             $this->pet = $pet;
@@ -308,9 +233,6 @@
             return $this;
         }
 
-        /*
-         * checkLogin
-         */
         public function checkLogin($email, $password) {
             //db conn
             $conn = Db::getConnection();
@@ -325,12 +247,6 @@
                 return false;
             }
             $hash = $result[0]["password"];
-            /*var_dump($result);
-            echo "<br>";
-            echo $password . "<br>";
-            echo $hash . "<br>";
-            var_dump(password_get_info($hash));
-            echo "<br>";*/
             if(password_verify($password, $hash)) {
                 return true;
             }else {
@@ -339,9 +255,6 @@
             }
         }
 
-        /*
-         * get all user data
-         */
         public function allUserData() {
             //db conn
             $conn = Db::getConnection();
@@ -357,9 +270,6 @@
             return $result;
         }
 
-        /*
-         * send all data from completing profile to database
-         */
         public function completeProfile() {
             //db conn
             $conn = Db::getConnection();
