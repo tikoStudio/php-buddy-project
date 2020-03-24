@@ -8,8 +8,8 @@ if(!empty($_POST)) {
         $user->setFirstname(htmlspecialchars($_POST['firstname']));
         $user->setLastname(htmlspecialchars($_POST['lastname']));
         $user->setEmail(htmlspecialchars($_POST['email']));
-        $user->setPassword(htmlspecialchars($_POST['password']));
-        $user->setPasswordconfirmation(htmlspecialchars($_POST['passwordconfirmation']));
+        $user->setPassword($_POST['password']);
+        $user->setPasswordconfirmation($_POST['passwordconfirmation']);
 
         if($_POST['password'] != $_POST['passwordconfirmation']) {
             $error = "Wachtwoord klopt niet!";

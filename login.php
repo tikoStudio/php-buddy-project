@@ -48,7 +48,7 @@
 
                 <div class="form__field">
 					<label for="password">Passwoord</label>
-                    <input type="text" id="password" name="password" placeholder="Passwoord">
+                    <input type="password" id="password" name="password" placeholder="Passwoord">
                 </div>
 
 				<div class="form__field">

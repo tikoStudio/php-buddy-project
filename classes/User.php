@@ -83,8 +83,8 @@
                         throw new Exception("Wachtwoord mag niet leeg zijn!");
                 }
 
-                $options = ['cost' => 15];
-                $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
+                $options = ['cost' => 12];
+                $password = password_hash($password, PASSWORD_DEFAULT, $options);
 
                 $this->password = $password;
 
@@ -101,7 +101,7 @@
                         throw new Exception("Wachtwoord mag niet leeg zijn!");
                 }
 
-                $options = ['cost' => 15];
+                $options = ['cost' => 12];
                 $passwordconfirmation = password_hash($this->passwordconfirmation, PASSWORD_DEFAULT, $options);
 
                 $this->passwordconfirmation = $passwordconfirmation;
@@ -311,7 +311,7 @@
         /*
          * checkLogin
          */
-        public static function checkLogin($email, $password) {
+        public function checkLogin($email, $password) {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -325,12 +325,12 @@
                 return false;
             }
             $hash = $result[0]["password"];
-            var_dump($result);
+            /*var_dump($result);
             echo "<br>";
             echo $password . "<br>";
             echo $hash . "<br>";
             var_dump(password_get_info($hash));
-            echo "<br>";
+            echo "<br>";*/
             if(password_verify($password, $hash)) {
                 return true;
             }else {
