@@ -3,12 +3,13 @@
 	$user = new User();
 
 	if(!empty($_POST)) {
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$email = htmlspecialchars($_POST['email']);
+		$password = htmlspecialchars($_POST['password']);
 		if(!empty($email) && !empty($password)){
 			if($user->checkLogin($email, $password)){
 				session_start();
 				$_SESSION["user"] = $email; // later aanpassen -> if checkbox is ticked use cookie 
+				
 				//redirect to index.php
 				header("Location: index.php");
 			}else{

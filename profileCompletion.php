@@ -2,8 +2,12 @@
     include_once(__DIR__ . "/classes/User.php"); 
     include_once("functions.php");
     
+    session_start();
+    $email = $_SESSION["user"];
     $user = new User();
-    $user->setId(1); //change to session or cookie instead of hard coded -> $_SESSION['id'];
+    $idArray = $user->idFromSession($email);
+    $id = $idArray[0]['id'];
+    $user->setId($id);
     $userData = $user->allUserData();
 
     $email = $userData[0]['email'];
@@ -75,7 +79,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vervolledig</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="login">
