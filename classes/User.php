@@ -214,6 +214,9 @@
             return $this;
         }
 
+        /*
+         * get all user data
+         */
         public function allUserData() {
             //db conn
             $conn = Db::getConnection();
@@ -229,6 +232,9 @@
             return $result;
         }
 
+        /*
+         * send all data from completing profile to database
+         */
         public function completeProfile() {
             //db conn
             $conn = Db::getConnection();
