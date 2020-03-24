@@ -1,1 +1,5 @@
-settings.php
+# exclude everything
+settings/*
+
+# exception to the rule
+!settings/.gitkeep 
