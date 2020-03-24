@@ -1,0 +1,115 @@
+*
+{
+  box-sizing: border-box;
+}
+
+body
+{
+  background-color: #fff;
+  color: rgb(39, 36, 36);
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0;
+
+}
+
+.login
+{
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
+  grid-template-rows: 1fr [form] 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.form--login
+{
+  padding: 1em;
+  grid-column: form;
+  grid-row: form;
+}
+
+.form__error
+{
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.form__field
+{
+  padding-bottom: 1em;
+}
+
+.form__field label
+{
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+input, select {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: gray;
+  border-radius: 8px;
+}
+
+.form__field input[type=text], 
+.form__field input[type=password],
+.form__field input[type=file],
+.form__field select
+{
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.4em;
+}
+
+.form__field .label__inline
+{
+  display: inline-block;
+}
+
+.btn
+{
+  width: 100%;
+  margin: 0.5em auto;
+}
+
+.btn--primary
+{
+  background-color: limegreen;
+  color: white;
+  text-align: center;
+  border: none;
+  padding: 0.3em 2em;
+  font-size: 1.4em;
+}
+
+h2 {
+  text-align: center;
+}
+
+.avatar {
+  height: 150px;
+  width: 150px;
+}
+
+.avatar__img {
+  text-align: center;
+}
+
+.fileUpload {
+  border-bottom: 2px solid gray;
+  color: gray;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 0.5em;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.form__field input[type=file] {
+  font-size: 1em;
+}
+
