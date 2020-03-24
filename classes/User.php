@@ -231,9 +231,16 @@
                 return false;
             }
             $hash = $result[0]["password"];
+            var_dump($result);
+            echo "<br>";
+            echo $password . "<br>";
+            echo $hash . "<br>";
+            var_dump(password_get_info($hash));
+            echo "<br>";
             if(password_verify($password, $hash)) {
                 return true;
             }else {
+                echo "fail";
                 return false;
             }
         }
