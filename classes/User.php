@@ -14,7 +14,6 @@
         private $beverage;
         private $pet;
         private $password;
-        private $passwordconfirmation;
 
         public function setFirstname($firstname) {
                 if(empty($firstname)) {

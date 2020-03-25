@@ -26,10 +26,11 @@
 <head>
   <meta charset="UTF-8">
   <title>buddy app</title>
+  <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="login">
+	<div class="login">
 		<div class="form form--login">
 			<form action="" method="post">
 				<h2 form__title>Login</h2>
@@ -44,7 +45,7 @@
 
                 <div class="form__field">
 					<label for="email">Email</label>
-                    <input type="text" id="email" name="email" placeholder="email">
+                    <input type="text" id="email" name="email" placeholder="Email">
 				</div>
 
                 <div class="form__field">

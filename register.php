@@ -52,7 +52,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
     <title>Registeer</title>
 </head>
 <body>
@@ -67,27 +68,27 @@
 
                 <div class="form__field">
                     <label for="firstname">Voornaam</label>
-                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="voornaam">
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Voornaam">
                 </div>
 
                 <div class="form__field">
                     <label for="lastname">Achternaam</label>
-                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="achternaam">
+                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Achternaam">
                 </div>
 
                 <div class="form__field">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="email">
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
                 </div>
 
                 <div class="form__field">
                     <label for="password">Wachtwoord</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="wachtwoord">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Wachtwoord">
                 </div>
 
                 <div class="form__field">
                     <label for="passwordconfirmation">Password confirmatie</label>
-                    <input type="password" class="form-control" name="passwordconfirmation" id="passwordconfirmation" placeholder="wachtwoord confirmatie">
+                    <input type="password" class="form-control" name="passwordconfirmation" id="passwordconfirmation" placeholder="Wachtwoord confirmatie">
                 </div>
 
                 <div class="form__field">
