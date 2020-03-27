@@ -9,19 +9,19 @@
     $email = $_SESSION["user"];
     $user = new User();
     $idArray = $user->idFromSession($email);
-    $id = $idArray[0]['id'];
+    $id = $idArray['id'];
     $user->setId($id);
     $userData = $user->allUserData();
 
-    $email = $userData[0]['email'];
-    $firstname = $userData[0]['firstname'];
-    $lastname = $userData[0]['lastname'];
-    $class = $userData[0]['class'];
-    $interests = $userData[0]['interests'];
-    $hobbies = $userData[0]['hobbies'];
-    $beverage = $userData[0]['beverage'];
-    $pet = $userData[0]['pet'];
-    $image = $userData[0]['avatar'];
+    $email = $userData['email'];
+    $firstname = $userData['firstname'];
+    $lastname = $userData['lastname'];
+    $class = $userData['class'];
+    $interests = $userData['interests'];
+    $hobbies = $userData['hobbies'];
+    $beverage = $userData['beverage'];
+    $pet = $userData['pet'];
+    $image = $userData['avatar'];
 
     if(!empty($_POST)) {
         //PROFILE PICTURE
@@ -30,7 +30,7 @@
                 $image = $_FILES['avatar']['name'];
                 uploadImage(htmlspecialchars($image));
             }catch(Exception $e) {
-                $image = $userData[0]['avatar'];
+                $image = $userData['avatar'];
                 $error = $e->getMessage();
             }
         }

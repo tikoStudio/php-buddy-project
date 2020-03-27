@@ -8,12 +8,12 @@
     }
     $user = new User();
     $idArray = $user->idFromSession($email);
-    $id = $idArray[0]['id'];
+    $id = $idArray['id'];
     $user->setId($id);
 
     $userData = $user->allUserData();
 
-    if(empty($userData[0]['class']) || empty($userData[0]['interests']) || empty($userData[0]['hobbies']) || empty($userData[0]['beverage']) || empty($userData[0]['pet'])) {
+    if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
     header('location: profileCompletion.php');
     }
 ?><!DOCTYPE html>
@@ -26,5 +26,6 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a href="logout.php">log out!</a>
 </body>
 </html>

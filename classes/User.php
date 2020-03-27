@@ -236,11 +236,11 @@
 
             //return result
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             if(empty($result)) {
                 return false;
             }
-            $hash = $result[0]["password"];
+            $hash = $result["password"];
             if(password_verify($password, $hash)) {
                 return true;
             }else {
@@ -258,7 +258,7 @@
 
             //return result
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             
             return $result;
         }
@@ -272,7 +272,7 @@
     
                 //return result
                 $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
                 return $result;
             }
 
