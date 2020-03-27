@@ -16,7 +16,7 @@
 
             if ( $user->availableEmail($user->getEmail()) ) {
                 // Email ready to use
-                if ( $user->validEmail($_POST['email']) === true ){
+                if ( $user->validEmail()){
                     // valid email
                 } else {
                     $error = "Ongeldig email!";
@@ -26,11 +26,12 @@
                 $error = "Email is al in gebruik!";
             }
 
-            if($user->endsWith($_POST['email'],"@student.thomasmore.be")) {
+            if($user->endsWith("@student.thomasmore.be")) {
+            
             }
             else {
                 $error = "Gebruik email van Thomasmore!";
-        }
+            }
 
 
         } catch (\Throwable $th) {

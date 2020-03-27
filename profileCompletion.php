@@ -3,6 +3,9 @@
     include_once("functions.php");
     
     session_start();
+    if(!isset($_SESSION['user']) ) {
+        header("Location: login.php");
+      }
     $email = $_SESSION["user"];
     $user = new User();
     $idArray = $user->idFromSession($email);

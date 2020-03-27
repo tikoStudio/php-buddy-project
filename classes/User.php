@@ -56,12 +56,6 @@
                 if(empty($email)) {
                         throw new Exception("Email mag niet leeg zijn!");
                 }
-/*
-                // hier moet je er nog voor zorgen dat het email adres moet eindigen op @student.thomasmore.be
-                if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                        throw new Exception("Email is not valid!");
-                }
-*/
                 $this->email = $email;
 
                 return $this;
@@ -71,8 +65,8 @@
                 return $this->email;
         }
 
-        public function validEmail($email) {
-                $email = $_POST['email'];
+        public function validEmail() {
+                $email = $this->getEmail();
                 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         return true;
                     } else {
@@ -96,7 +90,8 @@
                 }
         }
 
-        public function endsWith($email, $target) {
+        public function endsWith($target) {
+                $email = $this->getEmail();
                 $length = strlen($target);
                 if ($length == 0) {
                         return true;
@@ -249,7 +244,6 @@
             if(password_verify($password, $hash)) {
                 return true;
             }else {
-                echo "fail";
                 return false;
             }
         }
