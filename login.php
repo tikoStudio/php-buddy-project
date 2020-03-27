@@ -7,9 +7,16 @@
 		$password = htmlspecialchars($_POST['password']);
 		if(!empty($email) && !empty($password)){
 			if($user->checkLogin($email, $password)){
+				$user->setEmail($email);
+				$idArray = $user->idFromSession($email);
+				$id = $idArray['id'];
+				$user->setId($id);
+
+				// later aanpassen -> if checkbox is ticked use cookie 
 				session_start();
-				$_SESSION["user"] = $email; // later aanpassen -> if checkbox is ticked use cookie 
-				
+				$_SESSION["user"] = $email; 
+				$_SESSION["id"] = $id;
+
 				//redirect to index.php
 				header("Location: index.php");
 			}else{

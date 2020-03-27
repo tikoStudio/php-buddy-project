@@ -6,11 +6,8 @@
     if(!isset($_SESSION['user']) ) {
         header("Location: login.php");
       }
-    $email = $_SESSION["user"];
     $user = new User();
-    $idArray = $user->idFromSession($email);
-    $id = $idArray['id'];
-    $user->setId($id);
+    $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
 
     $email = $userData['email'];

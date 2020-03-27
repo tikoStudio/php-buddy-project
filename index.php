@@ -7,10 +7,7 @@
       header("Location: login.php");
     }
     $user = new User();
-    $idArray = $user->idFromSession($email);
-    $id = $idArray['id'];
-    $user->setId($id);
-
+    $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
