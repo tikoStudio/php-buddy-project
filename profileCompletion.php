@@ -176,7 +176,7 @@
                         <option <?php if(isset($pet) && $pet === "Cat") { echo "selected";}?> value="Cat">Kat 🐈</option>
                         <option <?php if(isset($pet) && $pet === "Dog") { echo "selected";}?> value="Dog">Hond 🐕</option>
                         <option <?php if(isset($pet) && $pet === "Horse") { echo "selected";}?> value="Horse">Paard 🐎</option>
-                        <option <?php if(isset($pet) && $pet === "All") { echo "selected";}?> value="All">ik hou van ze allemaal even veel 💓</option>
+                        <option <?php if(isset($pet) && $pet === "All") { echo "selected";}?> value="All">ik hou van ze allemaal 💓</option>
                     </select>
                 </div>
 
