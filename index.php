@@ -24,5 +24,57 @@
 </head>
 <body>
     <a href="logout.php">log out!</a>
+
+    <div class="form__field">
+    <label for="class">Klas</label>
+    <select name="class" id="class">
+        <option value="1IMD">1IMD</option>
+        <option value="2IMD">2IMD</option>
+        <option value="3IMD">3IMD</option>
+    </select>
+    </div>
+
+    <div class="form__field">
+	<label for="interests">Interesses</label>
+    <select name="interests" id="interests">
+        <option <?php if(isset($interests) && $interests === "Designing") { echo "selected";}?> value="Designing">Designen</option>
+        <option <?php if(isset($interests) && $interests === "Developing") { echo "selected";}?> value="Developing">Developen</option>
+        <option <?php if(isset($interests) && $interests === "Both") { echo "selected";}?> value="Both">Beide</option>
+    </select>
+    </div>
+
+    <div class="form__field">
+	<label for="hobbies">Hobbies</label>
+    <select name="hobbies" id="hobbies">
+        <option <?php if(isset($hobbies) && $hobbies === "Party") { echo "selected";}?> value="Party">party like it's 1969 🥳</option>
+        <option <?php if(isset($hobbies) && $hobbies === "Sleeping") { echo "selected";}?> value="Sleeping">slapen 😴</option>
+        <option <?php if(isset($hobbies) && $hobbies === "Tv") { echo "selected";}?> value="Tv">Tv-series en filmen kijken 📺</option>
+    </select>
+    </div>
+
+    <div class="form__field">
+	<label for="beverage">Favoriete drankje tijdens het developen/designen</label>
+    <select name="beverage" id="beverage">
+        <option <?php if(isset($beverage) && $beverage === "Beer") { echo "selected";}?> value="Beer">Bier 🍺</option>
+        <option <?php if(isset($beverage) && $beverage === "Coffee") { echo "selected";}?> value="Coffee">Koffie ☕</option>
+        <option <?php if(isset($beverage) && $beverage === "Soda") { echo "selected";}?> value="Soda">Frisdrank 🥤</option>
+        <option <?php if(isset($beverage) && $beverage === "Tea") { echo "selected";}?> value="Tea">Thee 🍵</option>
+    </select>
+    </div>
+
+    <div class="form__field">
+	<label for="pet">Favoriete huisdier</label>
+    <select name="pet" id="pet">
+        <option <?php if(isset($pet) && $pet === "Bunny") { echo "selected";}?> value="Bunny">Konijn 🐇</option>
+        <option <?php if(isset($pet) && $pet === "Cat") { echo "selected";}?> value="Cat">Kat 🐈</option>
+        <option <?php if(isset($pet) && $pet === "Dog") { echo "selected";}?> value="Dog">Hond 🐕</option>
+        <option <?php if(isset($pet) && $pet === "Horse") { echo "selected";}?> value="Horse">Paard 🐎</option>
+        <option <?php if(isset($pet) && $pet === "All") { echo "selected";}?> value="All">ik hou van ze allemaal even veel 💓</option>
+    </select>
+    </div>
+
+    <div>
+		<input type="submit" value="Filteren" class="btn btn--primary">	
+	</div>
 </body>
 </html>
