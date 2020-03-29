@@ -5,6 +5,7 @@
     class User {
         private $id;
         private $email;
+        private $updateEmail;
         private $password;
         private $firstname;
         private $lastname;
@@ -330,5 +331,42 @@
                 $this->description = $description;
 
                 return $this;
+        }
+
+        /**
+         * Get the value of updateEmail
+         */ 
+        public function getUpdateEmail()
+        {
+                return $this->updateEmail;
+        }
+
+        /**
+         * Set the value of updateEmail
+         *
+         * @return  self
+         */ 
+        public function setUpdateEmail($updateEmail)
+        {
+                $this->updateEmail = $updateEmail;
+
+                return $this;
+        }
+
+        public function changeEmail() {
+             //db conn
+             $conn = Db::getConnection();
+             //insert query
+             $statement = $conn->prepare("update users set email = :updateEmail where email= :email");
+             $email = $this->getEmail();
+             $updateEmail = $this->getUpdateEmail();
+
+             $statement->bindParam(":email", $email);
+             $statement->bindParam(":updateEmail", $updateEmail);
+
+            //return result
+            $result = $statement->execute();
+    
+            return $result;
         }
 }

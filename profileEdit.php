@@ -65,6 +65,33 @@
 
         //all the dropdowns auto select answer so will never be empty
 
+        //UPDATE EMAIL
+        if(!empty($_POST['email']) && !empty($_POST['newEmail'])) {
+            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setUpdateEmail(htmlspecialchars($_POST['newEmail']));
+            if($user->getEmail() == $_SESSION['user']) {
+                if ( $user->availableEmail($user->getUpdateEmail()) ) {
+                    // Email ready to use
+                    if ( $user->validEmail()){
+                        // valid email
+                        try {
+                            $_SESSION['user'] = $user->getUpdateEmail();
+                            $user->changeEmail();
+                        }catch(\Throwable $th) {
+                            $error = $th->getMessage();
+                        }
+                        
+                    } else {
+                        $error = "Ongeldig email!";
+                    }
+                } else {
+                    $error = "Email is al in gebruik!";
+                }
+            }else {
+                $error = "email klopt niet";
+            }
+        }//no else, not required
+
         //checks if everything is in order to update profile
         if(!isset($error)){
             try {
@@ -78,8 +105,8 @@
                 $user->setBeverage($beverage);
                 $user->setPet($pet);
                 $user->completeProfile();
-                //redirect to homepage
-				header('location: index.php');
+                //show succes message
+                $success = "profiel is aangepast";
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
             }
@@ -108,6 +135,14 @@
 				</div>
 				<?php endif; ?>
 
+                <?php if(isset($success)) : ?>
+				<div class="form__success">
+					<p>
+						<?php echo $success; ?>
+					</p>
+				</div>
+				<?php endif; ?>
+
 				<div class="form__field">
                     <label for="avatar">Profiel foto</label>
                     <div class="avatar__img">
@@ -118,8 +153,7 @@
                        echo "https://via.placeholder.com/150";
                     }  ?>
                     " alt="profielfoto"></div>
-                    <input type="file" name="avatar" id="avatar" class="fileUpload">
-                    
+                    <input type="file" name="avatar" id="avatar" class="fileUpload"> 
                 </div>
 
                 <div class="form__field">
@@ -200,12 +234,37 @@
                         <option <?php if(isset($pet) && $pet === "All") { echo "selected";}?> value="All">ik hou van ze allemaal 💓</option>
                     </select>
                 </div>
+                
+                <h2 form__title>Verander email adress</h2>
 
+                <div class="form__field">
+					<label for="email">huidige email</label>
+                    <input type="text" id="email" name="email" placeholder="huidig email adress">
+				</div>
+
+                <div class="form__field">
+					<label for="newEmail">nieuwe email</label>
+                    <input type="text" id="newEmail" name="newEmail" placeholder="nieuw email adress">
+                </div>
+
+                <h2 form__title>Verander wachtwoord</h2>
+
+                <div class="form__field">
+					<label for="password">huidige wachtwoord</label>
+                    <input type="text" id="password" name="password" placeholder="huidig wachtwoord">
+				</div>
+
+                <div class="form__field">
+					<label for="newPassword">nieuwe wachtwoord</label>
+                    <input type="text" id="newPassword" name="newPassword" placeholder="nieuw wachtwoord">
+                </div>
+                
 				<div class="form__field">
 					<input type="submit" value="vervolledig profiel" class="btn btn--primary">	
 				</div>
-			</form>
+
+            </form>
 		</div>
-	</div>
+    </div>
 </body>
 </html>
