@@ -5,15 +5,17 @@
     class User {
         private $id;
         private $email;
+        private $password;
         private $firstname;
         private $lastname;
+        private $description;
         private $avatar;
         private $class;
         private $interests;
         private $hobbies;
         private $beverage;
         private $pet;
-        private $password;
+        
 
         public function setFirstname($firstname) {
                 if(empty($firstname)) {
@@ -280,10 +282,11 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("update users set firstname= :firstname, lastname= :lastname, avatar= :avatar, class= :class, interests= :interests, hobbies= :hobbies, beverage= :beverage, pet= :pet where id= :id");
+            $statement = $conn->prepare("update users set firstname= :firstname, lastname= :lastname, description = :description, avatar= :avatar, class= :class, interests= :interests, hobbies= :hobbies, beverage= :beverage, pet= :pet where id= :id");
             $id = $this->getId();
             $firstname = $this->getFirstname();
             $lastname = $this->getLastname();
+            $description = $this->getDescription();
             $avatar = $this->getAvatar();
             $class = $this->getClass();
             $interests = $this->getInterest();
@@ -294,6 +297,7 @@
             $statement->bindParam(":id", $id);
             $statement->bindParam(":firstname", $firstname);
             $statement->bindParam(":lastname", $lastname);
+            $statement->bindParam(":description", $description);
             $statement->bindParam(":avatar", $avatar);
             $statement->bindParam(":class", $class);
             $statement->bindParam(":interests", $interests);
@@ -307,4 +311,24 @@
             return $result;
         }
 
+
+        /**
+         * Get the value of description
+         */ 
+        public function getDescription()
+        {
+                return $this->description;
+        }
+
+        /**
+         * Set the value of description
+         *
+         * @return  self
+         */ 
+        public function setDescription($description)
+        {
+                $this->description = $description;
+
+                return $this;
+        }
 }

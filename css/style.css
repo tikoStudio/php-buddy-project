@@ -48,7 +48,7 @@ body
   margin-bottom: 0.2em;
 }
 
-input, select {
+input, select, textarea {
   outline: 0;
   border-width: 0 0 2px;
   border-color: gray;
@@ -58,11 +58,16 @@ input, select {
 .form__field input[type=text], 
 .form__field input[type=password],
 .form__field input[type=file],
-.form__field select
+.form__field select,
+.form__field textarea
 {
   width: 100%;
   padding: 0.3em;
   font-size: 1.4em;
+}
+
+textarea {
+  height: 150px;
 }
 
 .form__field .label__inline
