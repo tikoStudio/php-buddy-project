@@ -7,6 +7,7 @@
         private $email;
         private $updateEmail;
         private $password;
+        private $updatePassword;
         private $firstname;
         private $lastname;
         private $description;
@@ -366,7 +367,49 @@
 
             //return result
             $result = $statement->execute();
-    
+            $this->setEmail($updateEmail);
             return $result;
+        }
+
+        /**
+         * Get the value of updatePassword
+         */ 
+        public function getUpdatePassword()
+        {
+                return $this->updatePassword;
+        }
+
+        /**
+         * Set the value of updatePassword
+         *
+         * @return  self
+         */ 
+        public function setUpdatePassword($updatePassword)
+        {
+            if(empty($updatePassword)) {
+                throw new Exception("Wachtwoord mag niet leeg zijn!");
+            }
+
+            $options = ['cost' => 12];
+            $updatePassword = password_hash($updatePassword, PASSWORD_DEFAULT, $options);
+
+            $this->updatePassword = $updatePassword;
+            return $this;
+        }
+
+        public function changePassword() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update users set password = :updatePassword where email= :email");
+            $email = $this->getEmail();
+            $updatePassword = $this->getUpdatePassword();
+
+            $statement->bindParam(":email", $email);
+            $statement->bindParam(":updatePassword", $updatePassword);
+
+             //return result
+             $result = $statement->execute();
+             return $result;
         }
 }

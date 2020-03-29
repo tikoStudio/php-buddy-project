@@ -24,5 +24,6 @@
 </head>
 <body>
     <a href="logout.php">log out!</a>
+    <a href="profileEdit.php">temp edit profile</a>
 </body>
 </html>

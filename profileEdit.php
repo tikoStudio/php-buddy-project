@@ -11,6 +11,7 @@
     $userData = $user->allUserData();
 
     $email = $userData['email'];
+    $user->setEmail($email);
     $firstname = $userData['firstname'];
     $lastname = $userData['lastname'];
     $description = $userData['description'];
@@ -90,7 +91,25 @@
             }else {
                 $error = "email klopt niet";
             }
-        }//no else, not required
+        }//no else, cahnge email not required
+
+        //UPDATE PASSWORD
+        if(!empty($_POST['password']) && !empty($_POST['newPassword'])) {
+            if ($user->checkLogin($_SESSION['user'], $_POST['password'])) {
+                if($_POST['newPassword'] == $_POST['newPasswordConfirmation']) {
+                    //current password matches -> update password
+                    $user->setUpdatePassword($_POST['newPassword']);
+                    $user->changePassword();
+                }else {
+                    $error = "wachtwoord komt niet overeen";
+                }   
+            }else {
+                $error = "wachtwoord klopt niet";
+            }
+            
+                
+            
+        }//no else, change password not required
 
         //checks if everything is in order to update profile
         if(!isset($error)){
@@ -257,6 +276,11 @@
                 <div class="form__field">
 					<label for="newPassword">nieuwe wachtwoord</label>
                     <input type="text" id="newPassword" name="newPassword" placeholder="nieuw wachtwoord">
+                </div>
+
+                <div class="form__field">
+					<label for="newPasswordConfirmation">nieuwe wachtwoord confirmatie</label>
+                    <input type="text" id="newPasswordConfirmation" name="newPasswordConfirmation" placeholder="nieuw wachtwoord confirmatie">
                 </div>
                 
 				<div class="form__field">
