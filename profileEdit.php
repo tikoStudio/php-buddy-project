@@ -270,17 +270,17 @@
 
                 <div class="form__field">
 					<label for="password">huidige wachtwoord</label>
-                    <input type="text" id="password" name="password" placeholder="huidig wachtwoord">
+                    <input type="password" id="password" name="password" placeholder="huidig wachtwoord">
 				</div>
 
                 <div class="form__field">
 					<label for="newPassword">nieuwe wachtwoord</label>
-                    <input type="text" id="newPassword" name="newPassword" placeholder="nieuw wachtwoord">
+                    <input type="password" id="newPassword" name="newPassword" placeholder="nieuw wachtwoord">
                 </div>
 
                 <div class="form__field">
 					<label for="newPasswordConfirmation">nieuwe wachtwoord confirmatie</label>
-                    <input type="text" id="newPasswordConfirmation" name="newPasswordConfirmation" placeholder="nieuw wachtwoord confirmatie">
+                    <input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" placeholder="nieuw wachtwoord confirmatie">
                 </div>
                 
 				<div class="form__field">
