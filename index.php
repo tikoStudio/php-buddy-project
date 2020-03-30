@@ -13,6 +13,13 @@
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
     header('location: profileCompletion.php');
     }
+
+    // Filteren
+
+    if($_POST['class'] == '2IMD') {
+        $users = $user->filterClass($class);
+    }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
