@@ -173,7 +173,7 @@
         }
              
         public function setClass($class)
-        {  
+        { 
             $this->class = $class;
 
             return $this;
@@ -307,7 +307,7 @@
             return $result;
         }
 
-        public function filterClass($class) {
+        public function filterUser() {
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE class = :class");
             $class = $this->getClass();

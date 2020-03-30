@@ -9,15 +9,15 @@
     $user = new User();
     $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
+    $user->setClass($class);
+    $userFilter = $user->filterUser();
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
     header('location: profileCompletion.php');
     }
 
-    // Filteren
-
-    if($_POST['class'] == '2IMD') {
-        $users = $user->filterClass($class);
+    if($_POST) {
+        $user->filterUser();
     }
 
 ?><!DOCTYPE html>
