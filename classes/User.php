@@ -307,4 +307,16 @@
             return $result;
         }
 
+        public function filterClass($class) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE class = :class");
+            $class = $this->getClass();
+            $statement->bindParam(":class", $class);
+
+            $statement->execute();
+            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $users;
+        }
+
 }
