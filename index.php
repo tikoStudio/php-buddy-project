@@ -9,14 +9,18 @@
     $user = new User();
     $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
-    $user->setClass($class);
+    $user->setClass($_POST['class']);
+    $user->setInterests($_POST['interests']);
+    $user->setHobbies($_POST['hobbies']);
+    $user->setBeverage($_POST['beverage']);
+    $user->setPet($_POST['pet']);
     $userFilter = $user->filterUser();
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
     header('location: profileCompletion.php');
     }
 
-    if($_POST['class'] == '2IMD') {
+    if($userFilter['class'] == '1IMD' || '2IMD' || '3IMD' && $userFilter['interests'] == 'Designing' || 'Developing' || 'Both' && $userFilter['hobbies'] == 'Party' || 'Sleeping' || 'Tv' && $userFilter['beverage'] == 'Beer' || 'Coffee' || 'Soda' || 'Tea' && $userFilter['pet'] == 'Bunny' || 'Cat' || 'Dog' || 'Horse' || 'All') {
         $user->filterUser();
     }
 
@@ -48,39 +52,39 @@
     <div class="form__field">
 	<label for="interests">Interesses</label>
     <select name="interests" id="interests">
-        <option <?php if(isset($interests) && $interests === "Designing") { echo "selected";}?> value="Designing">Designen</option>
-        <option <?php if(isset($interests) && $interests === "Developing") { echo "selected";}?> value="Developing">Developen</option>
-        <option <?php if(isset($interests) && $interests === "Both") { echo "selected";}?> value="Both">Beide</option>
+        <option value="Designing">Designen</option>
+        <option value="Developing">Developen</option>
+        <option value="Both">Beide</option>
     </select>
     </div>
 
     <div class="form__field">
 	<label for="hobbies">Hobbies</label>
     <select name="hobbies" id="hobbies">
-        <option <?php if(isset($hobbies) && $hobbies === "Party") { echo "selected";}?> value="Party">party like it's 1969 🥳</option>
-        <option <?php if(isset($hobbies) && $hobbies === "Sleeping") { echo "selected";}?> value="Sleeping">slapen 😴</option>
-        <option <?php if(isset($hobbies) && $hobbies === "Tv") { echo "selected";}?> value="Tv">Tv-series en filmen kijken 📺</option>
+        <option value="Party">party like it's 1969 🥳</option>
+        <option value="Sleeping">slapen 😴</option>
+        <option value="Tv">Tv-series en filmen kijken 📺</option>
     </select>
     </div>
 
     <div class="form__field">
 	<label for="beverage">Favoriete drankje tijdens het developen/designen</label>
     <select name="beverage" id="beverage">
-        <option <?php if(isset($beverage) && $beverage === "Beer") { echo "selected";}?> value="Beer">Bier 🍺</option>
-        <option <?php if(isset($beverage) && $beverage === "Coffee") { echo "selected";}?> value="Coffee">Koffie ☕</option>
-        <option <?php if(isset($beverage) && $beverage === "Soda") { echo "selected";}?> value="Soda">Frisdrank 🥤</option>
-        <option <?php if(isset($beverage) && $beverage === "Tea") { echo "selected";}?> value="Tea">Thee 🍵</option>
+        <option value="Beer">Bier 🍺</option>
+        <option value="Coffee">Koffie ☕</option>
+        <option value="Soda">Frisdrank 🥤</option>
+        <option value="Tea">Thee 🍵</option>
     </select>
     </div>
 
     <div class="form__field">
 	<label for="pet">Favoriete huisdier</label>
     <select name="pet" id="pet">
-        <option <?php if(isset($pet) && $pet === "Bunny") { echo "selected";}?> value="Bunny">Konijn 🐇</option>
-        <option <?php if(isset($pet) && $pet === "Cat") { echo "selected";}?> value="Cat">Kat 🐈</option>
-        <option <?php if(isset($pet) && $pet === "Dog") { echo "selected";}?> value="Dog">Hond 🐕</option>
-        <option <?php if(isset($pet) && $pet === "Horse") { echo "selected";}?> value="Horse">Paard 🐎</option>
-        <option <?php if(isset($pet) && $pet === "All") { echo "selected";}?> value="All">ik hou van ze allemaal even veel 💓</option>
+        <option value="Bunny">Konijn 🐇</option>
+        <option value="Cat">Kat 🐈</option>
+        <option value="Dog">Hond 🐕</option>
+        <option value="Horse">Paard 🐎</option>
+        <option value="All">ik hou van ze allemaal even veel 💓</option>
     </select>
     </div>
 
