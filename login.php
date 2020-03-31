@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="login">
+	<div class="container">
 		<div class="form form--login">
 			<form action="" method="post">
 				<h2 form__title>Login</h2>

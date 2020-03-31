@@ -58,7 +58,7 @@
     <title>Registeer</title>
 </head>
 <body>
-<div class="login">
+<div class="container">
     <div class="form form--login">
         <h2 form__title>Registreer</h2>
             <form action="" method="POST">

@@ -12,9 +12,7 @@
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
         header('location: profileCompletion.php');
-    }
-
-    if($userData['buddySearching']) {
+    }else if($userData['buddySearching']) {
         header('location: buddySearch.php');
     }
 ?><!DOCTYPE html>

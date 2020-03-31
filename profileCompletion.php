@@ -95,7 +95,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login">
+    <div class="container">
 		<div class="form form--login">
 			<form action="" method="post" enctype="multipart/form-data">
 				<h2 form__title>Maak je profiel volledig!</h2>

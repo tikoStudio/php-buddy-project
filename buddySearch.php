@@ -33,9 +33,34 @@
     <?php echo $user->getClass(); ?>
 
     <?php foreach ($matches as $match) :?>
-        <?php  echo "<br>"; var_dump($match); echo "<br>"; 
-            
+        <?php  
+            //echo $user->getId() . " and user " . $match['id'] . " are potential matches <br>";
+
+            $counter = 0;
+            //echo $counter . "<br>";
+            if($userData['interests'] == $match['interests']) {
+                $counter++;
+            }
+            //echo $counter . "<br>";
+            if($userData['hobbies'] == $match['hobbies']) {
+                $counter++;
+            }
+            //echo $counter . "<br>";
+            if($userData['beverage'] == $match['beverage']) {
+                $counter++;
+            }
+            //echo $counter . "<br>";
+            if($userData['pet'] == $match['pet']) {
+                $counter++;
+            }
+            //echo $counter . "<br>";
         ?>
+        <div class="container buddyCard priority<?php echo $counter; ?>">
+            <h3><?php echo $match['firstname'] . " " . $match['lastname'] ?></h3>
+            <img class="avatar" src="uploads/<?php echo $match["avatar"] ?>" alt="">
+            
+        </div>
+        
     <?php endforeach; ?>
 </body>
 </html>
