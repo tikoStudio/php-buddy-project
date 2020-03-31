@@ -309,9 +309,17 @@
 
         public function filterUser() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE class = :class");
+            $statement = $conn->prepare("SELECT * FROM users WHERE class = :class or interests = :interests or hobbies = :hobbies or beverage = :beverage or pet = :pet");
             $class = $this->getClass();
+            $interests = $this->getInterest();
+            $hobbies = $this->getHobbies();
+            $beverage = $this->getBeverage();
+            $pet = $this->getPet();
             $statement->bindParam(":class", $class);
+            $statement->bindParam(":interests", $interests);
+            $statement->bindParam(":hobbies", $hobbies);
+            $statement->bindParam(":beverage", $beverage);
+            $statement->bindParam(":pet", $pet);
 
             $statement->execute();
             $users = $statement->fetchAll(PDO::FETCH_ASSOC);
