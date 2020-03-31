@@ -26,7 +26,7 @@
         if(!empty($_FILES['avatar']['name'])) {         
             try {
                 $image = $_FILES['avatar']['name'];
-                uploadImage(htmlspecialchars($image));
+                uploadImage($image);
             }catch(Exception $e) {
                 $image = $userData['avatar'];
                 $error = $e->getMessage();
@@ -35,15 +35,15 @@
         
         //USERNAME
         if(!empty($_POST['firstname']) && !empty($_POST['lastname'])) {
-            $firstname = htmlspecialchars($_POST['firstname']);
-            $lastname = htmlspecialchars($_POST['lastname']);
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
         }else { // else because name is required
             $error = "voornaam en achternaam zijn verplicht";
         }
 
         //DESCRIPTION
         if(!empty($_POST['description'])) {
-            $description = htmlspecialchars($_POST['description']);
+            $description = $_POST['description'];
         }else if(strlen($decription > 500)) {
             $error = "profieltekst mag maximum 500 characters zijn";
         } // no else, field not required
@@ -113,7 +113,7 @@
                     <div class="avatar__img">
                         <p>Huidige profielfoto:</p>
                         <img class="avatar" src="<?php if(!empty($image)){ 
-                        echo "uploads/" . $image;
+                        echo "uploads/" . htmlspecialchars($image);
                     }else { 
                        echo "https://via.placeholder.com/150";
                     }  ?>
@@ -126,7 +126,7 @@
 					<label for="firstname">voornaam</label>
                     <input type="text" id="firstname" name="firstname"
                     <?php if(!empty($firstname)){ ?>
-                        value="<?php echo $firstname; ?>"
+                        value="<?php echo htmlspecialchars($firstname); ?>"
                     <?php } else { ?>
                         placeholder="first name"
                     <?php } ?>
@@ -137,7 +137,7 @@
 					<label for="lastname">achternaam</label>
                     <input type="text" id="lastname" name="lastname"
                     <?php if(!empty($lastname)){ ?>
-                        value="<?php echo $lastname; ?>"
+                        value="<?php echo htmlspecialchars($lastname); ?>"
                     <?php } else { ?>
                         placeholder="lastname"
                     <?php } ?>
@@ -150,7 +150,7 @@
                     <?php if(empty($description)){ ?>
                         placeholder="korte profieltekst, max 500 characters"
                     <?php } ?>
-                    ><?php echo $description; ?></textarea>
+                    ><?php echo htmlspecialchars($description); ?></textarea>
                 </div>
                 
                 <div class="form__field">

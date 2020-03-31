@@ -24,7 +24,7 @@
                         throw new Exception("Voornaam mag niet leeg zijn!");
                 }
 
-                if(!preg_match("/^[a-zA-Z ]*$/", $_POST['firstname'])) {
+                if(!preg_match("/^[a-zA-Z ]*$/", $firstname)) {
                         throw new Exception("Voornaam is niet geldig!");
                 }
 
@@ -42,7 +42,7 @@
                         throw new Exception("Achternaam mag niet leeg zijn!");
                 }
 
-                if(!preg_match("/^[a-zA-Z ]*$/", $_POST['lastname'])) {
+                if(!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
                         throw new Exception("Achternaam is niet geldig!");
                 }
 
