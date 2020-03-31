@@ -16,9 +16,11 @@
     header('location: profileCompletion.php');
     }
 
-    if($_POST) {
+    if($_POST['class'] == '2IMD') {
         $user->filterUser();
     }
+
+    
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -31,6 +33,8 @@
 </head>
 <body>
     <a href="logout.php">log out!</a>
+
+    <form action="" method="post">
 
     <div class="form__field">
     <label for="class">Klas</label>
@@ -83,5 +87,10 @@
     <div>
 		<input type="submit" value="Filteren" class="btn btn--primary">	
 	</div>
+    </form>
+
+    <?php foreach($userFilter as $u): ?>
+        <h2><?php echo $u['firstname'] . " " . $u['lastname']; ?></h2>
+    <?php endforeach; ?>
 </body>
 </html>
