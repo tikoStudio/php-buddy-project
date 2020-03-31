@@ -126,7 +126,9 @@ h2 {
 .buddyCard {
   position: absolute;
   max-width: 50%;
-min-width: 50%;
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* TEMP TEST? CLEANUP LATER */

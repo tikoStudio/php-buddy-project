@@ -15,7 +15,7 @@
 
     //used to check if you are looking for a buddy or are a buddy
     $user->setClass($userData['class']);
-    $matches = $user->searchMatch();    
+    $matches = $user->searchMatch();   
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -58,9 +58,20 @@
         <div class="container buddyCard priority<?php echo $counter; ?>">
             <h3><?php echo $match['firstname'] . " " . $match['lastname'] ?></h3>
             <img class="avatar" src="uploads/<?php echo $match["avatar"] ?>" alt="">
+         
+                <div class="form__field">
+					<input type="submit" value="stuur buddy verzoek!" class="btn btn--primary">	
+                </div>
+                
+                <div class="form__field">
+					<input type="submit" value="zoek andere buddy!" class="btn btn--primary" onclick="dismiss(this);">	
+				</div>
             
+
         </div>
         
     <?php endforeach; ?>
+
+    <script src="js/dismiss.js"><?php echo "dit is dikke rommel"; ?></script>
 </body>
 </html>
