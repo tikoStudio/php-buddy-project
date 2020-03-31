@@ -3,20 +3,20 @@
     include_once(__DIR__ . "./Db.php");
 
     class User {
-        private $id;
-        private $email;
-        private $updateEmail;
-        private $password;
-        private $updatePassword;
-        private $firstname;
-        private $lastname;
-        private $description;
-        private $avatar;
-        private $class;
-        private $interests;
-        private $hobbies;
-        private $beverage;
-        private $pet;
+        protected $id;
+        protected $email;
+        protected $updateEmail;
+        protected $password;
+        protected $updatePassword;
+        protected $firstname;
+        protected $lastname;
+        protected $description;
+        protected $avatar;
+        protected $class;
+        protected $interests;
+        protected $hobbies;
+        protected $beverage;
+        protected $pet;
         
 
         public function setFirstname($firstname) {
@@ -313,20 +313,11 @@
             return $result;
         }
 
-
-        /**
-         * Get the value of description
-         */ 
         public function getDescription()
         {
                 return $this->description;
         }
 
-        /**
-         * Set the value of description
-         *
-         * @return  self
-         */ 
         public function setDescription($description)
         {
                 $this->description = $description;
@@ -334,19 +325,11 @@
                 return $this;
         }
 
-        /**
-         * Get the value of updateEmail
-         */ 
         public function getUpdateEmail()
         {
                 return $this->updateEmail;
         }
 
-        /**
-         * Set the value of updateEmail
-         *
-         * @return  self
-         */ 
         public function setUpdateEmail($updateEmail)
         {
                 $this->updateEmail = $updateEmail;
@@ -371,19 +354,11 @@
             return $result;
         }
 
-        /**
-         * Get the value of updatePassword
-         */ 
         public function getUpdatePassword()
         {
                 return $this->updatePassword;
         }
 
-        /**
-         * Set the value of updatePassword
-         *
-         * @return  self
-         */ 
         public function setUpdatePassword($updatePassword)
         {
             if(empty($updatePassword)) {

@@ -1,0 +1,41 @@
+<?php  
+     include_once(__DIR__ . "/classes/Buddy.php"); 
+
+    session_start();
+    if(!isset($_SESSION['user']) ) {
+        header("Location: login.php");
+    }
+    $user = new Buddy();
+    $user->setId($_SESSION["id"]);
+    $userData = $user->allUserData();
+
+    if($userData['buddySearching'] == false) { // if you somehow got on page while not searching for buddies you get redirected
+        header('location: index.php');
+    }
+
+    //used to check if you are looking for a buddy or are a buddy
+    $user->setClass($userData['class']);
+    $matches = $user->searchMatch();    
+
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buddysearch</title>
+    <link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- temp while developing feature -->
+    <a href="index.php">temp index link</a>
+    <?php echo $user->getId(); ?>
+    <?php echo $user->getClass(); ?>
+
+    <?php foreach ($matches as $match) :?>
+        <?php  echo "<br>"; var_dump($match); echo "<br>"; 
+            
+        ?>
+    <?php endforeach; ?>
+</body>
+</html>

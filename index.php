@@ -11,7 +11,11 @@
     $userData = $user->allUserData();
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
-    header('location: profileCompletion.php');
+        header('location: profileCompletion.php');
+    }
+
+    if($userData['buddySearching']) {
+        header('location: buddySearch.php');
     }
 ?><!DOCTYPE html>
 <html lang="en">
