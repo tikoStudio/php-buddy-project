@@ -3,17 +3,17 @@
     include_once(__DIR__ . "./Db.php");
 
     class User {
-        private $id;
-        private $email;
-        private $firstname;
-        private $lastname;
-        private $avatar;
-        private $class;
-        private $interests;
-        private $hobbies;
-        private $beverage;
-        private $pet;
-        private $password;
+        protected $id;
+        protected $email;
+        protected $firstname;
+        protected $lastname;
+        protected $avatar;
+        protected $class;
+        protected $interests;
+        protected $hobbies;
+        protected $beverage;
+        protected $pet;
+        protected $password;
 
         public function setFirstname($firstname) {
                 if(empty($firstname)) {
@@ -305,26 +305,6 @@
             $result = $statement->execute();
     
             return $result;
-        }
-
-        public function filterUser() {
-            $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE class = :class and interests = :interests and hobbies = :hobbies and beverage = :beverage and pet = :pet");
-            $class = $this->getClass();
-            $interests = $this->getInterest();
-            $hobbies = $this->getHobbies();
-            $beverage = $this->getBeverage();
-            $pet = $this->getPet();
-            $statement->bindParam(":class", $class);
-            $statement->bindParam(":interests", $interests);
-            $statement->bindParam(":hobbies", $hobbies);
-            $statement->bindParam(":beverage", $beverage);
-            $statement->bindParam(":pet", $pet);
-
-            $statement->execute();
-            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
-            return $users;
         }
 
 }
