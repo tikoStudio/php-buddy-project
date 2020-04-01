@@ -309,7 +309,7 @@
 
         public function filterUser() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * FROM users WHERE class = :class or interests = :interests or hobbies = :hobbies or beverage = :beverage or pet = :pet");
+            $statement = $conn->prepare("SELECT * FROM users WHERE class = :class and interests = :interests and hobbies = :hobbies and beverage = :beverage and pet = :pet");
             $class = $this->getClass();
             $interests = $this->getInterest();
             $hobbies = $this->getHobbies();
