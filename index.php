@@ -24,6 +24,10 @@
         $user->filterUser();
     }
 
+    if($userFilter == null) {
+        $error = "Geen buddy gevonden met deze interesses";
+    }
+
     
 
 ?><!DOCTYPE html>
@@ -93,8 +97,10 @@
 	</div>
     </form>
 
+    <?php if(isset($error)) { echo $error;} ?>
+ 
     <?php foreach($userFilter as $u): ?>
         <h2><?php echo $u['firstname'] . " " . $u['lastname']; ?></h2>
-    <?php endforeach; ?>
+    <?php endforeach; ?> 
 </body>
 </html>
