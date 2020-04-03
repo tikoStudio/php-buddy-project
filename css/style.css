@@ -131,6 +131,11 @@ h2 {
   flex-direction: column;
 }
 
+.container__buddyCard {
+  display: flex;
+  justify-content: center;
+}
+
 /* TEMP TEST? CLEANUP LATER */
 .priority0 {
   background-color: #fff;
@@ -138,21 +143,21 @@ h2 {
 }
 
 .priority1 {
-  background-color: rgb(45, 219, 89); /* temp */
+  background-color: #fff; /* temp */
   z-index: 10;
 }
 
 .priority2 {
-  background-color: rgb(216, 219, 22); /* temp */
+  background-color: #fff;
   z-index: 20;
 }
 
 .priority3 {
-  background-color: rgb(236, 152, 25); /* temp */
+  background-color: #fff;
   z-index: 30; 
 }
 
 .priority4 {
-  background-color: rgb(231, 10, 10); /* temp */
+  background-color: #fff;
   z-index: 40;
 }

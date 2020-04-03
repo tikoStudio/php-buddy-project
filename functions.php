@@ -40,5 +40,4 @@
         }
     }
     //END UPLOAD IMAGE
-
 ?>

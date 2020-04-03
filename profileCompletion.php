@@ -3,12 +3,15 @@
     include_once("functions.php");
     
     session_start();
-    if(!isset($_SESSION['user']) ) {
-        header("Location: login.php");
-      }
     $user = new User();
     $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
+
+    if(!isset($_SESSION['user']) ) {
+        header("Location: login.php");
+    }else if(!empty($userData['class']) && !empty($userData['interests']) && !empty($userData['hobbies']) && !empty($userData['beverage']) && !empty($userData['pet'])) {
+        header('location: index.php');
+    }
 
     $email = $userData['email'];
     $firstname = $userData['firstname'];
