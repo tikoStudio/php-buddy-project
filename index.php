@@ -42,6 +42,7 @@
 <body>
     <a href="logout.php">log out!</a>
     <a href="profileEdit.php">temp edit profile</a>
+    <a href="friends.php">friends</a>
 
     <form action="" method="post">
 
