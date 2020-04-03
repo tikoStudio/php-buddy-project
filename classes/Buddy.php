@@ -5,7 +5,7 @@
     class Buddy extends user {
         //userId1 not neccesary because it = $id from User class
         private $userAnswer1;
-        private $user2Id;
+        private $userId2;
         private $userAnswer2;
 
         public function getUserAnswer1()
@@ -20,14 +20,14 @@
                 return $this;
         }
 
-        public function getUser2Id()
+        public function getUserId2()
         {
-                return $this->user2Id;
+                return $this->userId2;
         }
  
-        public function setUser2Id($user2Id)
+        public function setUserId2($userId2)
         {
-                $this->user2Id = $user2Id;
+                $this->userId2 = $userId2;
 
                 return $this;
         }
@@ -66,5 +66,31 @@
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
+        }
+
+        public function requestMatch() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("insert into buddies (userId1, userAnswer1, userId2) values (:userId1, :userAnswer1, :userId2)");
+            $userId1 = $this->getId();
+            $userAnswer1 = 1;
+            $userId2 = $this->getUserId2();
+            $statement->bindParam(":userId1", $userId1);
+            $statement->bindParam(":userId2", $userId2);
+            $statement->bindParam(":userAnswer1", $userAnswer1);
+
+            $statement->execute();
+
+        }
+
+        public function stopSearchingMatch($id) {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update users set buddySearching= 0 where id= :id");
+            $statement->bindParam(":id", $id);
+
+            $statement->execute();
         }
     }

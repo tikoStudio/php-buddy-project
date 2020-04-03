@@ -15,7 +15,11 @@
 
     //used to check if you are looking for a buddy or are a buddy
     $user->setClass($userData['class']);
-    $matches = $user->searchMatch();   
+    $matches = $user->searchMatch();  
+    
+    if(isset($_POST['action'])) {
+        echo "test";
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -29,8 +33,6 @@
 <body>
     <!-- temp while developing feature -->
     <a href="index.php">temp index link</a>
-    <?php echo $user->getId(); ?>
-    <?php echo $user->getClass(); ?>
 
     <?php foreach ($matches as $match) :?>
         <?php  
@@ -97,7 +99,7 @@
             <?php endif; endif; ?>
 
                 <div class="form__field">
-					<input type="submit" value="stuur buddy verzoek!" class="btn btn--primary">	
+					<input type="submit" value="stuur buddy verzoek!" class="btn btn--primary" id="buddyMatching" data-userId2= <?php echo $match['id']; ?> data-userId1 = <?php echo $_SESSION['id'] ?> onclick="request(this)">	
                 </div>
                 
                 <div class="form__field">
@@ -112,6 +114,7 @@
         ?>
     <?php endforeach; ?>
 
-    <script src="js/dismiss.js"><?php echo "dit is dikke rommel"; ?></script>
+    <script src="js/request.js"></script>
+    <script src="js/dismiss.js"></script>
 </body>
 </html>
