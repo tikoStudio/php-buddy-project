@@ -113,4 +113,22 @@
 
             $statement->execute();
         }
+
+        public function searchFriends() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users INNER JOIN buddies ON users.id = buddies.userId1 WHERE buddies.userAnswer1 = 1 and buddies.userAnswer2 = 1 ");
+
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function showFriends() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users INNER JOIN buddies ON users.id = buddies.userId2 WHERE buddies.userAnswer2 = 1");
+
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
     }

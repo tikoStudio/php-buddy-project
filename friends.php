@@ -1,11 +1,14 @@
 <?php
     include_once(__DIR__ . "/classes/Buddy.php"); 
+    include_once(__DIR__ . "/User.php");
 
     session_start();
     if(!isset($_SESSION['user']) ) {
         header("Location: login.php");
     }
-
+    $user = new Buddy();
+    $userFriends = $user->searchFriends();
+    $friends = $user->showFriends();
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -20,5 +23,10 @@
     <a href="logout.php">log out!</a>
     <a href="profileEdit.php">temp edit profile</a>
     <a href="friends.php">friends</a>
+
+    <?php foreach($userFriends as $u): ?>
+        <h2><?php echo $u['firstname'] . " " . $u['lastname'];?></h2>
+    <?php endforeach; ?>
+
 </body>
 </html>
