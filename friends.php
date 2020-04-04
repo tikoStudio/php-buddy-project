@@ -8,7 +8,8 @@
     }
     $user = new Buddy();
     $userFriends = $user->searchFriends();
-    $friends = $user->showFriends();
+
+    
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -24,9 +25,11 @@
     <a href="profileEdit.php">temp edit profile</a>
     <a href="friends.php">friends</a>
 
-    <?php foreach($userFriends as $u): ?>
-        <h2><?php echo $u['firstname'] . " " . $u['lastname'];?></h2>
-    <?php endforeach; ?>
+    <h1>Vriendenlijst</h1>
 
+    <?php if(isset($error)) { echo $error;} ?>
+    <?php foreach($userFriends as $u): ?>
+        <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met " . $u['firstname2'] . " " . $u['lastname2'];?></h2>
+    <?php endforeach; ?>
 </body>
 </html>
