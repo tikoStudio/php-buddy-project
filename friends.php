@@ -1,6 +1,5 @@
 <?php
     include_once(__DIR__ . "/classes/Buddy.php"); 
-    include_once(__DIR__ . "/User.php");
 
     session_start();
     if(!isset($_SESSION['user']) ) {
