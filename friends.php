@@ -1,6 +1,5 @@
 <?php
     include_once(__DIR__ . "/classes/Buddy.php"); 
-    include_once(__DIR__ . "/User.php");
 
     session_start();
     if(!isset($_SESSION['user']) ) {
@@ -29,7 +28,7 @@
 
     <?php if(isset($error)) { echo $error;} ?>
     <?php foreach($userFriends as $u): ?>
-        <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met " . $u['firstname2'] . " " . $u['lastname2'];?></h2>
+        <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met "  . $u['firstname2'] . " " . $u['lastname2'];?></h2>
     <?php endforeach; ?>
 </body>
 </html>
