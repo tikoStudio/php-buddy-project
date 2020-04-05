@@ -20,15 +20,17 @@
     <title>Friends</title>
 </head>
 <body>
-    <?php include_once('nav.inc.php'); ?>   
+    <?php include_once('nav.inc.php'); ?> 
 
-    <h1>Vriendenlijst</h1>
+    <div class="form form--login friends__list">
+        <h1 class="center">Vriendenlijst</h1>
 
-    <?php if(isset($error)) { echo $error;} ?>
-    <?php foreach($userFriends as $u): ?>
-        <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met "  . $u['firstname2'] . " " . $u['lastname2'];?></h2>
-    <?php endforeach; ?>
-
+        <?php if(isset($error)) { echo $error;} ?>
+        <?php foreach($userFriends as $u): ?>
+            <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met "  . $u['firstname2'] . " " . $u['lastname2'];?></h2>
+        <?php endforeach; ?>
+    </div>
+    
     <?php include_once('footer.inc.php'); ?>
 </body>
 </html>
