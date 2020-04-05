@@ -40,9 +40,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <a href="logout.php">log out!</a>
-    <a href="profileEdit.php">temp edit profile</a>
-    <a href="friends.php">friends</a>
+    <?php include_once('nav.inc.php'); ?>
 
     <div class="container">
         <div class="form form--login">
@@ -108,5 +106,7 @@
             <?php endif; ?>
         </div>
     </div>
+
+    <?php include_once('footer.inc.php'); ?>
 </body>
 </html>

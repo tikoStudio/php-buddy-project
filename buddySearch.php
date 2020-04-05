@@ -31,8 +31,9 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <a href="index.php">temp index link</a>
+    <?php include_once('nav.inc.php'); ?>
 
+    <div class="form form--login">
     <div class="container__buddyCard">
     <?php foreach ($matches as $match) :?>
             <?php  
@@ -114,7 +115,9 @@
             ?>
         <?php endforeach; ?>
     </div>
+    </div>
 
+    <?php include_once('footer.inc.php'); ?>
     <script src="js/request.js"></script>
     <script src="js/dismiss.js"></script>
 </body>

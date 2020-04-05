@@ -141,6 +141,8 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <?php include_once('nav.inc.php'); ?>
+
     <div class="container">
 		<div class="form form--login">
 			<form action="" method="post" enctype="multipart/form-data">
@@ -290,5 +292,7 @@
             </form>
 		</div>
     </div>
+
+    <?php include_once('footer.inc.php'); ?>
 </body>
 </html>

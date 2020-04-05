@@ -20,9 +20,7 @@
     <title>Friends</title>
 </head>
 <body>
-    <a href="logout.php">log out!</a>
-    <a href="profileEdit.php">temp edit profile</a>
-    <a href="friends.php">friends</a>
+    <?php include_once('nav.inc.php'); ?>   
 
     <h1>Vriendenlijst</h1>
 
@@ -30,5 +28,7 @@
     <?php foreach($userFriends as $u): ?>
         <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met "  . $u['firstname2'] . " " . $u['lastname2'];?></h2>
     <?php endforeach; ?>
+
+    <?php include_once('footer.inc.php'); ?>
 </body>
 </html>

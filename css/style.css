@@ -5,11 +5,61 @@
 
 body
 {
-  background-color: #fff;
+  background-color: #FAFAFA;
   color: rgb(39, 36, 36);
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
 
+}
+
+.header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  position: fixed;
+  width: 100%;
+  padding: 0 8%;
+  z-index: 999;
+  background-color: #fff;
+
+}
+
+footer {
+  height: 5vh;
+  position: fixed;
+  bottom: 0px;
+  background-color: #fff;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+nav {
+  display: none;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: center;
+}
+
+footer nav {
+  justify-content: space-evenly;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1758D3;
+  margin: 0 0.5em;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: 1.7em;
+  color: #1758D3;
+  text-decoration: none;
+}
+
+nav a:last-child {
+  margin-right: 2em;
 }
 
 .container
@@ -39,6 +89,10 @@ body
 }
 
 .form__success {
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
   color: green;
 }
 
@@ -69,6 +123,7 @@ input, select, textarea {
   width: 100%;
   padding: 0.3em;
   font-size: 1.4em;
+  background-color: transparent;
 }
 
 textarea {
@@ -88,7 +143,7 @@ textarea {
 
 .btn--primary
 {
-  background-color: limegreen;
+  background-color: #1758D3;
   color: white;
   text-align: center;
   border: none;
@@ -98,6 +153,10 @@ textarea {
 
 h2 {
   text-align: center;
+}
+
+h4 {
+  font-size: 0.7em;
 }
 
 .avatar {
@@ -125,10 +184,11 @@ h2 {
 
 .buddyCard {
   position: absolute;
-  max-width: 50%;
-  min-width: 50%;
+  max-width: 100%;
+  min-width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #FAFAFA;
 }
 
 .container__buddyCard {
@@ -136,28 +196,32 @@ h2 {
   justify-content: center;
 }
 
-/* TEMP TEST? CLEANUP LATER */
 .priority0 {
-  background-color: #fff;
   z-index: 5;
 }
 
-.priority1 {
-  background-color: #fff; /* temp */
+.priority1 { 
   z-index: 10;
 }
 
 .priority2 {
-  background-color: #fff;
   z-index: 20;
 }
 
 .priority3 {
-  background-color: #fff;
   z-index: 30; 
 }
 
 .priority4 {
-  background-color: #fff;
   z-index: 40;
+}
+
+@media (min-width: 780px) {
+  nav {
+    display: flex;
+  }
+
+  footer {
+    display: none;
+  }
 }
