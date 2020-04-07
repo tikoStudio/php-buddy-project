@@ -1,7 +1,7 @@
 <?php
     include_once(__DIR__ . "../../classes/Buddy.php");
     include_once(__DIR__ . "../../functions.php");
-    if(!empty($_POST['buddyEmail'])) {
+    if(!empty($_POST)) {
 
         //new class object
         $requestMatch = new Buddy();
