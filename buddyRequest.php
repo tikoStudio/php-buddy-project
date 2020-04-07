@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="form__field">
-					<label for="description">waarom je niet accepteerd (niet verplicht)</label>
+					<label for="description">waarom je niet accepteert (niet verplicht)</label>
                     <textarea type="textarea" id="reasonAnswer" name="reasonAnswer"></textarea>
                 </div>
                     
