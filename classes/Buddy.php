@@ -104,6 +104,17 @@
 
         }
 
+        public function pendingMatch() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("SELECT * FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 IS NULL");
+
+            $test = $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
         public function stopSearchingMatch($id) {
             //db conn
             $conn = Db::getConnection();

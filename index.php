@@ -1,5 +1,4 @@
 <?php 
-    include_once(__DIR__ . "/classes/User.php");
     include_once(__DIR__ . "/classes/Buddy.php");
 
     session_start();
@@ -10,13 +9,16 @@
     $user = new Buddy();
     $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
+    $pendingMatch = $user->pendingMatch();
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
         header('location: profileCompletion.php');
     }else if($userData['buddySearching']) {
         header('location: buddySearch.php');
+    }else if(!empty($pendingMatch) && $pendingMatch[0]['userId2'] == $user->getId()) {
+        header('location: buddyRequest.php');
     }
-
+    echo $pendingMatch[0]['userId2'];
     if(!empty($_POST)) {
         $user->setClass($_POST['class']);
         $user->setInterests($_POST['interests']);

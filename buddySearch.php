@@ -16,10 +16,6 @@
     //used to check if you are looking for a buddy or are a buddy
     $user->setClass($userData['class']);
     $matches = $user->searchMatch();  
-    
-    if(isset($_POST['action'])) {
-        echo "test";
-    }
 
 ?><!DOCTYPE html>
 <html lang="en">
