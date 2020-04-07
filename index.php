@@ -110,8 +110,13 @@
             <?php endif; ?>
         </div>
     </div>
-    <h2>Er zijn <?php echo $countUsers; ?> mensen geregistreerd</h2>
-    <h2>Er zijn al <?php echo $countBuddies; ?> buddies gevormd</h2>
+
+    <?php foreach($countUsers as $countUser): ?>
+    <h2>Er zijn <?php echo $countUser['COUNT(*)']; ?> mensen geregistreerd</h2>
+    <?php endforeach; ?>
+    <?php foreach($countBuddies as $countBuddy): ?>
+    <h2>Er zijn al <?php echo $countBuddy['COUNT(*)']; ?> buddies gevormd</h2>
+    <?php endforeach; ?>
 
     <?php include_once('footer.inc.php'); ?>
 </body>
