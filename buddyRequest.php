@@ -98,12 +98,13 @@
                 </div>
                     
                 <div class="form__field">
-                    <input type="submit" value="weiger buddy!" class="btn btn--primary">	
+                    <input type="submit" value="weiger buddy!" class="btn btn--primary" data-userId2= <?php echo $match['id2']; ?> data-userId1= <?php echo $match['id1']; ?> onclick="rejectMatch(this);">	
                 </div>
             </div>
     </div>
     </div>    
     <?php include_once('footer.inc.php'); ?>
     <script src="js/accept.js"></script>
+    <script src="js/reject.js"></script>
 </body>
 </html>

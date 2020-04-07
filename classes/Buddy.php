@@ -137,6 +137,16 @@
             $statement->execute();
         }
 
+        public function startSearchingMatch($id) {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update users set buddySearching= 1 where id= :id");
+            $statement->bindParam(":id", $id);
+
+            $statement->execute();
+        }
+
         public function searchFriends() {
             //db conn
             $conn = Db::getConnection();
@@ -155,6 +165,18 @@
             $conn = Db::getConnection();
             //insert query
             $statement = $conn->prepare("update buddies set userAnswer2= 1 where userId1 = :id1 and userId2 = :id2");
+            $id1= $this->getId();
+            $id2 = $this->getUserId2();
+            $statement->bindParam(":id1", $id1);
+            $statement->bindParam(":id2", $id2);
+            $statement->execute();
+        }
+
+        public function rejectMatch() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update buddies set userAnswer2= 0 where userId1 = :id1 and userId2 = :id2");
             $id1= $this->getId();
             $id2 = $this->getUserId2();
             $statement->bindParam(":id1", $id1);
