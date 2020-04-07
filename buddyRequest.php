@@ -96,6 +96,11 @@
                 <div class="form__field">
                     <input type="submit" value="accepteer buddy!" class="btn btn--primary" id="buddyMatching" data-userId2= <?php echo $match['id2']; ?> data-userId1= <?php echo $match['id1']; ?> onclick="acceptMatch(this);" >	
                 </div>
+
+                <div class="form__field">
+					<label for="description">waarom je niet accepteerd (niet verplicht)</label>
+                    <textarea type="textarea" id="reasonAnswer" name="reasonAnswer"></textarea>
+                </div>
                     
                 <div class="form__field">
                     <input type="submit" value="weiger buddy!" class="btn btn--primary" data-userId2= <?php echo $match['id2']; ?> data-userId1= <?php echo $match['id1']; ?> onclick="rejectMatch(this);">	

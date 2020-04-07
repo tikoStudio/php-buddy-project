@@ -7,6 +7,7 @@
         private $userAnswer1;
         private $userId2;
         private $userAnswer2;
+        private $reasonAnswer;
 
         public function getUserAnswer1()
         {
@@ -40,6 +41,18 @@
         public function setUserAnswer2($userAnswer2)
         {
                 $this->userAnswer2 = $userAnswer2;
+
+                return $this;
+        }
+
+        public function getReasonAnswer()
+        {
+                return $this->reasonAnswer;
+        }
+
+        public function setReasonAnswer($reasonAnswer)
+        {
+                $this->reasonAnswer = $reasonAnswer;
 
                 return $this;
         }
@@ -176,11 +189,16 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("update buddies set userAnswer2= 0 where userId1 = :id1 and userId2 = :id2");
+            $statement = $conn->prepare("update buddies set userAnswer2= 0, reasonAnswer2= :reason where userId1 = :id1 and userId2 = :id2");
             $id1= $this->getId();
             $id2 = $this->getUserId2();
+            $reasonAnswer = $this->getReasonAnswer();
             $statement->bindParam(":id1", $id1);
             $statement->bindParam(":id2", $id2);
+            if(empty($reasonAnswer)) {
+                $reasonAnswer = "Geen reden gegeven";
+            }
+            $statement->bindParam(":reason", $reasonAnswer);
             $statement->execute();
         }
     }

@@ -6,6 +6,7 @@
         $requestMatch = new Buddy();
         $requestMatch->setId($_POST['userId1']);
         $requestMatch->setUserId2($_POST['userId2']);
+        $requestMatch->setReasonAnswer($_POST[('reasonAnswer')]);
        
         //request()
         
