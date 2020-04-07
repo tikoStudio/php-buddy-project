@@ -18,7 +18,6 @@
     }else if(!empty($pendingMatch) && $pendingMatch['userId2'] == $user->getId()) {
         header('location: buddyRequest.php');
     }
-    echo $pendingMatch['userId2'];
     if(!empty($_POST)) {
         $user->setClass($_POST['class']);
         $user->setInterests($_POST['interests']);

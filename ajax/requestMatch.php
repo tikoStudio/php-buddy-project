@@ -1,5 +1,6 @@
 <?php
     include_once(__DIR__ . "../../classes/Buddy.php");
+    include_once(__DIR__ . "../../functions.php");
     if(!empty($_POST)) {
 
         //new class object
@@ -11,6 +12,10 @@
         $requestMatch->requestMatch();
         $requestMatch->stopSearchingMatch($_POST['userId1']);
         $requestMatch->stopSearchingMatch($_POST['userId2']);
+
+        // mail user
+        //$requestMatch->sendMail($_POST['buddyEmail']);
+        //$test = $_POST['buddyEmail'];
 
         //return success
         $response = [

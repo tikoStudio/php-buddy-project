@@ -40,4 +40,16 @@
         }
     }
     //END UPLOAD IMAGE
-?>
+
+    //SEND MAIL
+    function sendMail($email) {
+        // subject of mail
+        $subject = 'Buddy verzoek';
+        // message in mail
+        $message = "Een ijverige imd student heeft je een buddy request gestuurd!\r\nLog nu in om te kijken wie er met je wil connecteren.\r\nVeel plezier met potentiele buddy!";
+        // header with from which email
+        $headers = 'From: IMD BUDDIES APP';
+        mail($email, $subject, $message, $headers); 
+        echo "heyhoy sendmail functie is hier geraakt";
+    }
+?> 
