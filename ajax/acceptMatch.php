@@ -8,14 +8,13 @@
         $requestMatch->setUserId2($_POST['userId2']);
        
         //request()
-        $requestMatch->requestMatch();
-        $requestMatch->stopSearchingMatch($_POST['userId1']);
-        $requestMatch->stopSearchingMatch($_POST['userId2']);
+        
+        $requestMatch->acceptMatch();
 
         //return success
         $response = [
             'status' => 'success',
-            'request' => 'buddy message send'
+            'request' => 'buddy was accepted'
         ];
 
         header('Content-Type: application/json');

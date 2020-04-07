@@ -117,7 +117,7 @@
 
         public function searchPendingMatch($pendingMatch) {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT u1.firstname AS firstname1, u1.lastname AS lastname1, u2.firstname AS firstname2, u2.lastname AS lastname2, u1.avatar AS avatar1, u2.avatar AS avatar2, u1.id AS id1, u2.id as id2
+            $statement = $conn->prepare("SELECT u1.firstname AS firstname1, u1.lastname AS lastname1, u1.avatar AS avatar1, u1.id AS id1, u2.id as id2, u1.interests as interests1, u2.interests as interests2, u1.hobbies as hobbies1, u2.hobbies as hobbies2, u1.beverage as beverage1, u2.beverage as beverage2, u1.pet as pet1, u2.pet as pet2
             FROM users AS u1, buddies, users AS u2
             WHERE buddies.userId1 = u1.id AND buddies.userId2 = u2.id AND u1.id = :pendingId1 AND u2.id = :pendingId2");
             $statement->bindParam(":pendingId1", $pendingMatch['userId1']);
@@ -138,7 +138,9 @@
         }
 
         public function searchFriends() {
+            //db conn
             $conn = Db::getConnection();
+            //insert query
             $statement = $conn->prepare("SELECT u1.firstname AS firstname1, u1.lastname AS lastname1, u2.firstname AS firstname2, u2.lastname AS lastname2
             FROM users AS u1, buddies, users AS u2
             WHERE buddies.userId1 = u1.id AND buddies.userId2 = u2.id AND buddies.userAnswer1 = 1 AND buddies.userAnswer2 = 1");
@@ -146,5 +148,17 @@
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
+        }
+
+        public function acceptMatch() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update buddies set userAnswer2= 1 where userId1 = :id1 and userId2 = :id2");
+            $id1= $this->getId();
+            $id2 = $this->getUserId2();
+            $statement->bindParam(":id1", $id1);
+            $statement->bindParam(":id2", $id2);
+            $statement->execute();
         }
     }
