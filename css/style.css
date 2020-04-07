@@ -12,6 +12,10 @@ body
 
 }
 
+.header, footer {
+  z-index: 1000;
+}
+
 .header {
   display: none;
   flex-direction: row;
@@ -150,6 +154,10 @@ textarea {
   border: none;
   padding: 0.3em 2em;
   font-size: 1.4em;
+}
+
+.btn--bottom {
+  margin-bottom: 2em;
 }
 
 h2 {

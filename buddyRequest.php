@@ -28,7 +28,6 @@
 <body>
     <?php include_once('nav.inc.php'); ?>
 
-    
     <div class="form form--login">
     <div class="container__buddyCard">
             <?php  
@@ -51,7 +50,7 @@
                 }
             ?>
             <div class="container buddyCard priority<?php echo $counter; ?>">
-                <h3><?php echo $match['firstname1'] . " " . $match['lastname1'] . " wil buddies worden" ?></h3>
+                <h3><?php echo $match['firstname1'] . " " . $match['lastname1'] . " wil buddies worden"; ?></h3>
                 <img class="avatar" src="uploads/<?php echo $match["avatar1"] ?>" alt="profile picture">
                 <?php if(isset($interests)): ?>
                     <?php if($interests == "Both"): ?>
@@ -103,11 +102,11 @@
                 </div>
                     
                 <div class="form__field">
-                    <input type="submit" value="weiger buddy!" class="btn btn--primary" data-userId2= <?php echo $match['id2']; ?> data-userId1= <?php echo $match['id1']; ?> onclick="rejectMatch(this);">	
+                    <input type="submit" value="weiger buddy!" class="btn btn--primary btn--bottom" data-userId2= <?php echo $match['id2']; ?> data-userId1= <?php echo $match['id1']; ?> onclick="rejectMatch(this);">	
                 </div>
             </div>
     </div>
-    </div>    
+    </div>   
     <?php include_once('footer.inc.php'); ?>
     <script src="js/accept.js"></script>
     <script src="js/reject.js"></script>

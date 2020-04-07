@@ -100,7 +100,7 @@
                     </div>
                     
                     <div class="form__field">
-                        <input type="submit" value="zoek andere buddy!" class="btn btn--primary" onclick="dismiss(this);">	
+                        <input type="submit" value="zoek andere buddy!" class="btn btn--primary btn--bottom" onclick="dismiss(this);">	
                     </div>
             </div>
             <?php 
