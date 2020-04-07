@@ -111,7 +111,19 @@
             $statement = $conn->prepare("SELECT * FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 IS NULL");
 
             $test = $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function searchPendingMatch($pendingMatch) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT u1.firstname AS firstname1, u1.lastname AS lastname1, u2.firstname AS firstname2, u2.lastname AS lastname2, u1.avatar AS avatar1, u2.avatar AS avatar2, u1.id AS id1, u2.id as id2
+            FROM users AS u1, buddies, users AS u2
+            WHERE buddies.userId1 = u1.id AND buddies.userId2 = u2.id AND u1.id = :pendingId1 AND u2.id = :pendingId2");
+            $statement->bindParam(":pendingId1", $pendingMatch['userId1']);
+            $statement->bindParam(":pendingId2", $pendingMatch['userId2']);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
 

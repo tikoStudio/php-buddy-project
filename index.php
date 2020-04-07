@@ -15,10 +15,10 @@
         header('location: profileCompletion.php');
     }else if($userData['buddySearching']) {
         header('location: buddySearch.php');
-    }else if(!empty($pendingMatch) && $pendingMatch[0]['userId2'] == $user->getId()) {
+    }else if(!empty($pendingMatch) && $pendingMatch['userId2'] == $user->getId()) {
         header('location: buddyRequest.php');
     }
-    echo $pendingMatch[0]['userId2'];
+    echo $pendingMatch['userId2'];
     if(!empty($_POST)) {
         $user->setClass($_POST['class']);
         $user->setInterests($_POST['interests']);

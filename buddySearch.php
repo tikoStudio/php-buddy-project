@@ -54,7 +54,7 @@
             ?>
             <div class="container buddyCard priority<?php echo $counter; ?>">
                 <h3><?php echo $match['firstname'] . " " . $match['lastname'] ?></h3>
-                <img class="avatar" src="uploads/<?php echo $match["avatar"] ?>" alt="">
+                <img class="avatar" src="uploads/<?php echo $match["avatar"] ?>" alt="profile picture">
                 <?php if(isset($interests)): ?>
                     <?php if($interests == "Both"): ?>
                         <h4><?php echo "Jullie hebben beide interesse in design en development"; ?></h4>

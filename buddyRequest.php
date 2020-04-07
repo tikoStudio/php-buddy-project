@@ -14,10 +14,9 @@
         header('location: index.php');
     }
 
-    //used to check if you are looking for a buddy or are a buddy
-    $user->setClass($userData['class']);
-    $matches = $user->searchMatch();  
-
+    $pendingMatch = $user->pendingMatch();
+    $match = $user->searchPendingMatch($pendingMatch);  
+    var_dump($match);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +28,16 @@
 </head>
 <body>
     <?php include_once('nav.inc.php'); ?>
-    <h1>temp buddy request page</h1>
-    <h1>temp buddy request page</h1>
-    <h1>temp buddy request page</h1>
+
+    <div class="form form--login">
+    <div class="container__buddyCard">
+    <div class="container buddyCard">
+        <h3><?php echo $match['firstname1'] . " " . $match['lastname1'] . " wil buddies worden!"?></h3>
+    </div>
+    </div>
+    </div>
+
+
     <?php include_once('footer.inc.php'); ?>
 </body>
 </html>
