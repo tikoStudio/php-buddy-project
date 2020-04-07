@@ -390,7 +390,7 @@
 
         public function countUsers() {
                 $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT COUNT(id) FROM users");
+                $statement = $conn->prepare("SELECT COUNT(*) FROM users");
                 $result = $statement->execute();
                 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
@@ -400,6 +400,7 @@
                 $conn = Db::getConnection();
                 $statement = $conn->prepare("SELECT COUNT(*) FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 = 1");
                 $result = $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
         }
 }
