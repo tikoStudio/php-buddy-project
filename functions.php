@@ -68,7 +68,7 @@
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
         
             //Recipients
-            $mail->setFrom('tiko@techie.com', 'test');
+            $mail->setFrom('buddyproject@mail.com', 'IMD Buddy App');
             $mail->addAddress($email);       
         
             // Content
