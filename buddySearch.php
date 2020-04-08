@@ -96,11 +96,11 @@
                 <?php endif; endif; ?>
 
                     <div class="form__field">
-                        <input type="submit" value="stuur buddy verzoek!" class="btn btn--primary" id="buddyMatching" data-userId2= <?php echo $match['id']; ?> data-userId1 = <?php echo $_SESSION['id']; ?> data-buddyEmail= <?php echo $match['email']; ?> onclick="request(this)">	
+                        <input type="submit" value="stuur buddy verzoek!" class="btn btn--primary" id="buddyMatching" data-userId2= <?php echo $match['id']; ?> data-userId1 = <?php echo $_SESSION['id'] ?> onclick="request(this)">	
                     </div>
                     
                     <div class="form__field">
-                        <input type="submit" value="zoek andere buddy!" class="btn btn--primary btn--bottom" onclick="dismiss(this);">	
+                        <input type="submit" value="zoek andere buddy!" class="btn btn--primary" onclick="dismiss(this);">	
                     </div>
             </div>
             <?php 
@@ -112,7 +112,6 @@
         <?php endforeach; ?>
     </div>
     </div>
-
     <?php include_once('footer.inc.php'); ?>
     <script src="js/request.js"></script>
     <script src="js/dismiss.js"></script>

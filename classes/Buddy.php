@@ -1,6 +1,7 @@
 <?php
     include_once(__DIR__ . "/User.php");
     include_once(__DIR__ . "./Db.php");
+    include_once(__DIR__ . "../../functions.php");
 
     class Buddy extends user {
         //userId1 not neccesary because it = $id from User class
@@ -200,5 +201,20 @@
             }
             $statement->bindParam(":reason", $reasonAnswer);
             $statement->execute();
+        }
+
+        public function sendMail() {
+             //db conn
+             $conn = Db::getConnection();
+             //insert query
+             $statement = $conn->prepare("select email from users where id= :id");
+             $userId2 = $this->getUserId2();
+             $statement->bindParam(":id", $userId2);
+
+             $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $mailingAdress = $result['email'];
+            sendMail($mailingAdress);
         }
     }

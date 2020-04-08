@@ -1,4 +1,14 @@
 <?php
+
+    // Import PHPMailer classes into the global namespace
+    // These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    // Load Composer's autoloader
+    require 'vendor/autoload.php';
+
     // UPLOAD IMAGE
     function uploadImage($image) {
         if(!empty($_POST)) {
@@ -43,13 +53,36 @@
 
     //SEND MAIL
     function sendMail($email) {
-        // subject of mail
-        $subject = 'Buddy verzoek';
-        // message in mail
-        $message = "Een ijverige imd student heeft je een buddy request gestuurd!\r\nLog nu in om te kijken wie er met je wil connecteren.\r\nVeel plezier met potentiele buddy!";
-        // header with from which email
-        $headers = 'From: IMD BUDDIES APP';
-        mail($email, $subject, $message, $headers); 
-        echo "heyhoy sendmail functie is hier geraakt";
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        
+        try {
+            //Server settings 
+            //$mail->SMTPDebug = 1; debugging
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.sendgrid.net';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'apikey';                               // SMTP username
+            $mail->Password   = 'SG.7WNAmuPET1u7IEe7yI7qiw.hoMTSPosxtT3h-zKwGTLTOcOPwOYkfCJTlL-oCTTTFI';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+        
+            //Recipients
+            $mail->setFrom('tiko@techie.com', 'test');
+            $mail->addAddress($email);       
+        
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Buddy verzoek';
+            $mail->Body    = 'Je hebt een <b>buddy verzoek!</b> log snel in om te kijken wie met jou wil connecteren';
+            $mail->AltBody = 'Je hebt een buddy verzoek! log snel in om te kijken wie met jou wil connecteren';
+        
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
+    
+    
 ?> 
