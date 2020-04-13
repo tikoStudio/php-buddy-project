@@ -10,6 +10,8 @@
     $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
     $pendingMatch = $user->pendingMatch();
+    $countUsers = $user->countUsers();
+    $countBuddies = $user->countBuddies();
 
     if(empty($userData['class']) || empty($userData['interests']) || empty($userData['hobbies']) || empty($userData['beverage']) || empty($userData['pet'])) {
         header('location: profileCompletion.php');
@@ -107,6 +109,13 @@
             <?php endif; ?>
         </div>
     </div>
+
+    <?php foreach($countUsers as $countUser): ?>
+    <h2>Er zijn <?php echo $countUser['COUNT(*)']; ?> mensen geregistreerd</h2>
+    <?php endforeach; ?>
+    <?php foreach($countBuddies as $countBuddy): ?>
+    <h2>Er zijn al <?php echo $countBuddy['COUNT(*)']; ?> buddies gevormd</h2>
+    <?php endforeach; ?>
 
     <?php include_once('footer.inc.php'); ?>
 </body>
