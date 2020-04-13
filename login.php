@@ -6,14 +6,14 @@
 	$failedLogin = new IpCheck();
 	$ip = $_SERVER['REMOTE_ADDR']; //getting the IP Address
 	$t=time(); //Storing time in variable
-	$diff = (time()-60); // Here 60 means 1 minutes 1*60 seconds
+	$diff = (time()-120); // Here 120 means 2 minutes 1*1200 seconds
 
 	$failedLogin->setIp($ip);
 	$failedLogin->setT($t);
 	$failedLogin->setDiff($diff);
 
 	$count = $failedLogin->failedLoginAmount();
-	if( $count["COUNT(*)"] > 3) {
+	if( $count["COUNT(*)"] >= 3) {
 		$error = $count["COUNT(*)"] . " foutieve login pogingen, probeer binnen enkele minuten opnieuw";
 	}else {
 		if(!empty($_POST)) {
@@ -36,14 +36,14 @@
 					$failedLogin->deleteAllFailedLogin();
 					header("Location: index.php");
 				}else{
+					$failedLogin->failedLogin();
+					$count = $failedLogin->failedLoginAmount();
 					$num = 3 - $count["COUNT(*)"];
 					if($num > 0) {
 						$error = "Wachtwoord en email komen niet overeen, let op je hebt " . $num . " pogingen over";
 					}else {
 						$error = $count["COUNT(*)"] . " foutieve login pogingen, probeer binnen enkele minuten opnieuw";
-					}
-					
-					$failedLogin->failedLogin();	
+					}	
 				}
 			}else {
 				$error = "email en wachtwoord zijn verplicht";

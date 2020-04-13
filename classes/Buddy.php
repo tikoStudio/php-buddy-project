@@ -178,7 +178,7 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("update buddies set userAnswer2= 1 where userId1 = :id1 and userId2 = :id2");
+            $statement = $conn->prepare("update buddies set userAnswer2= 1 where userId1 = :id1 and userId2 = :id2 order by id desc limit 1"); 
             $id1= $this->getId();
             $id2 = $this->getUserId2();
             $statement->bindParam(":id1", $id1);
