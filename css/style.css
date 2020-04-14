@@ -12,6 +12,11 @@ body
 
 }
 
+.a__activate {
+  text-decoration: none;
+  color: #1758D3;
+}
+
 .header, footer {
   z-index: 1000;
 }

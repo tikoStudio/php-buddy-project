@@ -232,4 +232,15 @@
             $activationId = $result['id'];
             sendActivationMail($email, $activationId);
         }
+
+        public function activateAccount() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update users set active = 1 where id= :id");
+            $id = $this->getId();
+            $statement->bindParam(":id", $id);
+
+            $statement->execute();
+        }
     }

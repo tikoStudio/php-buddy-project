@@ -41,9 +41,14 @@
 
         if(!isset($error)) {
             // methode
-            $user->save(); //safe in database as not activated user
-            $user->sendActivationMail(); //send email with activation link
-            //header('Location: login.php');
+            try {
+                $user->save(); //safe in database as not activated user
+                $user->sendActivationMail(); //send email with activation link
+                header("Location: activateMessage.php");
+            } catch (\Throwable $th) {
+                $error = $th->getMessage();
+            }
+           
         }
 
     }
