@@ -41,7 +41,7 @@
 
         if(!isset($error)) {
             // methode
-            $user->save();
+            $user->save(); //instead of safe sendActivationEmail
 
             //$succes = "user saved";
             header('Location: login.php');

@@ -17,6 +17,7 @@
         protected $hobbies;
         protected $beverage;
         protected $pet;
+        protected $active;
         
 
         public function setFirstname($firstname) {
@@ -241,6 +242,9 @@
             //return result
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $this->setActive($result["active"]);
+
             if(empty($result)) {
                 return false;
             }
@@ -402,5 +406,17 @@
                 $result = $statement->execute();
                 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
+        }
+
+        public function getActive()
+        {
+                return $this->active;
+        }
+
+        public function setActive($active)
+        {
+                $this->active = $active;
+
+                return $this;
         }
 }

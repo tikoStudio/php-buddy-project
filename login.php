@@ -21,31 +21,35 @@
 			$password = htmlspecialchars($_POST['password']);
 			$count = $failedLogin->failedLoginAmount();
 			if(!empty($email) && !empty($password)){
-				if($user->checkLogin($email, $password)){
-					session_start();
-					if($_POST['captcha'] == $_SESSION['digit']) {
-						$user->setEmail($email);
-						$idArray = $user->idFromSession($email);
-						$id = $idArray['id'];
-						$user->setId($id);
+				if($user->checkLogin($email, $password)) {
+					if($user->getActive() == 1) {
+						session_start();
+						if($_POST['captcha'] == $_SESSION['digit']) {
+							$user->setEmail($email);
+							$idArray = $user->idFromSession($email);
+							$id = $idArray['id'];
+							$user->setId($id);
 
-						// later aanpassen -> if checkbox is ticked use cookie 
-						$_SESSION["user"] = $email; 
-						$_SESSION["id"] = $id;
+							// later aanpassen -> if checkbox is ticked use cookie 
+							$_SESSION["user"] = $email; 
+							$_SESSION["id"] = $id;
 
-						//redirect to index.php
-						$failedLogin->deleteAllFailedLogin();
-						header("Location: index.php");
-					} else {
-						session_destroy();
-						$failedLogin->failedLogin();
-						$count = $failedLogin->failedLoginAmount();
-						$num = 3 - $count["COUNT(*)"];
-						if($num > 0) {
-							$error = "captcha niet correct uitgevoerd, let op je hebt " . $num . " pogingen over";
-						}else {
-							$error = $count["COUNT(*)"] . " foutieve login pogingen, probeer binnen enkele minuten opnieuw";
+							//redirect to index.php
+							$failedLogin->deleteAllFailedLogin();
+							header("Location: index.php");
+						} else {
+							session_destroy();
+							$failedLogin->failedLogin();
+							$count = $failedLogin->failedLoginAmount();
+							$num = 3 - $count["COUNT(*)"];
+							if($num > 0) {
+								$error = "captcha niet correct uitgevoerd, let op je hebt " . $num . " pogingen over";
+							}else {
+								$error = $count["COUNT(*)"] . " foutieve login pogingen, probeer binnen enkele minuten opnieuw";
+							}
 						}
+					}else {
+						$error = "deze account werd nog niet geactiveerd";
 					}
 				}else{
 					$failedLogin->failedLogin();

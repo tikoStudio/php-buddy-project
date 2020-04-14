@@ -217,4 +217,8 @@
             $mailingAdress = $result['email'];
             sendMail($mailingAdress);
         }
+
+        public function sendActivationMail($email) {
+            
+        }
     }
