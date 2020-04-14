@@ -1,4 +1,4 @@
-<?PHP
+<?php
   $image = @imagecreatetruecolor(120, 30);
 
   // set background color and set drawing colors
@@ -8,8 +8,8 @@
   $textcolor = imagecolorallocate($image, 39, 36, 36);
 
   // draw random lines on canvas
-  for($i=0; $i < 6; $i++) {
-    imagesetthickness($image, rand(1,3));
+  for($i=0; $i < 4; $i++) {
+    imagesetthickness($image, rand(1,2));
     imageline($image, 0, rand(0,30), 120, rand(0,30), $linecolor);
   }
 
@@ -22,10 +22,10 @@
     imagechar($image, rand(3, 5), $x, rand(2, 14), $num, $textcolor);
   }
 
-  // record digits in session variable
+  // set digit in session to be able to check if correct input was given by user
   $_SESSION['digit'] = $digit;
 
-  // display image and clean up
+  // display image and destroy so you always create new captcha
   header('Content-type: image/png');
   imagepng($image);
   imagedestroy($image);
