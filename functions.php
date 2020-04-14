@@ -78,9 +78,43 @@
             $mail->AltBody = 'Je hebt een buddy verzoek! log snel in om te kijken wie met jou wil connecteren';
         
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $error = $mail->ErrorInfo;
+        }
+    }
+    // END SEND MAIL
+
+    //SEND ACTIVATION MAIL
+    function sendActivationMail($email, $activationId) {
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        $fullUri = $_SERVER['REQUEST_URI'];
+        $correctUri = str_replace( "register.php", '', $fullUri );
+        $link = "http://$_SERVER[HTTP_HOST]$correctUri"."activate.php?id=" . $activationId;
+        try {
+            //Server settings 
+            //$mail->SMTPDebug = 1; debugging
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.sendgrid.net';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'apikey';                               // SMTP username
+            $mail->Password   = 'SG.7WNAmuPET1u7IEe7yI7qiw.hoMTSPosxtT3h-zKwGTLTOcOPwOYkfCJTlL-oCTTTFI';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+        
+            //Recipients
+            $mail->setFrom('buddyproject@mail.com', 'IMD Buddy App');
+            $mail->addAddress($email);       
+        
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'account activatie';
+            $mail->Body    = 'Klik op de link om je account te activeren en start met het zoeken van IMD Buddies via ons matchingsysteem! <a href="' . $link . '"> klik hier </a>';
+            $mail->AltBody = 'Je hebt een buddy verzoek! log snel in om te kijken wie met jou wil connecteren';
+        
+            $mail->send();
+        } catch (Exception $e) {
+            $error = $mail->ErrorInfo;
         }
     }
     

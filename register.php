@@ -1,10 +1,10 @@
 <?php
-    include_once(__DIR__ . "/classes/User.php");
+    include_once(__DIR__ . "/classes/Buddy.php");
 
     if(!empty($_POST)) {
 
         try {
-            $user = new User();
+            $user = new Buddy();
             $user->setFirstname(htmlspecialchars($_POST['firstname']));
             $user->setLastname(htmlspecialchars($_POST['lastname']));
             $user->setEmail(htmlspecialchars($_POST['email']));
@@ -41,10 +41,9 @@
 
         if(!isset($error)) {
             // methode
-            $user->save(); //instead of safe sendActivationEmail
-
-            //$succes = "user saved";
-            header('Location: login.php');
+            $user->save(); //safe in database as not activated user
+            $user->sendActivationMail(); //send email with activation link
+            //header('Location: login.php');
         }
 
     }

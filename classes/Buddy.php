@@ -218,7 +218,18 @@
             sendMail($mailingAdress);
         }
 
-        public function sendActivationMail($email) {
-            
+        public function sendActivationMail() {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("select id from users where email= :email");
+            $email = $this->getEmail();
+            $statement->bindParam(":email", $email);
+
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $activationId = $result['id'];
+            sendActivationMail($email, $activationId);
         }
     }
