@@ -112,6 +112,11 @@ nav a:last-child {
   margin-bottom: 0.2em;
 }
 
+.form__field img {
+  display: flex;
+  margin: auto;
+}
+
 input, select, textarea {
   outline: 0;
   border-width: 0 0 2px;

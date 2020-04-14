@@ -22,19 +22,31 @@
 			$count = $failedLogin->failedLoginAmount();
 			if(!empty($email) && !empty($password)){
 				if($user->checkLogin($email, $password)){
-					$user->setEmail($email);
-					$idArray = $user->idFromSession($email);
-					$id = $idArray['id'];
-					$user->setId($id);
-
-					// later aanpassen -> if checkbox is ticked use cookie 
 					session_start();
-					$_SESSION["user"] = $email; 
-					$_SESSION["id"] = $id;
+					if($_POST['captcha'] == $_SESSION['digit']) {
+						$user->setEmail($email);
+						$idArray = $user->idFromSession($email);
+						$id = $idArray['id'];
+						$user->setId($id);
 
-					//redirect to index.php
-					$failedLogin->deleteAllFailedLogin();
-					header("Location: index.php");
+						// later aanpassen -> if checkbox is ticked use cookie 
+						$_SESSION["user"] = $email; 
+						$_SESSION["id"] = $id;
+
+						//redirect to index.php
+						$failedLogin->deleteAllFailedLogin();
+						header("Location: index.php");
+					} else {
+						session_destroy();
+						$failedLogin->failedLogin();
+						$count = $failedLogin->failedLoginAmount();
+						$num = 3 - $count["COUNT(*)"];
+						if($num > 0) {
+							$error = "captcha niet correct uitgevoerd, let op je hebt " . $num . " pogingen over";
+						}else {
+							$error = $count["COUNT(*)"] . " foutieve login pogingen, probeer binnen enkele minuten opnieuw";
+						}
+					}
 				}else{
 					$failedLogin->failedLogin();
 					$count = $failedLogin->failedLoginAmount();
@@ -83,7 +95,15 @@
                 <div class="form__field">
 					<label for="password">Passwoord</label>
                     <input type="password" id="password" name="password" placeholder="Passwoord">
+				</div>
+				
+				<div class="form__field">
+					<label for="captcha">Captcha</label>
+					<img src="captcha.php">
+                    <input type="text" name="captcha" placeholder="captcha">
                 </div>
+
+				
 				
 				<div class="form__field">
 					<input type="submit" value="login" class="btn btn--primary">	
