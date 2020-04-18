@@ -100,6 +100,7 @@
 					<input type="submit" value="Registreren" class="btn btn--primary">	
 				</div>
             </form>
+            <a class="a__activate a__right" href="login.php">Al een account? Login!</a>
     </div>
 </div>
 </body>

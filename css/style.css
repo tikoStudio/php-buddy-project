@@ -243,6 +243,30 @@ h4 {
   text-align: center;
 }
 
+.index__data {
+  margin-top: 15vh;
+}
+
+.blue {
+  color: #1758D3;
+}
+
+.logo img {
+  height: 8vh;
+  display: flex;
+  align-content: center;
+}
+
+.a__right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon {
+  height: 4vh;
+  margin-top: 5px;
+}
+
 @media (min-width: 780px) {
   .header {
     display: flex;

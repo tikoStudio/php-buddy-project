@@ -272,17 +272,17 @@
         }
 
         public function idFromSession($email) {
-                //db conn
-                $conn = Db::getConnection();
-                //insert query
-                $statement = $conn->prepare("select id from users where email = :email");
-                $statement->bindParam(":email", $email);
-    
-                //return result
-                $statement->execute();
-                $result = $statement->fetch(PDO::FETCH_ASSOC);
-                return $result;
-            }
+        	//db conn
+			$conn = Db::getConnection();
+			//insert query
+			$statement = $conn->prepare("select id from users where email = :email");
+			$statement->bindParam(":email", $email);
+
+			//return result
+			$statement->execute();
+			$result = $statement->fetch(PDO::FETCH_ASSOC);
+			return $result;
+        }
 
         public function completeProfile() {
             //db conn

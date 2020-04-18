@@ -23,7 +23,7 @@
     <?php include_once('nav.inc.php'); ?> 
 
     <div class="form form--login friends__list">
-        <h1 class="center">Vriendenlijst</h1>
+        <h1 class="center">Alle IMD Buddies!</h1>
 
         <?php if(isset($error)) { echo $error;} ?>
         <?php foreach($userFriends as $u): ?>

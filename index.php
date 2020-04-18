@@ -44,7 +44,15 @@
 </head>
 <body>
     <?php include_once('nav.inc.php'); ?>
-
+    <div class="index__data">
+        <?php foreach($countUsers as $countUser): ?>
+            <h2>Er zijn <span class="blue"> <?php echo $countUser['COUNT(*)']; ?>  student(en)</span> geregistreerd</h2>
+        <?php endforeach; ?>
+        <?php foreach($countBuddies as $countBuddy): ?>
+            <h2>Er zijn al <span class="blue"> <?php echo $countBuddy['COUNT(*)']; ?> buddymatch(es)</span> gebeurd</h2>
+        <?php endforeach; ?>
+    </div>
+    
     <div class="container">
         <div class="form form--login">
             <form action="" method="post">
@@ -109,13 +117,6 @@
             <?php endif; ?>
         </div>
     </div>
-
-    <?php foreach($countUsers as $countUser): ?>
-    <h2>Er zijn <?php echo $countUser['COUNT(*)']; ?> mensen geregistreerd</h2>
-    <?php endforeach; ?>
-    <?php foreach($countBuddies as $countBuddy): ?>
-    <h2>Er zijn al <?php echo $countBuddy['COUNT(*)']; ?> buddies gevormd</h2>
-    <?php endforeach; ?>
 
     <?php include_once('footer.inc.php'); ?>
 </body>
