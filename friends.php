@@ -27,7 +27,7 @@
 
         <?php if(isset($error)) { echo $error;} ?>
         <?php foreach($userFriends as $u): ?>
-            <h2><?php echo $u['firstname1'] . " " . $u['lastname1'] . " is bevriend met "  . $u['firstname2'] . " " . $u['lastname2'];?></h2>
+            <h2><?php echo htmlspecialchars($u['firstname1']) . " " . htmlspecialchars($u['lastname1']) . " is bevriend met "  . htmlspecialchars($u['firstname2']) . " " . htmlspecialchars($u['lastname2']);?></h2>
         <?php endforeach; ?>
     </div>
     

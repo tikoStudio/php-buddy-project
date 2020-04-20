@@ -33,28 +33,27 @@
     <div class="container__buddyCard">
     <?php foreach ($matches as $match) :?>
             <?php  
-                //echo $user->getId() . " and user " . $match['id'] . " are potential matches <br>";
                 $counter = 0;
                 if($userData['interests'] == $match['interests']) {
                     $counter++;
-                    $interests = $userData['interests'];
+                    $interests = htmlspecialchars($userData['interests']);
                 }
                 if($userData['hobbies'] == $match['hobbies']) {
                     $counter++;
-                    $hobbies = $userData['hobbies'];
+                    $hobbies = htmlspecialchars($userData['hobbies']);
                 }
                 if($userData['beverage'] == $match['beverage']) {
                     $counter++;
-                    $beverage = $userData['beverage'];
+                    $beverage = htmlspecialchars($userData['beverage']);
                 }
                 if($userData['pet'] == $match['pet']) {
                     $counter++;
-                    $pet = $userData['pet'];
+                    $pet = htmlspecialchars($userData['pet']);
                 }
             ?>
             <div class="container buddyCard priority<?php echo $counter; ?>">
-                <h3><?php echo $match['firstname'] . " " . $match['lastname'] ?></h3>
-                <img class="avatar" src="uploads/<?php echo $match["avatar"] ?>" alt="">
+                <h3><?php echo htmlspecialchars($match['firstname']) . " " . htmlspecialchars($match['lastname']) ?></h3>
+                <img class="avatar" src="uploads/<?php echo htmlspecialchars($match["avatar"]) ?>" alt="">
                 <?php if(isset($interests)): ?>
                     <?php if($interests == "Both"): ?>
                         <h4><?php echo "Jullie hebben beide interesse in design en development"; ?></h4>

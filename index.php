@@ -112,7 +112,7 @@
             <?php if(isset($error)) { echo $error;} ?>
             <?php if(!empty($_POST)): ?>
             <?php foreach($userFilter as $u): ?>
-                <h2><?php echo $u['firstname'] . " " . $u['lastname']; ?></h2>
+                <h2><?php echo htmlspecialchars($u['firstname']) . " " . htmlspecialchars($u['lastname']); ?></h2>
             <?php endforeach; ?> 
             <?php endif; ?>
         </div>

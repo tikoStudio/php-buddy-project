@@ -10,12 +10,12 @@
     $userData = $user->allUserData();
     $pendingMatch = $user->pendingMatch();
 
-    if(empty($pendingMatch)) {
+    "if(empty($pendingMatch)) {
         header('location: index.php');
     }
 
     $pendingMatch = $user->pendingMatch();
-    $match = $user->searchPendingMatch($pendingMatch);  
+    $match = $user->searchPendingMatch($pendingMatch)";  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,26 +32,26 @@
     <div class="container__buddyCard">
             <?php  
                 $counter = 0;
-                if($match['interests1'] == $match['interests2']) {
+                if($userData['interests'] == $match['interests']) {
                     $counter++;
-                    $interests = $match['interests1'];
+                    $interests = htmlspecialchars($userData['interests']);
                 }
-                if($match['hobbies1'] == $match['hobbies2']) {
+                if($userData['hobbies'] == $match['hobbies']) {
                     $counter++;
-                    $hobbies = $match['hobbies1'];
+                    $hobbies = htmlspecialchars($userData['hobbies']);
                 }
-                if($match['beverage1'] == $match['beverage2']) {
+                if($userData['beverage'] == $match['beverage']) {
                     $counter++;
-                    $beverage = $match['beverage1'];
+                    $beverage = htmlspecialchars($userData['beverage']);
                 }
-                if($match['pet1'] == $match['pet2']) {
+                if($userData['pet'] == $match['pet']) {
                     $counter++;
-                    $pet = $match['pet1'];
+                    $pet = htmlspecialchars($userData['pet']);
                 }
             ?>
             <div class="container buddyCard priority<?php echo $counter; ?>">
-                <h3><?php echo $match['firstname1'] . " " . $match['lastname1'] . " wil buddies worden"; ?></h3>
-                <img class="avatar" src="uploads/<?php echo $match["avatar1"] ?>" alt="profile picture">
+                <h3><?php echo htmlspecialchars($match['firstname1']) . " " . htmlspecialchars($match['lastname1']) . " wil buddies worden"; ?></h3>
+                <img class="avatar" src="uploads/<?php echo htmlspecialchars($match["avatar1"]) ?>" alt="profile picture">
                 <?php if(isset($interests)): ?>
                     <?php if($interests == "Both"): ?>
                         <h4><?php echo "Jullie hebben beide interesse in design en development"; ?></h4>
