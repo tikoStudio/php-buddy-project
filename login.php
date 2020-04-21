@@ -39,6 +39,8 @@
 							header("Location: index.php");
 						} else {
 							session_destroy();
+							$t=time();
+							$failedLogin->setT($t);
 							$failedLogin->failedLogin();
 							$count = $failedLogin->failedLoginAmount();
 							$num = 3 - $count["COUNT(*)"];

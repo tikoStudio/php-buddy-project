@@ -3,7 +3,7 @@
 
     if(!empty($_GET['id'])) {
         $user = new Buddy();
-        $user->setId($_GET['id']);
+        $user->setActivationToken($_GET['id']);
         $user->activateAccount();  
     }
 ?><!DOCTYPE html>

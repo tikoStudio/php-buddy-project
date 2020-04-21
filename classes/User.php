@@ -128,19 +128,22 @@
                 $conn = Db::getConnection();
 
                 // query
-                $statement = $conn->prepare("insert into users (firstname, lastname, email, password) values (:firstname, :lastname, :email, :password)");
+                $statement = $conn->prepare("insert into users (firstname, lastname, email, password, activationToken) values (:firstname, :lastname, :email, :password, :activationToken)");
                 
                 // variabelen klaarzetten om te binden
                 $firstname = $this->getFirstname();
                 $lastname = $this->getLastname();
                 $email = $this->getEmail();
                 $password = $this->getPassword();
+                $hash = md5($firstname);
+                $activationToken = uniqid($hash, true);
                 
                 // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
                 $statement->bindParam(":firstname", $firstname);
                 $statement->bindParam(":lastname", $lastname);
                 $statement->bindParam(":email", $email);
                 $statement->bindParam(":password", $password);
+                $statement->bindParam(":activationToken", $activationToken);
 
                 // als je geen execute doet dan wordt die query niet uitgevoerd
                 $result = $statement->execute();

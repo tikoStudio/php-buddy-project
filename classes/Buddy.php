@@ -9,6 +9,7 @@
         private $userId2;
         private $userAnswer2;
         private $reasonAnswer;
+        private $activationToken;
 
         public function getUserAnswer1()
         {
@@ -54,6 +55,18 @@
         public function setReasonAnswer($reasonAnswer)
         {
                 $this->reasonAnswer = $reasonAnswer;
+
+                return $this;
+        }
+
+        public function getActivationToken()
+        {
+                return $this->activationToken;
+        }
+
+        public function setActivationToken($activationToken)
+        {
+                $this->activationToken = $activationToken;
 
                 return $this;
         }
@@ -222,25 +235,26 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("select id from users where email= :email");
+            $statement = $conn->prepare("select activationToken from users where email= :email");
             $email = $this->getEmail();
             $statement->bindParam(":email", $email);
 
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $activationId = $result['id'];
-            sendActivationMail($email, $activationId);
+            $activationToken = $result['activationToken'];
+            sendActivationMail($email, $activationToken);
         }
 
         public function activateAccount() {
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("update users set active = 1 where id= :id");
-            $id = $this->getId();
-            $statement->bindParam(":id", $id);
+            $statement = $conn->prepare("update users set active = 1 where activationtoken= :activationToken");
+            $activationToken = $this->getActivationToken();
+            $statement->bindParam(":activationToken", $activationToken);
 
             $statement->execute();
         }
+
     }

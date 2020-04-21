@@ -85,12 +85,12 @@
     // END SEND MAIL
 
     //SEND ACTIVATION MAIL
-    function sendActivationMail($email, $activationId) {
+    function sendActivationMail($email, $activationToken) {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
         $fullUri = $_SERVER['REQUEST_URI'];
         $correctUri = str_replace( "register.php", '', $fullUri );
-        $link = "http://$_SERVER[HTTP_HOST]$correctUri"."activate.php?id=" . $activationId;
+        $link = "http://$_SERVER[HTTP_HOST]$correctUri"."activate.php?id=" . $activationToken;
         try {
             //Server settings 
             //$mail->SMTPDebug = 1; debugging
