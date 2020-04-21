@@ -1,7 +1,20 @@
 document.querySelector("#email").addEventListener("click", function() {
-    let email = this.dataset.id;
     let text = document.querySelector("#email").value;
 
-    console.log(email);
-    console.log(text);
+    // post naar databank
+    let formData = new FormData();
+
+    formData.append('text', text);
+
+    fetch('ajax/validateEmail.php', {
+    method: 'POST',
+    body: formData
+    })
+    .then((response) => response.json())
+    .then((result) => {
+    console.log('Success:', result);
+    })
+    .catch((error) => {
+    console.error('Error:', error);
+    });
 });
