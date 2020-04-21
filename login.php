@@ -62,7 +62,7 @@
                 </div>
 
 				<div class="form__field">
-					<input type="submit" value="vervolledig profiel" class="btn btn--primary">	
+					<input type="submit" value="Login" class="btn btn--primary">	
 				</div>
 			</form>
 		</div>

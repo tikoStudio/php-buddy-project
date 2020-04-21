@@ -14,7 +14,7 @@
             if($_POST['password'] != $_POST['passwordconfirmation']) {
                 $error = "Wachtwoord klopt niet!";
             }
-
+/*
             if ( $user->availableEmail($user->getEmail()) ) {
                 // Email ready to use
                 if ( $user->validEmail()){
@@ -26,7 +26,7 @@
             else {
                 $error = "Email is al in gebruik!";
             }
-
+*/
             if($user->endsWith("@student.thomasmore.be")) {
             
             }
