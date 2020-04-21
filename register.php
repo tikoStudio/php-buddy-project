@@ -5,6 +5,7 @@
 
         try {
             $user = new User();
+            $user->setId($_SESSION["id"]);
             $user->setFirstname(htmlspecialchars($_POST['firstname']));
             $user->setLastname(htmlspecialchars($_POST['lastname']));
             $user->setEmail(htmlspecialchars($_POST['email']));
@@ -79,7 +80,7 @@
 
                 <div class="form__field">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" data-id= <?php echo $user['id']; ?>>
                 </div>
 
                 <div class="form__field">
@@ -98,5 +99,6 @@
             </form>
     </div>
 </div>
+<script src="js/email.js"></script>
 </body>
 </html>
