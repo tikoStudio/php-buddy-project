@@ -80,7 +80,7 @@
 
                 <div class="form__field">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" data-id= <?php echo $user['id']; ?>>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
                 </div>
 
                 <div class="form__field">
