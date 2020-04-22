@@ -64,7 +64,7 @@
             <form action="" method="POST">
             
                 
-                    <div class="form__error"><?php if(isset($error)): ?><?php echo $error; ?><?php endif; ?></div>
+                <div class="form__error"><?php if(isset($error)): ?><?php echo $error; ?><?php endif; ?></div>
                
 
                 <div class="form__field">
