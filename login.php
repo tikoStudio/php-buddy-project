@@ -112,7 +112,7 @@
 				
 				
 				<div class="form__field">
-					<input type="submit" value="login" class="btn btn--primary">	
+					<input type="submit" value="Login" class="btn btn--primary">	
 				</div>
 			</form>
 			<a class="a__activate a__right" href="register.php">Geen account? Maak er één!</a>

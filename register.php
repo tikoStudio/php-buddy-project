@@ -13,7 +13,7 @@
             if($_POST['password'] != $_POST['passwordconfirmation']) {
                 $error = "Wachtwoord klopt niet!";
             }
-
+/*          
             if ( $user->availableEmail($user->getEmail()) ) {
                 // Email ready to use
                 if ( $user->validEmail()){
@@ -25,7 +25,7 @@
             else {
                 $error = "Email is al in gebruik!";
             }
-
+*/
             if($user->endsWith("@student.thomasmore.be")) {
             
             }
@@ -67,9 +67,9 @@
         <h2 form__title>Registreer</h2>
             <form action="" method="POST">
             
-                <?php if(isset($error)): ?>
-                    <div class="form__error"><?php echo $error; ?></div>
-                <?php endif; ?>
+                
+                <div class="form__error"><?php if(isset($error)): ?><?php echo $error; ?><?php endif; ?></div>
+               
 
                 <div class="form__field">
                     <label for="firstname">Voornaam</label>
@@ -103,5 +103,6 @@
             <a class="a__activate a__right" href="login.php">Al een account? Login!</a>
     </div>
 </div>
+<script src="js/email.js"></script>
 </body>
 </html>
