@@ -11,7 +11,6 @@ document.querySelector("#email").addEventListener("keyup", function() {
     .then((response) => response.json())
     .then((result) => {
         let errorEmail = result.body;
-        console.log(email)
         document.querySelector(".form__error").innerHTML = `<p>${errorEmail}</p>`;
 
     })
