@@ -10,9 +10,10 @@ document.querySelector("#email").addEventListener("keyup", function() {
     })
     .then((response) => response.json())
     .then((result) => {
-        let errorEmail = document.createElement('p');
-        errorEmail.innerHTML = result.body;
-        document.querySelector(".form__error").appendChild(errorEmail);
+        let errorEmail = result.body;
+        console.log(email)
+        document.querySelector(".form__error").innerHTML = `<p>${errorEmail}</p>`;
+
     })
     .catch((error) => {
     console.error('Error:', error);

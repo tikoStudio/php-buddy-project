@@ -90,7 +90,6 @@
                         return true;
                 } else {
                         // Email not available
-                        throw new Exception("Email is al in gebruik!");
                         return false;
                 }
         }

@@ -5,7 +5,6 @@
 
         try {
             $user = new User();
-            $user->setId($_SESSION["id"]);
             $user->setFirstname(htmlspecialchars($_POST['firstname']));
             $user->setLastname(htmlspecialchars($_POST['lastname']));
             $user->setEmail(htmlspecialchars($_POST['email']));
@@ -14,7 +13,7 @@
             if($_POST['password'] != $_POST['passwordconfirmation']) {
                 $error = "Wachtwoord klopt niet!";
             }
-/*
+/*          
             if ( $user->availableEmail($user->getEmail()) ) {
                 // Email ready to use
                 if ( $user->validEmail()){
@@ -64,9 +63,9 @@
         <h2 form__title>Registreer</h2>
             <form action="" method="POST">
             
-                <?php if(isset($error)): ?>
-                    <div class="form__error"><?php echo $error; ?></div>
-                <?php endif; ?>
+                
+                    <div class="form__error"><?php if(isset($error)): ?><?php echo $error; ?><?php endif; ?></div>
+               
 
                 <div class="form__field">
                     <label for="firstname">Voornaam</label>
