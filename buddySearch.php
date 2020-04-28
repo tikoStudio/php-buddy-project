@@ -109,6 +109,10 @@
                 unset($pet);
             ?>
         <?php endforeach; ?>
+        <div class="buddyConfirm">
+            <h1>request verzonden!</h1>
+            <a href="index.php" class="a__activate">home</a>
+        </div>
     </div>
     </div>
     <?php include_once('footer.inc.php'); ?>

@@ -10,12 +10,12 @@
     $userData = $user->allUserData();
     $pendingMatch = $user->pendingMatch();
 
-    "if(empty($pendingMatch)) {
+    if(empty($pendingMatch)) {
         header('location: index.php');
     }
 
     $pendingMatch = $user->pendingMatch();
-    $match = $user->searchPendingMatch($pendingMatch)";  
+    $match = $user->searchPendingMatch($pendingMatch);  
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

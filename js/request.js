@@ -11,7 +11,7 @@ function request(button) {
     })
     .then((response) => response)
     .then((result) => {
-       window.location.href = "index.php";
+       document.querySelector('.buddyConfirm').style.display = "flex"
     })
     .catch((error) => {
         console.error('Error:', error);
