@@ -90,7 +90,7 @@
         $mail = new PHPMailer(true);
         $fullUri = $_SERVER['REQUEST_URI'];
         $correctUri = str_replace( "register.php", '', $fullUri );
-        $link = "http://$_SERVER[HTTP_HOST]$correctUri"."activate.php?id=" . $activationToken;
+        $link = "http://$_SERVER[HTTP_HOST]$correctUri"."activate.php?u=" . $activationToken;
         try {
             //Server settings 
             //$mail->SMTPDebug = 1; debugging
