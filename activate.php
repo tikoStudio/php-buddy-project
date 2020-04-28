@@ -1,10 +1,10 @@
-<?php  
+<?php
     include_once(__DIR__ . "/classes/Buddy.php");
 
-    if(!empty($_GET['u'])) {
+    if (!empty($_GET['u'])) {
         $user = new Buddy();
         $user->setActivationToken($_GET['u']);
-        $user->activateAccount();  
+        $user->activateAccount();
     }
 ?><!DOCTYPE html>
 <html lang="en">

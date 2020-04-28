@@ -3,7 +3,8 @@
     include_once(__DIR__ . "./Db.php");
     include_once(__DIR__ . "../../functions.php");
 
-    class Buddy extends user {
+    class Buddy extends user
+    {
         //userId1 not neccesary because it = $id from User class
         private $userAnswer1;
         private $userId2;
@@ -13,65 +14,66 @@
 
         public function getUserAnswer1()
         {
-                return $this->userAnswer1;
+            return $this->userAnswer1;
         }
  
         public function setUserAnswer1($userAnswer1)
         {
-                $this->userAnswer1 = $userAnswer1;
+            $this->userAnswer1 = $userAnswer1;
 
-                return $this;
+            return $this;
         }
 
         public function getUserId2()
         {
-                return $this->userId2;
+            return $this->userId2;
         }
  
         public function setUserId2($userId2)
         {
-                $this->userId2 = $userId2;
+            $this->userId2 = $userId2;
 
-                return $this;
+            return $this;
         }
 
         public function getUserAnswer2()
         {
-                return $this->userAnswer2;
+            return $this->userAnswer2;
         }
 
         public function setUserAnswer2($userAnswer2)
         {
-                $this->userAnswer2 = $userAnswer2;
+            $this->userAnswer2 = $userAnswer2;
 
-                return $this;
+            return $this;
         }
 
         public function getReasonAnswer()
         {
-                return $this->reasonAnswer;
+            return $this->reasonAnswer;
         }
 
         public function setReasonAnswer($reasonAnswer)
         {
-                $this->reasonAnswer = $reasonAnswer;
+            $this->reasonAnswer = $reasonAnswer;
 
-                return $this;
+            return $this;
         }
 
         public function getActivationToken()
         {
-                return $this->activationToken;
+            return $this->activationToken;
         }
 
         public function setActivationToken($activationToken)
         {
-                $this->activationToken = $activationToken;
+            $this->activationToken = $activationToken;
 
-                return $this;
+            return $this;
         }
 
-        public function filterUser() {
+        public function filterUser()
+        {
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT * FROM users WHERE class = :class and interests = :interests and hobbies = :hobbies and beverage = :beverage and pet = :pet");
             $class = $this->getClass();
@@ -91,21 +93,22 @@
         }
 
 
-        public function searchMatch() {
+        public function searchMatch()
+        {
             //db conn
             $conn = Db::getConnection();
 
             $class = $this->getClass();
-            //check for searching user what class he is     
+            //check for searching user what class he is
             $class1 = "1IMD";
             $class2 = "2IMD";
             $class3 = "3IMD";
 
-            if($class == "1IMD") { //select 2IMD and 3IMD students
+            if ($class == "1IMD") { //select 2IMD and 3IMD students
                 $statement = $conn->prepare("select * from users where class = :class2 or class = :class3 and buddySearching = 1");
                 $statement->bindParam(":class2", $class2);
                 $statement->bindParam(":class3", $class3);
-            }else {
+            } else {
                 $statement = $conn->prepare("select * from users where class = :class1 and buddySearching = 1");
                 $statement->bindParam(":class1", $class1);
             }
@@ -115,7 +118,8 @@
             return $result;
         }
 
-        public function requestMatch() {
+        public function requestMatch()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -128,10 +132,10 @@
             $statement->bindParam(":userAnswer1", $userAnswer1);
 
             $statement->execute();
-
         }
 
-        public function pendingMatch() {
+        public function pendingMatch()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -142,7 +146,8 @@
             return $result;
         }
 
-        public function searchPendingMatch($pendingMatch) {
+        public function searchPendingMatch($pendingMatch)
+        {
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT u1.firstname AS firstname1, u1.lastname AS lastname1, u1.avatar AS avatar1, u1.id AS id1, u2.id as id2, u1.interests as interests1, u2.interests as interests2, u1.hobbies as hobbies1, u2.hobbies as hobbies2, u1.beverage as beverage1, u2.beverage as beverage2, u1.pet as pet1, u2.pet as pet2
             FROM users AS u1, buddies, users AS u2
@@ -154,7 +159,8 @@
             return $result;
         }
 
-        public function stopSearchingMatch($id) {
+        public function stopSearchingMatch($id)
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -164,7 +170,8 @@
             $statement->execute();
         }
 
-        public function startSearchingMatch($id) {
+        public function startSearchingMatch($id)
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -174,7 +181,8 @@
             $statement->execute();
         }
 
-        public function searchFriends() {
+        public function searchFriends()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -187,11 +195,12 @@
             return $result;
         }
 
-        public function acceptMatch() {
+        public function acceptMatch()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("update buddies set userAnswer2= 1 where userId1 = :id1 and userId2 = :id2 order by id desc limit 1"); 
+            $statement = $conn->prepare("update buddies set userAnswer2= 1 where userId1 = :id1 and userId2 = :id2 order by id desc limit 1");
             $id1= $this->getId();
             $id2 = $this->getUserId2();
             $statement->bindParam(":id1", $id1);
@@ -199,7 +208,8 @@
             $statement->execute();
         }
 
-        public function rejectMatch() {
+        public function rejectMatch()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -209,29 +219,31 @@
             $reasonAnswer = $this->getReasonAnswer();
             $statement->bindParam(":id1", $id1);
             $statement->bindParam(":id2", $id2);
-            if(empty($reasonAnswer)) {
+            if (empty($reasonAnswer)) {
                 $reasonAnswer = "Geen reden gegeven";
             }
             $statement->bindParam(":reason", $reasonAnswer);
             $statement->execute();
         }
 
-        public function sendMail() {
-             //db conn
-             $conn = Db::getConnection();
-             //insert query
-             $statement = $conn->prepare("select email from users where id= :id");
-             $userId2 = $this->getUserId2();
-             $statement->bindParam(":id", $userId2);
+        public function sendMail()
+        {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("select email from users where id= :id");
+            $userId2 = $this->getUserId2();
+            $statement->bindParam(":id", $userId2);
 
-             $statement->execute();
+            $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
 
             $mailingAdress = $result['email'];
             sendMail($mailingAdress);
         }
 
-        public function sendActivationMail() {
+        public function sendActivationMail()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -246,7 +258,8 @@
             sendActivationMail($email, $activationToken);
         }
 
-        public function activateAccount() {
+        public function activateAccount()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -256,5 +269,4 @@
 
             $statement->execute();
         }
-
     }

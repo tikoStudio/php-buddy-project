@@ -1,48 +1,50 @@
 <?php
     include_once(__DIR__ . "./Db.php");
 
-    class IpCheck {
+    class IpCheck
+    {
         private $ip;
         private $t;
         private $diff;
 
         public function getIp()
         {
-                return $this->ip;
+            return $this->ip;
         }
 
         public function setIp($ip)
         {
-                $this->ip = $ip;
+            $this->ip = $ip;
 
-                return $this;
+            return $this;
         }
 
         public function getT()
         {
-                return $this->t;
+            return $this->t;
         }
 
         public function setT($t)
         {
-                $this->t = $t;
+            $this->t = $t;
 
-                return $this;
+            return $this;
         }
 
         public function getDiff()
         {
-                return $this->diff;
+            return $this->diff;
         }
 
         public function setDiff($diff)
         {
-                $this->diff = $diff;
+            $this->diff = $diff;
 
-                return $this;
+            return $this;
         }
 
-        public function failedLogin() {
+        public function failedLogin()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -55,7 +57,8 @@
             $this->deleteFailedLogin();
         }
 
-        public function deleteFailedLogin() {
+        public function deleteFailedLogin()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -68,7 +71,8 @@
             $statement->execute();
         }
 
-        public function deleteAllFailedLogin() {
+        public function deleteAllFailedLogin()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -79,19 +83,20 @@
             $statement->execute();
         }
 
-        public function failedLoginAmount() {
-           //db conn
-           $conn = Db::getConnection();
-           //insert query
-           $statement = $conn->prepare( "select COUNT(*) from loginLimit where ipAddress like :ip and timeDiff > :diff");
-           $ip = $this->getIp();
-           $diff = $this->getDiff();
-           $statement->bindParam(":ip", $ip);
-           $statement->bindParam(":diff", $diff);
+        public function failedLoginAmount()
+        {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("select COUNT(*) from loginLimit where ipAddress like :ip and timeDiff > :diff");
+            $ip = $this->getIp();
+            $diff = $this->getDiff();
+            $statement->bindParam(":ip", $ip);
+            $statement->bindParam(":diff", $diff);
 
-           $statement->execute();
-           $count = $statement->fetch(PDO::FETCH_ASSOC);
-           $this->deleteFailedLogin();
-           return $count;
+            $statement->execute();
+            $count = $statement->fetch(PDO::FETCH_ASSOC);
+            $this->deleteFailedLogin();
+            return $count;
         }
     }

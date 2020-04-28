@@ -10,17 +10,18 @@
     require 'vendor/autoload.php';
 
     // UPLOAD IMAGE
-    function uploadImage($image) {
-        if(!empty($_POST)) {
+    function uploadImage($image)
+    {
+        if (!empty($_POST)) {
             $folder = "uploads/";
             $target_file = $folder . basename($image);
             $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     
             // Check if image file is correct
-            if(isset($_POST["submit"])) {
+            if (isset($_POST["submit"])) {
                 $check = getimagesize($image);
-                if($check == false) {
+                if ($check == false) {
                     throw new Exception('Het geuploade bestand is geen foto.');
                     $uploadOk = 0;
                 }
@@ -35,7 +36,7 @@
                 $uploadOk = 0;
             }
             // Allow certain file formats
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
                 throw new Exception('Alleen JPG, JPEG, PNG & GIF bestanden zijn toegelaten.');
                 $uploadOk = 0;
             }
@@ -52,12 +53,13 @@
     //END UPLOAD IMAGE
 
     //SEND MAIL
-    function sendMail($email) {
+    function sendMail($email)
+    {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
         
         try {
-            //Server settings 
+            //Server settings
             //$mail->SMTPDebug = 1; debugging
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host       = 'smtp.sendgrid.net';                    // Set the SMTP server to send through
@@ -69,7 +71,7 @@
         
             //Recipients
             $mail->setFrom('buddyproject@mail.com', 'IMD Buddy App');
-            $mail->addAddress($email);       
+            $mail->addAddress($email);
         
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -85,14 +87,15 @@
     // END SEND MAIL
 
     //SEND ACTIVATION MAIL
-    function sendActivationMail($email, $activationToken) {
+    function sendActivationMail($email, $activationToken)
+    {
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer(true);
         $fullUri = $_SERVER['REQUEST_URI'];
-        $correctUri = str_replace( "register.php", '', $fullUri );
+        $correctUri = str_replace("register.php", '', $fullUri);
         $link = "http://$_SERVER[HTTP_HOST]$correctUri"."activate.php?u=" . $activationToken;
         try {
-            //Server settings 
+            //Server settings
             //$mail->SMTPDebug = 1; debugging
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host       = 'smtp.sendgrid.net';                    // Set the SMTP server to send through
@@ -104,7 +107,7 @@
         
             //Recipients
             $mail->setFrom('buddyproject@mail.com', 'IMD Buddy App');
-            $mail->addAddress($email);       
+            $mail->addAddress($email);
         
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML

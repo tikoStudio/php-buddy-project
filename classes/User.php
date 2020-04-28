@@ -2,7 +2,8 @@
 
     include_once(__DIR__ . "./Db.php");
 
-    class User {
+    class User
+    {
         protected $id;
         protected $email;
         protected $updateEmail;
@@ -20,147 +21,156 @@
         protected $active;
         
 
-        public function setFirstname($firstname) {
-                if(empty($firstname)) {
-                        throw new Exception("Voornaam mag niet leeg zijn!");
-                }
+        public function setFirstname($firstname)
+        {
+            if (empty($firstname)) {
+                throw new Exception("Voornaam mag niet leeg zijn!");
+            }
 
-                if(!preg_match("/^[a-zA-Z ]*$/", $firstname)) {
-                        throw new Exception("Voornaam is niet geldig!");
-                }
+            if (!preg_match("/^[a-zA-Z ]*$/", $firstname)) {
+                throw new Exception("Voornaam is niet geldig!");
+            }
 
             $this->firstname = $firstname;
             return $this;
         }
 
-        public function getFirstname() {
+        public function getFirstname()
+        {
             return $this->firstname;
         }
 
-        public function setLastname($lastname) {
+        public function setLastname($lastname)
+        {
+            if (empty($lastname)) {
+                throw new Exception("Achternaam mag niet leeg zijn!");
+            }
 
-                if(empty($lastname)) {
-                        throw new Exception("Achternaam mag niet leeg zijn!");
-                }
+            if (!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
+                throw new Exception("Achternaam is niet geldig!");
+            }
 
-                if(!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
-                        throw new Exception("Achternaam is niet geldig!");
-                }
+            $this->lastname = $lastname;
 
-                $this->lastname = $lastname;
-
-                return $this;
+            return $this;
         }
 
-        public function getLastname() {
-                return $this->lastname;
+        public function getLastname()
+        {
+            return $this->lastname;
         }
 
-        public function setEmail($email) {
+        public function setEmail($email)
+        {
+            if (empty($email)) {
+                throw new Exception("Email mag niet leeg zijn!");
+            }
+            $this->email = $email;
 
-                if(empty($email)) {
-                        throw new Exception("Email mag niet leeg zijn!");
-                }
-                $this->email = $email;
-
-                return $this;
+            return $this;
         }
 
-        public function getEmail() {
-                return $this->email;
+        public function getEmail()
+        {
+            return $this->email;
         }
 
-        public function validEmail() {
-                $email = $this->getEmail();
-                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+        public function validEmail()
+        {
+            $email = $this->getEmail();
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        public function availableEmail($email) {
-                $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-                $statement->bindParam(":email", $email);
-                $statement->execute();
-                $result = $statement->fetch(PDO::FETCH_ASSOC);
+        public function availableEmail($email)
+        {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $statement->bindParam(":email", $email);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-                if ($result == false) {
-                        // Email available
-                        return true;
-                } else {
-                        // Email not available
-                        return false;
-                }
+            if ($result == false) {
+                // Email available
+                return true;
+            } else {
+                // Email not available
+                return false;
+            }
         }
 
-        public function endsWith($target) {
-                $email = $this->getEmail();
-                $length = strlen($target);
-                if ($length == 0) {
-                        return true;
-                }
+        public function endsWith($target)
+        {
+            $email = $this->getEmail();
+            $length = strlen($target);
+            if ($length == 0) {
+                return true;
+            }
  
-                return (substr($email, -$length) === $target);
+            return (substr($email, -$length) === $target);
         }
 
-        public function setPassword($password) {
+        public function setPassword($password)
+        {
+            if (empty($password)) {
+                throw new Exception("Wachtwoord mag niet leeg zijn!");
+            }
 
-                if(empty($password)) {
-                        throw new Exception("Wachtwoord mag niet leeg zijn!");
-                }
+            $options = ['cost' => 12];
+            $password = password_hash($password, PASSWORD_DEFAULT, $options);
 
-                $options = ['cost' => 12];
-                $password = password_hash($password, PASSWORD_DEFAULT, $options);
+            $this->password = $password;
 
-                $this->password = $password;
-
-                return $this;
+            return $this;
         }
 
-        public function getPassword() {
-                return $this->password;
+        public function getPassword()
+        {
+            return $this->password;
         }
 
-        public function save() {
-                // connectie
-                $conn = Db::getConnection();
+        public function save()
+        {
+            // connectie
+            $conn = Db::getConnection();
 
-                // query
-                $statement = $conn->prepare("insert into users (firstname, lastname, email, password, activationToken) values (:firstname, :lastname, :email, :password, :activationToken)");
+            // query
+            $statement = $conn->prepare("insert into users (firstname, lastname, email, password, activationToken) values (:firstname, :lastname, :email, :password, :activationToken)");
                 
-                // variabelen klaarzetten om te binden
-                $firstname = $this->getFirstname();
-                $lastname = $this->getLastname();
-                $email = $this->getEmail();
-                $password = $this->getPassword();
-                $hash = md5($firstname);
-                $activationToken = uniqid($hash, true);
+            // variabelen klaarzetten om te binden
+            $firstname = $this->getFirstname();
+            $lastname = $this->getLastname();
+            $email = $this->getEmail();
+            $password = $this->getPassword();
+            $hash = md5($firstname);
+            $activationToken = uniqid($hash, true);
                 
-                // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
-                $statement->bindParam(":firstname", $firstname);
-                $statement->bindParam(":lastname", $lastname);
-                $statement->bindParam(":email", $email);
-                $statement->bindParam(":password", $password);
-                $statement->bindParam(":activationToken", $activationToken);
+            // uitlezen wat er in de variabele zit en die zal op een veilige manier gekleefd worden
+            $statement->bindParam(":firstname", $firstname);
+            $statement->bindParam(":lastname", $lastname);
+            $statement->bindParam(":email", $email);
+            $statement->bindParam(":password", $password);
+            $statement->bindParam(":activationToken", $activationToken);
 
-                // als je geen execute doet dan wordt die query niet uitgevoerd
-                $result = $statement->execute();
+            // als je geen execute doet dan wordt die query niet uitgevoerd
+            $result = $statement->execute();
 
-                return $result;
+            return $result;
         }
 
         public function getId()
         {
-                return $this->id;
+            return $this->id;
         }
 
         public function setId($id)
         {
-                $this->id = $id;
+            $this->id = $id;
 
-                return $this;
+            return $this;
         }
  
         public function getAvatar()
@@ -169,7 +179,7 @@
         }
             
         public function setAvatar($avatar)
-        {  
+        {
             $this->avatar = $avatar;
 
             return $this;
@@ -181,7 +191,7 @@
         }
              
         public function setClass($class)
-        { 
+        {
             $this->class = $class;
 
             return $this;
@@ -193,7 +203,7 @@
         }
              
         public function setInterests($interests)
-        {  
+        {
             $this->interests = $interests;
 
             return $this;
@@ -205,7 +215,7 @@
         }
             
         public function setHobbies($hobbies)
-        {  
+        {
             $this->hobbies = $hobbies;
 
             return $this;
@@ -217,7 +227,7 @@
         }
             
         public function setBeverage($beverage)
-        {  
+        {
             $this->beverage = $beverage;
 
             return $this;
@@ -229,13 +239,14 @@
         }
             
         public function setPet($pet)
-        {  
+        {
             $this->pet = $pet;
 
             return $this;
         }
 
-        public function checkLogin($email, $password) {
+        public function checkLogin($email, $password)
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -248,18 +259,19 @@
 
             $this->setActive($result["active"]);
 
-            if(empty($result)) {
+            if (empty($result)) {
                 return false;
             }
             $hash = $result["password"];
-            if(password_verify($password, $hash)) {
+            if (password_verify($password, $hash)) {
                 return true;
-            }else {
+            } else {
                 return false;
             }
         }
 
-        public function allUserData() {
+        public function allUserData()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -274,20 +286,22 @@
             return $result;
         }
 
-        public function idFromSession($email) {
-        	//db conn
-			$conn = Db::getConnection();
-			//insert query
-			$statement = $conn->prepare("select id from users where email = :email");
-			$statement->bindParam(":email", $email);
+        public function idFromSession($email)
+        {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("select id from users where email = :email");
+            $statement->bindParam(":email", $email);
 
-			//return result
-			$statement->execute();
-			$result = $statement->fetch(PDO::FETCH_ASSOC);
-			return $result;
+            //return result
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
         }
 
-        public function completeProfile() {
+        public function completeProfile()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -322,38 +336,39 @@
 
         public function getDescription()
         {
-                return $this->description;
+            return $this->description;
         }
 
         public function setDescription($description)
         {
-                $this->description = $description;
+            $this->description = $description;
 
-                return $this;
+            return $this;
         }
 
         public function getUpdateEmail()
         {
-                return $this->updateEmail;
+            return $this->updateEmail;
         }
 
         public function setUpdateEmail($updateEmail)
         {
-                $this->updateEmail = $updateEmail;
+            $this->updateEmail = $updateEmail;
 
-                return $this;
+            return $this;
         }
 
-        public function changeEmail() {
-             //db conn
-             $conn = Db::getConnection();
-             //insert query
-             $statement = $conn->prepare("update users set email = :updateEmail where email= :email");
-             $email = $this->getEmail();
-             $updateEmail = $this->getUpdateEmail();
+        public function changeEmail()
+        {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("update users set email = :updateEmail where email= :email");
+            $email = $this->getEmail();
+            $updateEmail = $this->getUpdateEmail();
 
-             $statement->bindParam(":email", $email);
-             $statement->bindParam(":updateEmail", $updateEmail);
+            $statement->bindParam(":email", $email);
+            $statement->bindParam(":updateEmail", $updateEmail);
 
             //return result
             $result = $statement->execute();
@@ -363,12 +378,12 @@
 
         public function getUpdatePassword()
         {
-                return $this->updatePassword;
+            return $this->updatePassword;
         }
 
         public function setUpdatePassword($updatePassword)
         {
-            if(empty($updatePassword)) {
+            if (empty($updatePassword)) {
                 throw new Exception("Wachtwoord mag niet leeg zijn!");
             }
 
@@ -379,7 +394,8 @@
             return $this;
         }
 
-        public function changePassword() {
+        public function changePassword()
+        {
             //db conn
             $conn = Db::getConnection();
             //insert query
@@ -390,36 +406,38 @@
             $statement->bindParam(":email", $email);
             $statement->bindParam(":updatePassword", $updatePassword);
 
-             //return result
-             $result = $statement->execute();
-             return $result;
+            //return result
+            $result = $statement->execute();
+            return $result;
         }
 
-        public function countUsers() {
-                $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT COUNT(*) FROM users");
-                $result = $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                return $result;
+        public function countUsers()
+        {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT COUNT(*) FROM users");
+            $result = $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
 
-        public function countBuddies() {
-                $conn = Db::getConnection();
-                $statement = $conn->prepare("SELECT COUNT(*) FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 = 1");
-                $result = $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                return $result;
+        public function countBuddies()
+        {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT COUNT(*) FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 = 1");
+            $result = $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
 
         public function getActive()
         {
-                return $this->active;
+            return $this->active;
         }
 
         public function setActive($active)
         {
-                $this->active = $active;
+            $this->active = $active;
 
-                return $this;
+            return $this;
         }
-}
+    }
