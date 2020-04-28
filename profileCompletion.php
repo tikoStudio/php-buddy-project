@@ -1,5 +1,7 @@
 <?php
-    include_once(__DIR__ . "/classes/User.php");
+    namespace src\Buddy;
+
+    spl_autoload_register();
     include_once("functions.php");
     
     session_start();
@@ -30,7 +32,7 @@
             try {
                 $image = $_FILES['avatar']['name'];
                 uploadImage($image);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $image = $userData['avatar'];
                 $error = $e->getMessage();
             }

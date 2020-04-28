@@ -1,5 +1,6 @@
 <?php
-    include_once(__DIR__ . "./Db.php");
+
+    namespace src\Buddy;
 
     class IpCheck
     {
@@ -95,7 +96,7 @@
             $statement->bindParam(":diff", $diff);
 
             $statement->execute();
-            $count = $statement->fetch(PDO::FETCH_ASSOC);
+            $count = $statement->fetch(\PDO::FETCH_ASSOC);
             $this->deleteFailedLogin();
             return $count;
         }

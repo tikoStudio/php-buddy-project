@@ -1,6 +1,6 @@
 <?php
 
-    include_once(__DIR__ . "./Db.php");
+    namespace src\Buddy;
 
     class User
     {
@@ -24,11 +24,11 @@
         public function setFirstname($firstname)
         {
             if (empty($firstname)) {
-                throw new Exception("Voornaam mag niet leeg zijn!");
+                throw new \Exception("Voornaam mag niet leeg zijn!");
             }
 
             if (!preg_match("/^[a-zA-Z ]*$/", $firstname)) {
-                throw new Exception("Voornaam is niet geldig!");
+                throw new \Exception("Voornaam is niet geldig!");
             }
 
             $this->firstname = $firstname;
@@ -43,11 +43,11 @@
         public function setLastname($lastname)
         {
             if (empty($lastname)) {
-                throw new Exception("Achternaam mag niet leeg zijn!");
+                throw new \Exception("Achternaam mag niet leeg zijn!");
             }
 
             if (!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
-                throw new Exception("Achternaam is niet geldig!");
+                throw new \Exception("Achternaam is niet geldig!");
             }
 
             $this->lastname = $lastname;
@@ -63,7 +63,7 @@
         public function setEmail($email)
         {
             if (empty($email)) {
-                throw new Exception("Email mag niet leeg zijn!");
+                throw new \Exception("Email mag niet leeg zijn!");
             }
             $this->email = $email;
 
@@ -91,7 +91,7 @@
             $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
             $statement->bindParam(":email", $email);
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
             if ($result == false) {
                 // Email available
@@ -116,7 +116,7 @@
         public function setPassword($password)
         {
             if (empty($password)) {
-                throw new Exception("Wachtwoord mag niet leeg zijn!");
+                throw new \Exception("Wachtwoord mag niet leeg zijn!");
             }
 
             $options = ['cost' => 12];
@@ -255,7 +255,7 @@
 
             //return result
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
             $this->setActive($result["active"]);
 
@@ -281,7 +281,7 @@
 
             //return result
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
             
             return $result;
         }
@@ -296,7 +296,7 @@
 
             //return result
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -384,7 +384,7 @@
         public function setUpdatePassword($updatePassword)
         {
             if (empty($updatePassword)) {
-                throw new Exception("Wachtwoord mag niet leeg zijn!");
+                throw new \Exception("Wachtwoord mag niet leeg zijn!");
             }
 
             $options = ['cost' => 12];
@@ -416,7 +416,7 @@
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT COUNT(*) FROM users");
             $result = $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -425,7 +425,7 @@
             $conn = Db::getConnection();
             $statement = $conn->prepare("SELECT COUNT(*) FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 = 1");
             $result = $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         }
 

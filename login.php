@@ -1,6 +1,7 @@
 <?php
-    include_once(__DIR__ . "/classes/User.php");
-    include_once(__DIR__ . "/classes/IpCheck.php");
+    namespace src\Buddy;
+
+    spl_autoload_register();
     $user = new User();
 
     $failedLogin = new IpCheck();
@@ -74,52 +75,52 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>buddy app login</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buddy app login</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-	<div class="container">
-		<div class="form form--login">
-			<form action="" method="post">
-				<h2 form__title>Login</h2>
+    <div class="container">
+        <div class="form form--login">
+            <form action="" method="post">
+                <h2 form__title>Login</h2>
 
-				<?php if (isset($error)) : ?>
-				<div class="form__error">
-					<p>
-						<?php echo $error; ?>
-					</p>
-				</div>
-				<?php endif; ?>
+                <?php if (isset($error)) : ?>
+                <div class="form__error">
+                    <p>
+                        <?php echo $error; ?>
+                    </p>
+                </div>
+                <?php endif; ?>
 
-				<div class="form__field">
-					<label for="email">Email</label>
-					<input type="text" id="email" name="email" placeholder="Email">
-				</div>
+                <div class="form__field">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Email">
+                </div>
 
-				<div class="form__field">
-					<label for="password">Passwoord</label>
-					<input type="password" id="password" name="password" placeholder="Passwoord">
-				</div>
+                <div class="form__field">
+                    <label for="password">Passwoord</label>
+                    <input type="password" id="password" name="password" placeholder="Passwoord">
+                </div>
 
-				<div class="form__field">
-					<label for="captcha">Captcha</label>
-					<img src="captcha.php">
-					<input type="text" name="captcha" placeholder="captcha">
-				</div>
+                <div class="form__field">
+                    <label for="captcha">Captcha</label>
+                    <img src="captcha.php">
+                    <input type="text" name="captcha" placeholder="captcha">
+                </div>
 
 
 
-				<div class="form__field">
-					<input type="submit" value="Login" class="btn btn--primary">
-				</div>
-			</form>
-			<a class="a__activate a__right" href="register.php">Geen account? Maak er één!</a>
-		</div>
-	</div>
+                <div class="form__field">
+                    <input type="submit" value="Login" class="btn btn--primary">
+                </div>
+            </form>
+            <a class="a__activate a__right" href="register.php">Geen account? Maak er één!</a>
+        </div>
+    </div>
 </body>
 
 </html>

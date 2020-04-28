@@ -1,5 +1,7 @@
 <?php
-    include_once(__DIR__ . "/classes/Buddy.php");
+    namespace src\Buddy;
+
+    spl_autoload_register();
 
     if (!empty($_POST)) {
         try {

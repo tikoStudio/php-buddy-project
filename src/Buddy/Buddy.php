@@ -1,7 +1,8 @@
 <?php
-    include_once(__DIR__ . "/User.php");
-    include_once(__DIR__ . "./Db.php");
-    include_once(__DIR__ . "../../functions.php");
+
+    namespace src\Buddy;
+
+    include_once('../../functions.php');
 
     class Buddy extends user
     {
@@ -88,7 +89,7 @@
             $statement->bindParam(":pet", $pet);
 
             $statement->execute();
-            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $users = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $users;
         }
 
@@ -114,7 +115,7 @@
             }
         
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -142,7 +143,7 @@
             $statement = $conn->prepare("SELECT * FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 IS NULL");
 
             $test = $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -155,7 +156,7 @@
             $statement->bindParam(":pendingId1", $pendingMatch['userId1']);
             $statement->bindParam(":pendingId2", $pendingMatch['userId2']);
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -191,7 +192,7 @@
             WHERE buddies.userId1 = u1.id AND buddies.userId2 = u2.id AND buddies.userAnswer1 = 1 AND buddies.userAnswer2 = 1");
 
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -236,7 +237,7 @@
             $statement->bindParam(":id", $userId2);
 
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
             $mailingAdress = $result['email'];
             sendMail($mailingAdress);
@@ -252,7 +253,7 @@
             $statement->bindParam(":email", $email);
 
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
 
             $activationToken = $result['activationToken'];
             sendActivationMail($email, $activationToken);
