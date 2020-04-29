@@ -29,10 +29,10 @@
         <h1 class="center">Alle IMD Buddies!</h1>
 
         <?php if (isset($error)) {
-    echo $error;
-} ?>
+            echo $error;
+        } ?>
         <?php foreach ($userFriends as $u): ?>
-        <h2><?php echo htmlspecialchars($u['firstname1']) . " " . htmlspecialchars($u['lastname1']) . " is bevriend met "  . htmlspecialchars($u['firstname2']) . " " . htmlspecialchars($u['lastname2']);?>
+        <h2><img class="friend-image" src="uploads/<?php echo $u['avatar1']; ?>"><span class="blue"><?php echo " " . htmlspecialchars($u['firstname1']) . " " . htmlspecialchars($u['lastname1'])?> </span>is bevriend met<img class="friend-image" src="uploads/<?php echo $u['avatar2']; ?>"><span class="blue"><? echo " " . htmlspecialchars($u['firstname2']) . " " . htmlspecialchars($u['lastname2']);?></span>
         </h2>
         <?php endforeach; ?>
     </div>
