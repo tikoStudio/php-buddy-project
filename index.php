@@ -20,18 +20,6 @@
     } elseif (!empty($pendingMatch) && $pendingMatch['userId2'] == $user->getId()) {
         header('location: buddyRequest.php');
     }
-    if (!empty($_POST)) {
-        $user->setClass($_POST['class']);
-        $user->setInterests($_POST['interests']);
-        $user->setHobbies($_POST['hobbies']);
-        $user->setBeverage($_POST['beverage']);
-        $user->setPet($_POST['pet']);
-        $userFilter = $user->filterUser();
-    
-        if ($userFilter == null) {
-            $error = "Geen buddy gevonden met deze interesses";
-        }
-    }
 
 ?>
 <!DOCTYPE html>
@@ -56,74 +44,6 @@
         <h2>Er zijn al <span class="blue"> <?php echo $countBuddy['COUNT(*)']; ?>
                 buddymatch(es)</span> gebeurd</h2>
         <?php endforeach; ?>
-    </div>
-
-    <div class="container">
-        <div class="form form--login">
-            <form action="" method="post">
-                <div class="form__field">
-                    <label for="class">Klas</label>
-                    <select name="class" id="class">
-                        <option value="1IMD">1IMD</option>
-                        <option value="2IMD">2IMD</option>
-                        <option value="3IMD">3IMD</option>
-                    </select>
-                </div>
-
-                <div class="form__field">
-                    <label for="interests">Interesses</label>
-                    <select name="interests" id="interests">
-                        <option value="Designing">Designen</option>
-                        <option value="Developing">Developen</option>
-                        <option value="Both">Beide</option>
-                    </select>
-                </div>
-
-                <div class="form__field">
-                    <label for="hobbies">Hobbies</label>
-                    <select name="hobbies" id="hobbies">
-                        <option value="Party">party like it's 1969 🥳</option>
-                        <option value="Sleeping">slapen 😴</option>
-                        <option value="Tv">Tv-series en filmen kijken 📺</option>
-                    </select>
-                </div>
-
-                <div class="form__field">
-                    <label for="beverage">Favoriete drankje tijdens het developen/designen</label>
-                    <select name="beverage" id="beverage">
-                        <option value="Beer">Bier 🍺</option>
-                        <option value="Coffee">Koffie ☕</option>
-                        <option value="Soda">Frisdrank 🥤</option>
-                        <option value="Tea">Thee 🍵</option>
-                    </select>
-                </div>
-
-                <div class="form__field">
-                    <label for="pet">Favoriete huisdier</label>
-                    <select name="pet" id="pet">
-                        <option value="Bunny">Konijn 🐇</option>
-                        <option value="Cat">Kat 🐈</option>
-                        <option value="Dog">Hond 🐕</option>
-                        <option value="Horse">Paard 🐎</option>
-                        <option value="All">ik hou van ze allemaal even veel 💓</option>
-                    </select>
-                </div>
-
-                <div>
-                    <input type="submit" value="Filteren" class="btn btn--primary">
-                </div>
-            </form>
-
-            <?php if (isset($error)) {
-    echo $error;
-} ?>
-            <?php if (!empty($_POST)): ?>
-            <?php foreach ($userFilter as $u): ?>
-            <h2><?php echo htmlspecialchars($u['firstname']) . " " . htmlspecialchars($u['lastname']); ?>
-            </h2>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
     </div>
 
     <?php include_once('footer.inc.php'); ?>

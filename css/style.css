@@ -82,6 +82,10 @@ nav a:last-child {
   align-items: center;
 }
 
+.filter {
+  margin-top: 15vh;
+}
+
 .form--login
 {
   padding: 1em;
@@ -179,6 +183,9 @@ h4 {
 }
 
 .avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   height: 150px;
   width: 150px;
 }
@@ -205,13 +212,13 @@ h4 {
   position: absolute;
   max-width: 100%;
   min-width: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
   background-color: #FAFAFA;
 }
 
 .container__buddyCard {
-  display: flex;
+  display: none;
   justify-content: center;
 }
 
