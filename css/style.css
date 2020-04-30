@@ -17,6 +17,12 @@ body
   color: #1758D3;
 }
 
+.a__center {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .header, footer {
   z-index: 1000;
 }
@@ -83,7 +89,16 @@ nav a:last-child {
 }
 
 .filter {
-  margin-top: 15vh;
+  position: absolute;
+  justify-content: center;
+  background-color: #FAFAFA;
+  z-index: 500;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.container--pushed {
+  margin-top: 13.5vh;
 }
 
 .form--login
@@ -212,13 +227,13 @@ h4 {
   position: absolute;
   max-width: 100%;
   min-width: 100%;
-  display: none;
+  display: flex;
   flex-direction: column;
   background-color: #FAFAFA;
 }
 
 .container__buddyCard {
-  display: none;
+  display: flex;
   justify-content: center;
 }
 

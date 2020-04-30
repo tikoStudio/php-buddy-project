@@ -45,7 +45,9 @@
 <body>
     <?php include_once('nav.inc.php'); ?>
 
-    <div class="container filter">
+    <div class="container filter <?php if (!empty($_POST)) {
+    echo "container--pushed";
+} ?>">
         <div class="form form--login">
             <form action="" method="post">
                 <div class="form__field">
@@ -97,13 +99,14 @@
                 </div>
 
                 <div>
-                    <input type="submit" value="Filteren" class="btn btn--primary">
+                    <input type="submit" value="Filteren" class="btn btn--primary btn--filter">
                 </div>
+                <p class="a__activate a__center a__filterRemove">zoek op basis van matchen in plaats van filter</p>
             </form>
 
             <?php if (isset($error)) {
-                echo $error;
-            } ?>
+    echo $error;
+} ?>
 
             <?php if (!empty($_POST)): ?>
             <?php foreach ($userFilter as $u): ?>
@@ -111,14 +114,16 @@
                 <h1>request verzonden!</h1>
                 <a href="index.php" class="a__activate">home</a>
             </div>
-            <h2><?php echo htmlspecialchars($u['firstname']) . " " . htmlspecialchars($u['lastname']); ?></h2>
-            <img class="avatar" src="uploads/<?php echo $u['avatar']; ?>">
+            <h2><?php echo htmlspecialchars($u['firstname']) . " " . htmlspecialchars($u['lastname']); ?>
+            </h2>
+            <img class="avatar"
+                src="uploads/<?php echo $u['avatar']; ?>">
             <div class="form__field">
-                    <input type="submit" value="stuur buddy verzoek!" class="btn btn--primary" id="buddyMatching"
-                        data-userId2=<?php echo $u['id']; ?>
-                    data-userId1 = <?php echo $_SESSION['id'] ?>
-                    onclick="request(this)">
-                </div>
+                <input type="submit" value="stuur buddy verzoek!" class="btn btn--primary" id="buddyMatching"
+                    data-userId2=<?php echo $u['id']; ?>
+                data-userId1 = <?php echo $_SESSION['id'] ?>
+                onclick="request(this)">
+            </div>
             <?php endforeach; ?>
             <?php endif; ?>
         </div>
@@ -232,6 +237,7 @@
         </div>
     </div>
     <?php include_once('footer.inc.php'); ?>
+    <script src="js/filter.js"></script>
     <script src="js/request.js"></script>
     <script src="js/dismiss.js"></script>
 </body>
