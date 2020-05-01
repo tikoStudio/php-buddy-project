@@ -308,9 +308,48 @@ h4 {
 }
 
 .friend-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 100px;
   height: 100px;
   border-radius: 50px;
+}
+
+.friends {
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr;
+}
+
+.card-friend1 {
+  display: grid;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  height: 250px;
+  width: 350px;
+  align-content: center;
+  margin-right: 0px;
+}
+
+.card-friend2 {
+  display: grid;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  height: 250px;
+  width: 350px;
+  align-content: center;
+  margin-left: 0px;
+}
+
+.friend-with {
+  display: grid;
+  align-content: center;
 }
 
 @media (min-width: 780px) {
@@ -325,5 +364,13 @@ h4 {
   .buddyConfirm {
     max-width: auto;
     min-width: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .friends {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
