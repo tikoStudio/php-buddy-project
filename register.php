@@ -13,6 +13,17 @@
                 $error = "Wachtwoord klopt niet!";
             }
 
+            if ($user->availableEmail($user->getEmail())) { //still needed to actually give out error
+                // Email ready to use
+                if ($user->validEmail()) {
+                    // valid email
+                } else {
+                    $error = "Ongeldig email!";
+                }
+            } else {
+                $error = "Email is al in gebruik!";
+            }
+
             if ($user->endsWith("@student.thomasmore.be")) {
             } else {
                 $error = "Gebruik email van Thomasmore!";
