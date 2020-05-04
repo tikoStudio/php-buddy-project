@@ -139,8 +139,9 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("SELECT * FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 IS NULL");
-
+            $statement = $conn->prepare("SELECT * FROM buddies WHERE userAnswer1 = 1 AND userAnswer2 IS NULL AND userId2 = :id");
+            $id = $this->getId();
+            $statement->bindParam(":id", $id);
             $test = $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;

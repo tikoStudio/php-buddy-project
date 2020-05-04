@@ -10,6 +10,7 @@
             if (self::$conn === null) {
                 try {
                     self::$conn = new PDO('mysql:host=' . SETTINGS['db']['host'] . ';port=' . SETTINGS['db']['port'] . ';dbname=' . SETTINGS['db']['dbname'], SETTINGS['db']['user'], SETTINGS['db']['password']);
+                    self::$conn->query('set names utf8');
                 } catch (PDOException $th) {
                     $eror = $th->getMessage();
                 }

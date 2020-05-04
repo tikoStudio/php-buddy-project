@@ -3,13 +3,14 @@
     include_once("functions.php");
     
     session_start();
-    if (!isset($_SESSION['user'])) {
-        header("Location: login.php");
-    }
     $user = new User();
     $user->setId($_SESSION["id"]);
     $userData = $user->allUserData();
 
+    if (!isset($_SESSION['user'])) {
+        header("Location: login.php");
+    }
+   
     $email = $userData['email'];
     $user->setEmail($email);
     $firstname = $userData['firstname'];
