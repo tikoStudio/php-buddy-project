@@ -5,7 +5,7 @@
         try {
             $user = new Buddy();
             $user->setFirstname($_POST['firstname']);
-            $user->setLastname(($_POST['lastname']);
+            $user->setLastname($_POST['lastname']);
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
 
