@@ -101,7 +101,8 @@
                 <div>
                     <input type="submit" value="Filteren" class="btn btn--primary btn--filter">
                 </div>
-                <p class="a__activate a__center a__filterRemove">zoek op basis van matchen in plaats van filter</p>
+                <p class="a__activate a__center a__filterRemove">zoek op basis van gelijkenissen in plaats van filter
+                </p>
             </form>
 
             <?php if (isset($error)) {
