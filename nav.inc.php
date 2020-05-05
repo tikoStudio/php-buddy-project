@@ -3,6 +3,7 @@
         <nav>
                 <a href="index.php">Home</a>
                 <a href="friends.php">see all matches</a>
+                <a href="forum.php">forum</a>
                 <a href="profile.php">profiel</a>
                 <a href="logout.php">logout</a>
         </nav>
