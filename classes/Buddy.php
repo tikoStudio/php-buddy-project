@@ -269,5 +269,12 @@
             $statement->bindParam(":activationToken", $activationToken);
 
             $statement->execute();
+
+            $statement2 = $conn->prepare("select * from users where activationtoken= :activationToken");
+            $statement2->bindParam(':activationToken', $activationToken);
+
+            $statement2->execute();
+            $result= $statement2->fetch(PDO::FETCH_ASSOC);
+            return $result;
         }
     }
