@@ -11,13 +11,13 @@ document.querySelector("#email").addEventListener("keyup", function() {
     .then((response) => response.json())
     .then((result) => {
         let errorEmail = result.body;
-        if(result.body == "Email is al in gebruik"){
-            document.querySelector(".form__error").innerHTML = `<p>${errorEmail}</p>`;
-            document.querySelector(".form__success").innerHTML = ``;
-        } else {
-            document.querySelector(".form__error").innerHTML = ``;
-            document.querySelector(".form__success").innerHTML = `<p>${errorEmail}</p>`;
+        const errorEmail = document.querySelector(".form__error"); 
 
+        if(result['status'] === "succes") {
+            errorEmail.innerHTML = `<p style='color: green;'>${errorEmail}</p>`;
+        }
+        else {
+            errorEmail.innerHTML = `<p style='color: red;'>${errorEmail}</p>`;
         }
     })
     .catch((error) => {
