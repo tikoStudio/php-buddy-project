@@ -6,13 +6,24 @@
     if (!empty($_POST)) {
         try {
             $user = new Buddy();
-            $user->setFirstname(htmlspecialchars($_POST['firstname']));
-            $user->setLastname(htmlspecialchars($_POST['lastname']));
-            $user->setEmail(htmlspecialchars($_POST['email']));
+            $user->setFirstname($_POST['firstname']);
+            $user->setLastname($_POST['lastname']);
+            $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
 
             if ($_POST['password'] != $_POST['passwordconfirmation']) {
                 $error = "Wachtwoord klopt niet!";
+            }
+
+            if ($user->availableEmail($user->getEmail())) { //still needed to actually give out error
+                // Email ready to use
+                if ($user->validEmail()) {
+                    // valid email
+                } else {
+                    $error = "Ongeldig email!";
+                }
+            } else {
+                $error = "Email is al in gebruik!";
             }
 
             if ($user->endsWith("@student.thomasmore.be")) {

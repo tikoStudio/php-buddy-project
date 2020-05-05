@@ -17,6 +17,12 @@ body
   color: #1758D3;
 }
 
+.a__center {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
 .header, footer {
   z-index: 1000;
 }
@@ -80,6 +86,19 @@ nav a:last-child {
   grid-template-rows: 1fr [form] 1fr 1fr;
   justify-content: center;
   align-items: center;
+}
+
+.filter {
+  position: absolute;
+  justify-content: center;
+  background-color: #FAFAFA;
+  z-index: 500;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.container--pushed {
+  margin-top: 13.5vh;
 }
 
 .form--login
@@ -179,6 +198,9 @@ h4 {
 }
 
 .avatar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   height: 150px;
   width: 150px;
 }
@@ -285,6 +307,51 @@ h4 {
   display: none;
 }
 
+.friend-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.friends {
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr;
+}
+
+.card-friend1 {
+  display: grid;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  height: 250px;
+  width: 350px;
+  align-content: center;
+  margin-right: 0px;
+}
+
+.card-friend2 {
+  display: grid;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  height: 250px;
+  width: 350px;
+  align-content: center;
+  margin-left: 0px;
+}
+
+.friend-with {
+  display: grid;
+  align-content: center;
+}
+
 @media (min-width: 780px) {
   .header {
     display: flex;
@@ -297,5 +364,13 @@ h4 {
   .buddyConfirm {
     max-width: auto;
     min-width: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .friends {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }

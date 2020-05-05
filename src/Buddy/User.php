@@ -2,6 +2,7 @@
 
     namespace src\Buddy;
 
+
     class User
     {
         protected $id;

@@ -33,10 +33,19 @@
         <?php if (isset($error)) {
     echo $error;
 } ?>
+        <div class="friends">
         <?php foreach ($userFriends as $u): ?>
-        <h2><?php echo htmlspecialchars($u['firstname1']) . " " . htmlspecialchars($u['lastname1']) . " is bevriend met "  . htmlspecialchars($u['firstname2']) . " " . htmlspecialchars($u['lastname2']);?>
-        </h2>
+        <div class="card-friend1">
+        <h2><span class="blue"><?php echo " " . htmlspecialchars($u['firstname1']) . " " . htmlspecialchars($u['lastname1'])?></h2>
+        <img class="friend-image" src="uploads/<?php echo $u['avatar1']; ?>"></span>
+        </div>
+        <h2 class="friend-with">+</h2>
+        <div class="card-friend2">
+        <h2><span class="blue"><?php echo " " . htmlspecialchars($u['firstname2']) . " " . htmlspecialchars($u['lastname2']);?></span></h2>
+        <img class="friend-image" src="uploads/<?php echo $u['avatar2']; ?>">
+        </div>
         <?php endforeach; ?>
+        </div>
     </div>
 
     <?php include_once('footer.inc.php'); ?>

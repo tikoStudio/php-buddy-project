@@ -19,6 +19,19 @@
     $user->setClass($userData['class']);
     $matches = $user->searchMatch();
 
+    if (!empty($_POST)) {
+        $user->setClass($_POST['class']);
+        $user->setInterests($_POST['interests']);
+        $user->setHobbies($_POST['hobbies']);
+        $user->setBeverage($_POST['beverage']);
+        $user->setPet($_POST['pet']);
+        $userFilter = $user->filterUser();
+    
+        if ($userFilter == null) {
+            $error = "Geen buddy gevonden met deze interesses";
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +46,91 @@
 
 <body>
     <?php include_once('nav.inc.php'); ?>
+
+    <div class="container filter <?php if (!empty($_POST)) {
+    echo "container--pushed";
+} ?>">
+        <div class="form form--login">
+            <form action="" method="post">
+                <div class="form__field">
+                    <label for="class">Klas</label>
+                    <select name="class" id="class">
+                        <option value="1IMD">1IMD</option>
+                        <option value="2IMD">2IMD</option>
+                        <option value="3IMD">3IMD</option>
+                    </select>
+                </div>
+
+                <div class="form__field">
+                    <label for="interests">Interesses</label>
+                    <select name="interests" id="interests">
+                        <option value="Designing">Designen</option>
+                        <option value="Developing">Developen</option>
+                        <option value="Both">Beide</option>
+                    </select>
+                </div>
+
+                <div class="form__field">
+                    <label for="hobbies">Hobbies</label>
+                    <select name="hobbies" id="hobbies">
+                        <option value="Party">party like it's 1969 🥳</option>
+                        <option value="Sleeping">slapen 😴</option>
+                        <option value="Tv">Tv-series en filmen kijken 📺</option>
+                    </select>
+                </div>
+
+                <div class="form__field">
+                    <label for="beverage">Favoriete drankje tijdens het developen/designen</label>
+                    <select name="beverage" id="beverage">
+                        <option value="Beer">Bier 🍺</option>
+                        <option value="Coffee">Koffie ☕</option>
+                        <option value="Soda">Frisdrank 🥤</option>
+                        <option value="Tea">Thee 🍵</option>
+                    </select>
+                </div>
+
+                <div class="form__field">
+                    <label for="pet">Favoriete huisdier</label>
+                    <select name="pet" id="pet">
+                        <option value="Bunny">Konijn 🐇</option>
+                        <option value="Cat">Kat 🐈</option>
+                        <option value="Dog">Hond 🐕</option>
+                        <option value="Horse">Paard 🐎</option>
+                        <option value="All">ik hou van ze allemaal even veel 💓</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="submit" value="Filteren" class="btn btn--primary btn--filter">
+                </div>
+                <p class="a__activate a__center a__filterRemove">zoek op basis van gelijkenissen in plaats van filter
+                </p>
+            </form>
+
+            <?php if (isset($error)) {
+    echo $error;
+} ?>
+
+            <?php if (!empty($_POST)): ?>
+            <?php foreach ($userFilter as $u): ?>
+            <div class="buddyConfirm">
+                <h1>request verzonden!</h1>
+                <a href="index.php" class="a__activate">home</a>
+            </div>
+            <h2><?php echo htmlspecialchars($u['firstname']) . " " . htmlspecialchars($u['lastname']); ?>
+            </h2>
+            <img class="avatar"
+                src="uploads/<?php echo $u['avatar']; ?>">
+            <div class="form__field">
+                <input type="submit" value="stuur buddy verzoek!" class="btn btn--primary" id="buddyMatching"
+                    data-userId2=<?php echo $u['id']; ?>
+                data-userId1 = <?php echo $_SESSION['id'] ?>
+                onclick="request(this)">
+            </div>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
 
     <div class="form form--login">
         <div class="container__buddyCard">
@@ -142,6 +240,7 @@
         </div>
     </div>
     <?php include_once('footer.inc.php'); ?>
+    <script src="js/filter.js"></script>
     <script src="js/request.js"></script>
     <script src="js/dismiss.js"></script>
 </body>
