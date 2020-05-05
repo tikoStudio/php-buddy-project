@@ -66,6 +66,8 @@
                 <div class="form__error"><?php if (isset($error)): ?><?php echo $error; ?><?php endif; ?>
                 </div>
 
+                <div class="form__success"></div>
+
 
                 <div class="form__field">
                     <label for="firstname">Voornaam</label>
@@ -79,7 +81,8 @@
 
                 <div class="form__field">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                    <input type="text" class="form-control" name="email" id="email"
+                        placeholder="Email@student.thomasmore.be">
                 </div>
 
                 <div class="form__field">
