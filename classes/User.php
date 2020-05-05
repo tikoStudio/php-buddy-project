@@ -19,6 +19,8 @@
         protected $beverage;
         protected $pet;
         protected $active;
+        protected $forum;
+        protected $post;
         
 
         public function setFirstname($firstname)
@@ -439,5 +441,68 @@
             $this->active = $active;
 
             return $this;
+        }
+
+        /**
+         * Get the value of forum
+         */ 
+        public function getForum()
+        {
+                return $this->forum;
+        }
+
+        /**
+         * Set the value of forum
+         *
+         * @return  self
+         */ 
+        public function setForum($forum)
+        {
+                $this->forum = $forum;
+
+                return $this;
+        }
+
+        public function savePost() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("insert into posts (userId, post) values (:userId, :post)");
+            $userId = $this->getId();
+            $post =  $this->getPost();
+            $statement->bindValue(":userId", $userId);
+            $statement->bindValue(":post", $post);
+
+            $result = $statement->execute();
+            return $result;
+        }
+
+        /**
+         * Get the value of post
+         */ 
+        public function getPost()
+        {
+                return $this->post;
+        }
+
+        /**
+         * Set the value of post
+         *
+         * @return  self
+         */ 
+        public function setPost($post)
+        {
+            if (empty($post)) {
+                throw new Exception("Invulveld mag niet leeg zijn!");
+            }
+                $this->post = $post;
+
+                return $this;
+        }
+
+        public function printPost() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * from posts INNER JOIN users ON posts.userId = users.id");
+            $result = $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
     }
