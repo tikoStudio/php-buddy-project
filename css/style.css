@@ -352,6 +352,27 @@ h4 {
   align-content: center;
 }
 
+.forum {
+  margin-top: 20vh;
+}
+
+.forums {
+  margin-top: 20vh;
+}
+
+.forum-posts {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.forum-naam {
+  display: grid;
+}
+
+.forum-post {
+  display: grid;
+}
+
 @media (min-width: 780px) {
   .header {
     display: flex;
