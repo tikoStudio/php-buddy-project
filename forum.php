@@ -22,7 +22,7 @@ if(!empty($_POST['question'])) {
 }
 
 if(!empty($_POST['pinit'])) {
-    $user->setId($_SESSION["id"]);
+    echo $user->getId();
     $user->savePin();
 }
 

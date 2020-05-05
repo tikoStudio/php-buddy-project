@@ -20,6 +20,7 @@
         protected $pet;
         protected $active;
         protected $post;
+        protected $pin;
         
 
         public function setFirstname($firstname)
@@ -487,12 +488,12 @@
 
         public function savePin() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("update posts set pin = 1 where id= :id");
+            $statement = $conn->prepare("update posts set pin = 1 where posts.id= :id");
             $id = $this->getId();
-
             $statement->bindParam(":id", $id);
             //return result
             $result = $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -502,5 +503,25 @@
             $result = $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
+        }
+
+        /**
+         * Get the value of pin
+         */ 
+        public function getPin()
+        {
+                return $this->pin;
+        }
+
+        /**
+         * Set the value of pin
+         *
+         * @return  self
+         */ 
+        public function setPin($pin)
+        {
+                $this->pin = $pin;
+
+                return $this;
         }
     }
