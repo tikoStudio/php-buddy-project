@@ -27,9 +27,9 @@ $pins = $user->showPins();
     <div class="forum-text">
     <h2 class="forum-naam2"><?php echo htmlspecialchars($p['firstname']) . " " . htmlspecialchars($p['lastname']); ?></h2>
     <p class="forum-post"><?php echo htmlspecialchars($p['post']); ?></p>
-    <?php var_dump($p); ?>
     </div>
     <?php endforeach; ?>
     </div>
+    <?php include_once('footer.inc.php'); ?>
 </body>
 </html>

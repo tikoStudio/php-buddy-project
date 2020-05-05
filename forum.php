@@ -1,7 +1,7 @@
 <?php
 
 include_once(__DIR__ . "/classes/Post.php");
-
+include_once(__DIR__ . "/classes/User.php");
 
 session_start();
 if (!isset($_SESSION['user'])) {
@@ -14,8 +14,9 @@ $posts = $user->printPost();
 if(!empty($_POST['question'])) {
     try {
         $user->setPost($_POST['question']);
-        $user->setUserId($_SESSION["userId"]);
+        $user->setUserId($_SESSION["id"]);
         $user->savePost();
+        $posts = $user->printPost();
     }
     catch (\Throwable $th) {
         $error = $th->getMessage();
@@ -39,7 +40,7 @@ if(!empty($_GET['id'])) {
 </head>
 <body>
 
-
+<?php include_once('nav.inc.php'); ?>
 
 <div class="form__error forums"><?php if (isset($error)): ?><?php echo $error; ?><?php endif; ?></div>
 
@@ -56,10 +57,16 @@ if(!empty($_GET['id'])) {
 <div class="forum-posts">
 <?php foreach ($posts as $p): ?>
 <div class="forum-text">
-<h2 class="forum-naam"><?php echo htmlspecialchars($p['firstname']) . " " . htmlspecialchars($p['lastname']); ?></h2>
+<!--nieuw object aanmaken van User-->
+<?php $person = new User(); ?>
+<!--verandert userId naar id van die persoon-->
+<?php $person->setId($p['userId']); ?>
+<!--functie die alle data ophaalt van user met bepaalde id-->
+<?php $name = $person->allUserData(); ?>
+
+<h2 class="forum-naam"><?php echo htmlspecialchars($name['firstname']) . " " . htmlspecialchars($name['lastname']); ?></h2>
 <p class="forum-post"><?php echo htmlspecialchars($p['post']); ?></p>
-<?php var_dump($p); ?>
-<a href="forum.php?id=<?php echo $p['id']; ?>">Pin it</a>
+<a href="forum.php?id=<?php echo $p['id']; ?> " class="pin">Pin it</a>
 </div>
 <?php endforeach; ?>
 </div>

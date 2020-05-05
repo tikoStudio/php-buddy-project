@@ -373,14 +373,37 @@ h4 {
 }
 
 .forum-text {
+  background-color: white;
+  width: 500px;
+  height: 200px;
+  border-radius: 20px;
   display: row;
   grid-template-rows: 1fr 1fr;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 20px;
 }
 
+.forum-naam {
+  padding-top: 20px;
+}
+
+.forum-post {
+  padding-bottom: 10px;
+}
+
+.pin {
+  text-decoration: none;
+  background-color: #1758D3;
+  color: white;
+  padding: 10px 50px;
+  border-radius: 20px;
+}
+
 .forum-naam2 {
-  margin-top: 20vh;
+  margin-top: 15vh;
+  padding-top: 20px;
 }
 
 @media (min-width: 780px) {
