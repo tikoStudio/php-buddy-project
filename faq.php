@@ -1,12 +1,12 @@
 <?php
-include_once(__DIR__ . "/classes/User.php");
+include_once(__DIR__ . "/classes/Post.php");
 
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
 }
 
-$user = new User();
+$user = new Post();
 $pins = $user->showPins();
 
 
@@ -27,6 +27,7 @@ $pins = $user->showPins();
     <div class="forum-text">
     <h2 class="forum-naam2"><?php echo htmlspecialchars($p['firstname']) . " " . htmlspecialchars($p['lastname']); ?></h2>
     <p class="forum-post"><?php echo htmlspecialchars($p['post']); ?></p>
+    <?php var_dump($p); ?>
     </div>
     <?php endforeach; ?>
     </div>

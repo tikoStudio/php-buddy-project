@@ -1,19 +1,19 @@
 <?php
 
-include_once(__DIR__ . "/classes/User.php");
+include_once(__DIR__ . "/classes/Post.php");
 
 session_start();
 if (!isset($_SESSION['user'])) {
     header("Location: login.php");
 }
 
-$user = new User();
+$user = new Post();
 $posts = $user->printPost();
 
 if(!empty($_POST['question'])) {
     try {
         $user->setPost($_POST['question']);
-        $user->setId($_SESSION["id"]);
+        $user->setUserId($_SESSION["userId"]);
         $user->savePost();
     }
     catch (\Throwable $th) {
@@ -21,9 +21,10 @@ if(!empty($_POST['question'])) {
     }
 }
 
-if(!empty($_POST['pinit'])) {
-    echo $user->getId();
-    $user->savePin();
+if(!empty($_GET['id'])) {
+        $id = $_GET['id'];
+        $user->savePin();
+        
 }
 
 ?><!DOCTYPE html>
@@ -56,24 +57,9 @@ if(!empty($_POST['pinit'])) {
 <div class="forum-text">
 <h2 class="forum-naam"><?php echo htmlspecialchars($p['firstname']) . " " . htmlspecialchars($p['lastname']); ?></h2>
 <p class="forum-post"><?php echo htmlspecialchars($p['post']); ?></p>
-<form action="" method="POST">
-<div class="form__field">
-    <input type="submit" value="Pin it" name="pinit" class="btn btn--primary forum-btn">
+<?php var_dump($p); ?>
+<a href="forum.php?id=<?php echo $p['id']; ?>">Pin it</a>
 </div>
-</form>
-</div>
-<!--
-<form action="" method="POST">
-<div class="forum-answer">
-<div class="form_field forum-input">
-    <input type="text" class="form-control" name="answer" id="lastname" placeholder="Geef hier je antwoord">
-</div>
-<div class="form__field">
-    <input type="submit" value="Verzenden" class="btn btn--primary forum-btn">
-</div>
-</div>
-</form>
--->
 <?php endforeach; ?>
 </div>
 <?php include_once('footer.inc.php'); ?>
