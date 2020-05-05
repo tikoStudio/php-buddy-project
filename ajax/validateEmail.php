@@ -14,7 +14,7 @@
             ];
         } else {
             $response = [
-                'status' => 'succes',
+                'status' => 'error',
                 'body' => 'Email is al in gebruik',
                 'message' => 'validate email'
             ];
