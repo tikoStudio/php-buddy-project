@@ -20,7 +20,7 @@ class Post {
         $result = $statement->execute();
         return $result;
     }
-
+    
     public function printPost() {
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * from posts ORDER BY date DESC");
