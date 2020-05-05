@@ -352,25 +352,35 @@ h4 {
   align-content: center;
 }
 
+.forum-btn {
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.forum-input {
+  text-align: center;
+}
+
 .forum {
   margin-top: 20vh;
 }
 
 .forums {
   margin-top: 20vh;
+  text-align: center;
 }
 
-.forum-posts {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+.forum-text {
+  display: row;
+  grid-template-rows: 1fr 1fr;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
-.forum-naam {
-  display: grid;
-}
-
-.forum-post {
-  display: grid;
+.forum-naam2 {
+  margin-top: 20vh;
 }
 
 @media (min-width: 780px) {
