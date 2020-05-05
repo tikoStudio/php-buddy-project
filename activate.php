@@ -21,16 +21,22 @@
 <body>
     <div class="container">
         <div class="form form--login center">
+            <?php if (isset($_GET['u']) && !empty($_GET['u'])): ?>
             <?php if ($_GET['u'] == $result['activationToken']): ?>
             <h1>
-                <?php echo "Account geactiveerd:"; ?>
+                <?php echo "Account geactiveerd!"; ?>
             </h1>
             <p><a href="login.php" class="a__activate">klik hier</a> om in te loggen!</p>
             <?php else: ?>
             <h1>
-                <?php echo "Account niet gevonden"; ?>
+                <?php echo "Account niet gevonden!"; ?>
             </h1>
             <p><a href="register.php" class="a__activate">klik hier</a> om een account aan te maken!</p>
+            <?php endif; ?>
+            <?php else: ?>
+            <h1>
+                <?php echo "Geen account meegegeven om te activeren!"; ?>
+            </h1>
             <?php endif; ?>
         </div>
     </div>
