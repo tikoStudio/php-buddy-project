@@ -19,7 +19,6 @@
         protected $beverage;
         protected $pet;
         protected $active;
-        protected $forum;
         protected $post;
         
 
@@ -443,26 +442,6 @@
             return $this;
         }
 
-        /**
-         * Get the value of forum
-         */ 
-        public function getForum()
-        {
-                return $this->forum;
-        }
-
-        /**
-         * Set the value of forum
-         *
-         * @return  self
-         */ 
-        public function setForum($forum)
-        {
-                $this->forum = $forum;
-
-                return $this;
-        }
-
         public function savePost() {
             $conn = Db::getConnection();
             $statement = $conn->prepare("insert into posts (userId, post) values (:userId, :post)");
@@ -500,7 +479,26 @@
 
         public function printPost() {
             $conn = Db::getConnection();
-            $statement = $conn->prepare("SELECT * from posts INNER JOIN users ON posts.userId = users.id");
+            $statement = $conn->prepare("SELECT * from posts INNER JOIN users ON posts.userId = users.id ORDER BY date DESC");
+            $result = $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public function savePin() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("update posts set pin = 1 where id= :id");
+            $id = $this->getId();
+
+            $statement->bindParam(":id", $id);
+            //return result
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function showPins() {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("select * from posts inner join users on posts.userId = users.id where pin= 1");
             $result = $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
