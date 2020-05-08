@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__ . "./Db.php");
+    include_once(__DIR__ . "/Db.php");
 
     class IpCheck
     {
@@ -48,7 +48,7 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("insert into loginLimit (ipAddress, timeDiff) values (:ip, :t)");
+            $statement = $conn->prepare("insert into loginlimit (ipAddress, timeDiff) values (:ip, :t)");
             $ip = $this->getIp();
             $t = $this->getT();
             $statement->bindParam(":ip", $ip);
@@ -62,7 +62,7 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("delete from loginLimit where ipAddress like :ip and timeDiff < :diff");
+            $statement = $conn->prepare("delete from loginlimit where ipAddress like :ip and timeDiff < :diff");
             $ip = $this->getIp();
             $diff = $this->getDiff();
             $statement->bindParam(":ip", $ip);
@@ -76,7 +76,7 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("delete from loginLimit where ipAddress like :ip");
+            $statement = $conn->prepare("delete from loginlimit where ipAddress like :ip");
             $ip = $this->getIp();
             $statement->bindParam(":ip", $ip);
 
@@ -88,7 +88,7 @@
             //db conn
             $conn = Db::getConnection();
             //insert query
-            $statement = $conn->prepare("select COUNT(*) from loginLimit where ipAddress like :ip and timeDiff > :diff");
+            $statement = $conn->prepare("select COUNT(*) from loginlimit where ipAddress like :ip and timeDiff > :diff");
             $ip = $this->getIp();
             $diff = $this->getDiff();
             $statement->bindParam(":ip", $ip);

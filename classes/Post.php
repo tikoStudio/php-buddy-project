@@ -1,15 +1,16 @@
 <?php
-include_once(__DIR__ . "./Db.php");
+include_once(__DIR__ . "/Db.php");
 
-class Post {
-
+class Post
+{
     private $id;
     private $userId;
     private $post;
     private $pin;
 
 
-    public function savePost() {
+    public function savePost()
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare("insert into posts (userId, post) values (:userId, :post)");
         $userId = $this->getUserId();
@@ -21,7 +22,8 @@ class Post {
         return $result;
     }
     
-    public function printPost() {
+    public function printPost()
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * from posts ORDER BY date DESC");
         $result = $statement->execute();
@@ -29,7 +31,8 @@ class Post {
         return $result;
     }
 
-    public function savePin() {
+    public function savePin()
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare("update posts set pin = 1 where id= {$_GET['id']}");
         $id = $this->getId();
@@ -40,7 +43,8 @@ class Post {
         return $result;
     }
 
-    public function showPins() {
+    public function showPins()
+    {
         $conn = Db::getConnection();
         $statement = $conn->prepare("select * from posts inner join users on posts.userId = users.id where pin= 1");
         $result = $statement->execute();
@@ -50,7 +54,7 @@ class Post {
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -60,7 +64,7 @@ class Post {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -70,7 +74,7 @@ class Post {
 
     /**
      * Get the value of userId
-     */ 
+     */
     public function getUserId()
     {
         return $this->userId;
@@ -80,7 +84,7 @@ class Post {
      * Set the value of userId
      *
      * @return  self
-     */ 
+     */
     public function setUserId($userId)
     {
         $this->userId = $userId;
@@ -90,7 +94,7 @@ class Post {
 
     /**
      * Get the value of post
-     */ 
+     */
     public function getPost()
     {
         return $this->post;
@@ -100,7 +104,7 @@ class Post {
      * Set the value of post
      *
      * @return  self
-     */ 
+     */
     public function setPost($post)
     {
         if (empty($post)) {
@@ -113,7 +117,7 @@ class Post {
 
     /**
      * Get the value of pin
-     */ 
+     */
     public function getPin()
     {
         return $this->pin;
@@ -123,7 +127,7 @@ class Post {
      * Set the value of pin
      *
      * @return  self
-     */ 
+     */
     public function setPin($pin)
     {
         $this->pin = $pin;

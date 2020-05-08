@@ -11,7 +11,8 @@
     $failedLogin->setIp($ip);
     $failedLogin->setT($t);
     $failedLogin->setDiff($diff);
-
+    $countUsers = $user->countUsers();
+    $countBuddies = $user->countBuddies();
     $count = $failedLogin->failedLoginAmount();
     if ($count["COUNT(*)"] >= 3) {
         $error = $count["COUNT(*)"] . " foutieve login pogingen, probeer binnen enkele minuten opnieuw";
@@ -82,6 +83,16 @@
 </head>
 
 <body>
+    <div class="index__data">
+        <?php foreach ($countUsers as $countUser): ?>
+        <h2>Er zijn <span class="blue"> <?php echo $countUser['COUNT(*)']; ?>
+                student(en)</span> geregistreerd</h2>
+        <?php endforeach; ?>
+        <?php foreach ($countBuddies as $countBuddy): ?>
+        <h2>Er zijn al <span class="blue"> <?php echo $countBuddy['COUNT(*)']; ?>
+                buddymatch(es)</span> gebeurd</h2>
+        <?php endforeach; ?>
+    </div>
     <div class="container">
         <div class="form form--login">
             <form action="" method="post">

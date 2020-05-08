@@ -11,13 +11,13 @@ document.querySelector("#email").addEventListener("keyup", function() {
     .then((response) => response.json())
     .then((result) => {
         let errorEmail = result.body;
-        const errorEmail = document.querySelector(".form__error"); 
+        const errorField = document.querySelector(".form__error"); 
 
         if(result['status'] === "succes") {
-            errorEmail.innerHTML = `<p style='color: green;'>${errorEmail}</p>`;
+            errorField.innerHTML = `<p style='color: green;'>${errorEmail}</p>`;
         }
         else {
-            errorEmail.innerHTML = `<p style='color: red;'>${errorEmail}</p>`;
+            errorField.innerHTML = `<p style='color: red;'>${errorEmail}</p>`;
         }
     })
     .catch((error) => {

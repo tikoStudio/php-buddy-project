@@ -108,6 +108,11 @@ nav a:last-child {
   grid-row: form;
 }
 
+.form--login--top {
+  padding: 1em;
+  grid-column: form;
+}
+
 .form__error
 {
   font-weight: lighter;
