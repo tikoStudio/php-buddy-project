@@ -300,6 +300,20 @@
             return $result;
         }
 
+        public function tokenFromSession($email)
+        {
+            //db conn
+            $conn = Db::getConnection();
+            //insert query
+            $statement = $conn->prepare("select activationToken from users where email = :email");
+            $statement->bindParam(":email", $email);
+
+            //return result
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
         public function completeProfile()
         {
             //db conn

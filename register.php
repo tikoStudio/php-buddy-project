@@ -38,7 +38,10 @@
             try {
                 $user->save(); //safe in database as not activated user
                 $user->sendActivationMail(); //send email with activation link
-                header("Location: activateMessage.php");
+                session_start();
+                $_SESSION["registeredUser"] = $_POST['email'];
+                $id = $user->tokenFromSession($_SESSION['registeredUser']);
+                header("Location: activateMessage.php?u=" . $id['activationToken']);
             } catch (\Throwable $th) {
                 $error = $th->getMessage();
             }
